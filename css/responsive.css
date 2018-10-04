@@ -1,0 +1,262 @@
+
+/**
+ * Theme       : Vamico
+ * Author      : AivahThmees
+ * Author URI  : www.aivahthemes.com
+*/
+
+/* Common General Styles go here
+ Small Desktop
+======================================================================== */
+@media only screen
+and (max-width : 959px ) {
+
+	.minicart-wrap{ display: none!important; }
+	.sf-menu { display: none !important; }
+	body:not(.fullwidth) .entry-content-wrapper { padding: 32px 0; }
+}
+
+/* Small Desktop and Laptop 13 Inch
+======================================================================== */
+@media only screen and (max-width : 1169px) {
+	.header-s1 .menu-inner,
+	.header-s2 .menu-inner,
+	.header-s3 .menu-inner,
+	.inner,
+	.pagemid  > .inner { max-width: 900px; width: 100%; }
+}
+
+/* Small Desktop Resolution and iPad Landscape
+======================================================================== */
+@media only screen
+and (min-width : 960px)
+and (max-width : 1024px) {
+
+	.pagemid  > .inner { max-width: 940px; width: 100%; }
+	.topbar-wrap .inner,
+	.header-s1 .menu-inner,
+	.owl__large,
+	.modal-box-inner,
+	.footer-wrap .inner,
+	.header-s1 .header-inner { max-width: 940px; width:100%; }
+	.null-instagram-feed .instagram-pics { margin: 0 !important;}
+	.owl-carousel.owl-boxed .owl-item img,
+	.owl-carousel.owl-center .owl-item img,
+	.owl-carousel.owl-multiple .owl-item img {
+    	height: 400px;
+	}
+
+}
+
+/* iPad Portrait
+======================================================================== */
+@media only screen
+and (min-width: 768px)
+and (max-width: 959px) {
+	.iva-hamburger { display: block; }
+	.header-s3,
+	.header-s2,
+	.header-s1 { display: none; }
+
+	.m-header-wrap { display: block; margin-bottom:0; }
+	.modal-box-inner,
+	.owl__large,
+	.m-header-inner { max-width: 720px; width: 100%; }
+	.rightsidebar .content-area,
+	.rightsidebar #sidebar {
+    	width: 100% !important;
+	}
+
+	/* Slider Settings */
+	.owl__caption { padding: 40px 0;}
+	.owl__bg-overlay h2 { font-size: 32px; line-height: 1;}
+
+	.inner, .pagemid > .inner { width: 90% !important;  }
+
+	.leftsidebar .content-area,
+	.rightsidebar .content-area {
+		float: none;
+		width: auto;
+		padding-left:0;
+		padding-right:0;
+		border: none;
+	}
+
+	.header-owl-large .featured_slider { margin-top: 0 !important; }
+
+	.rightsidebar .sidebar { float: none; width: 100%; }
+	.rightsidebar .sidebar .content { display: flex; flex-wrap: wrap; padding: 0; }
+	.sidebar .widget { flex: 1; flex-basis: 50%; padding: 0 10px;}
+
+	.footer-area-middle .inner-row { display: flex; flex-wrap: wrap; }
+	.footer-wrap .widget { flex: 1; flex-basis: 50%; padding: 0 10px; }
+
+	.post__comments-list .children { padding-left: 0; }
+	.null-instagram-feed .instagram-pics { margin: 0 !important;}
+
+	.owl-carousel.owl-boxed .owl-item img,
+	.owl-carousel.owl-center .owl-item img,
+	.owl-carousel.owl-multiple .owl-item img {
+    	height: 400px;
+	}
+}
+
+/* iPhone 5s(landscape)
+======================================================================== */
+@media only screen
+and (min-width: 480px)
+and (max-width: 767px) {
+	.iva-hamburger { display: block; }
+	.header-s3,
+	.header-s2,
+	.header-s1 { display: none; }
+	.m-header-wrap { display: block; margin-bottom:0;}
+	.modal-box-inner,
+	.owl__large,
+	.m-header-inner { max-width: 90%; }
+
+	/* Slider Settings */
+	.owl__caption { padding: 40px 0;}
+	.owl__bg-overlay h2 { font-size: 32px; line-height: 1;}
+
+	.inner, .pagemid > .inner {  width: 90% !important; width: 100%; }
+
+	.leftsidebar .content-area,
+	.rightsidebar .content-area {
+		float: none;
+		width: auto;
+		padding-left:0;
+		padding-right:0;
+		border: none;
+	}
+	.null-instagram-feed .instagram-pics { justify-content: space-around;}
+	.rightsidebar .content-area,
+	.rightsidebar #sidebar {
+    	width: 100% !important;
+	}
+
+	.rightsidebar .sidebar .content,
+	.leftsidebar .sidebar .content { padding-left:0; padding-right:0; }
+
+	.header-owl-large .featured_slider { margin-top: 0 !important; }
+
+	.rightsidebar .sidebar { float: none; width: 100%; }
+	.footer-area-middle .cols { width:100%; }
+	.related__posts-title { text-align: center; }
+	.post__related { padding-top: 0; }
+	.post__comments-list .children { padding-left: 0; }
+	.null-instagram-feed .instagram-pics { margin: 0 !important;}
+	.owl-carousel.owl-boxed .owl-item img,
+	.owl-carousel.owl-center .owl-item img,
+	.owl-carousel.owl-multiple .owl-item img {
+    	height: 450px;
+	}
+}
+
+/* Smartphones and iPhone 4s(landscape)
+======================================================================== */
+@media only screen
+and (min-width: 320px)
+and (max-width: 480px) {
+	.iva-hamburger { display: block; }
+	.header-s3,
+	.header-s2,
+	.header-s1 { display: none; }
+	.null-instagram-feed li {
+	    padding: 5px;
+		margin: 0;
+	}
+	.m-header-wrap { display: block;margin-bottom:0;}
+	.modal-box-inner,
+	.owl__large,
+	.m-header-inner { max-width: 90%; width: 100%; }
+	.rightsidebar .content-area,
+	.rightsidebar #sidebar {
+    	width: 100% !important;
+	}
+
+	/* Slider Settings */
+	.owl__caption { padding: 40px 0;}
+	.owl__bg-overlay h2 { font-size: 32px; line-height: 1;}
+
+	.inner,	.pagemid > .inner {  width: 90% !important;  }
+
+	.leftsidebar .content-area,
+	.rightsidebar .content-area {
+		float: none;
+		width: auto;
+		padding-left:0;
+		padding-right:0;
+		border: none;
+	}
+
+	.header-owl-large .featured_slider { margin-top: 0 !important; }
+
+	.rightsidebar #sidebar { float: none; width: 100%; }
+	.rightsidebar .sidebar .content,
+	.leftsidebar .sidebar .content { padding-left:0; padding-right:0; }
+
+	.footer-area-middle .cols { width:100%; }
+	.related__posts-title { text-align: center; }
+	.post__related { padding-top: 0; }
+	.post__comments-list .children { padding-left: 0; }
+	.copyright-left, .copyright-right {
+		flex: unset;
+	}
+	.null-instagram-feed .instagram-pics { margin: 0 !important;}
+	.owl-carousel.owl-boxed .owl-item img,
+	.owl-carousel.owl-center .owl-item img,
+	.owl-carousel.owl-multiple .owl-item img {
+    	height: 400px;
+	}
+
+	.owl__caption-overlay .owl__title {
+		font-size: 24px;
+	}
+}
+
+/* Smartphones  and iPhone 4s (portrait)
+======================================================================== */
+@media only screen
+and (max-width : 320px) {
+	.null-instagram-feed li {
+	    padding: 5px;
+		margin: 0;
+	}
+	.iva-hamburger { display: block; }
+	.header-s3,
+	.header-s2,
+	.header-s1 { display: none; }
+	.m-header-wrap { display: block; margin-bottom:0;}
+	.modal-box-inner,
+	.owl__large,
+	.m-header-inner { max-width: 280px; }
+
+	/* Slider Settings */
+	.owl__caption { padding: 40px 0;}
+	.owl__bg-overlay h2 { font-size: 32px; line-height: 1;}
+
+	.inner, .pagemid > .inner {  width: 90% !important; width: 100%; }
+
+	.leftsidebar .content-area,
+	.rightsidebar .content-area {
+		float: none;
+		width: auto;
+		padding-left:0;
+		padding-right:0;
+		border: none;
+	}
+
+	.header-owl-large .m-header-wrap { margin-bottom: 0; }
+	.header-owl-large .featured_slider { margin-top: 0 !important; }
+
+	.rightsidebar #sidebar { float: none; width: 100%; }
+	.rightsidebar .sidebar .content,
+	.leftsidebar .sidebar .content { padding-left:0; padding-right:0; }
+
+	.footer-area-middle .cols { width:100%; }
+	.related__posts-title { text-align: center; }
+	.post__related { padding-top: 0; }
+	.post__comments-list .children { padding-left: 0; }
+
+}
