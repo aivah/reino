@@ -18,31 +18,39 @@ get_header(); ?>
 			<main class="content-area">
 				<div class="entry-content-wrapper clearfix">
 					<div class="archive-box">
-						<?php vamico_page_title(); ?>
+						<?php reino_page_title(); ?>
 					</div>
-					<?php $vamico_post_count = 0; ?>
 					<?php
-					$before               = '';
-					$after                = '';
-					$vamico_archive_style = get_option( 'vamico_archive_style' ) ? get_option( 'vamico_archive_style' ) : '';
-					if ( 'archive_standard_style' === $vamico_archive_style ) {
+
+					$reino_post_count = 0;
+
+					$before = '';
+					$after  = '';
+
+					$reino_archive_style = get_option( 'reino_archive_style' )
+										? get_option( 'reino_archive_style' )
+										: '';
+
+					if ( 'archive_standard_style' === $reino_archive_style ) {
 						$before = '<div class="post-layout"><div class="post__layout-standard">';
 						$after  = '</div></div>';//. post-layout
 					}
-					if ( 'archive_grid_style' === $vamico_archive_style ) {
+					if ( 'archive_grid_style' === $reino_archive_style ) {
 						$before = '<div class="post__layout row">';
 						$after  = '</div>';//. post-layout
 					}
-					if ( 'archive_list_style' === $vamico_archive_style ) {
+					if ( 'archive_list_style' === $reino_archive_style ) {
 						$before = '<div class="post-layout"><div class="post__layout-list">';
 						$after  = '</div></div>';//. post-layout
 					}
+
 					echo wp_kses_post( $before );
+
 					if ( have_posts() ) :
 						while ( have_posts() ) :
-							$vamico_post_count++;
+							$reino_post_count++;
 							the_post();
-							switch ( $vamico_archive_style ) {
+							switch ( $reino_archive_style ) {
 								case 'archive_standard_style':
 									get_template_part( 'templates/content', 'standard' );
 									break;
@@ -56,17 +64,15 @@ get_header(); ?>
 									get_template_part( 'templates/content', 'standard' );
 									break;
 							}
-							?>
-					<?php endwhile; ?>
+						endwhile;
 
-						<?php
 						// Pagination
-						if ( function_exists( 'vamico_pagination' ) ) {
-							vamico_pagination();
+						if ( function_exists( 'reino_pagination' ) ) {
+							reino_pagination();
 						}
 						?>
 					<?php else : ?>
-					<div class="alert alert-warning"><?php esc_html_e( 'Sorry, but nothing matched your search terms. Please try again with some different keywords.', 'vamico' ); ?></div>
+					<div class="alert alert-warning"><?php esc_html_e( 'Sorry, but nothing matched your search terms. Please try again with some different keywords.', 'reino' ); ?></div>
 					<?php get_search_form(); ?>
 					<?php endif; ?>
 
@@ -75,7 +81,7 @@ get_header(); ?>
 			</main><!-- .content-area -->
 
 			<?php
-			if ( vamico_generator( 'vamico_sidebar_option', get_the_ID() ) !== 'fullwidth' ) {
+			if ( reino_generator( 'reino_sidebar_option', get_the_ID() ) !== 'fullwidth' ) {
 				get_sidebar();
 			}
 			?>

@@ -2,7 +2,7 @@
 /**
  * The template for displaying Author archive pages
  * @link http://codex.wordpress.org/Template_Hierarchy
- * @package Vamico
+ * @package Reino
  */
 
 get_header(); ?>
@@ -12,37 +12,37 @@ get_header(); ?>
 			<main class="content-area">
 				<div class="entry-content-wrapper clearfix">
 
-					<?php vamico_generator( 'vamico_about_author' ); ?>
+					<?php reino_generator( 'reino_about_author' ); ?>
 					<?php
-					if ( vamico_generator( 'vamico_sidebar_option', get_the_id() ) !== 'fullwidth' ) {
+					if ( reino_generator( 'reino_sidebar_option', get_the_id() ) !== 'fullwidth' ) {
 						$width = '520';
 					} else {
 						$width = '960';
 					}
 					?>
-					<?php $vamico_post_count = 0; ?>
+					<?php $reino_post_count = 0; ?>
 					<?php
-					$vamico_before       = '';
-					$vamico_after        = '';
-					$vamico_author_style = get_option( 'vamico_author_style' ) ? get_option( 'vamico_author_style' ) : '';
-					if ( 'author_standard_style' === $vamico_author_style ) {
-						$vamico_before = '<div class="post__layout"><div class="post__layout-standard">';
-						$vamico_after  = '</div></div>';//. post-layout
+					$reino_before       = '';
+					$reino_after        = '';
+					$reino_author_style = get_option( 'reino_author_style' ) ? get_option( 'reino_author_style' ) : '';
+					if ( 'author_standard_style' === $reino_author_style ) {
+						$reino_before = '<div class="post__layout"><div class="post__layout-standard">';
+						$reino_after  = '</div></div>';//. post-layout
 					}
-					if ( 'author_grid_style' === $vamico_author_style ) {
-						$vamico_before = '<div class="post__layout row">';
-						$vamico_after  = '</div>';//. post-layout
+					if ( 'author_grid_style' === $reino_author_style ) {
+						$reino_before = '<div class="post__layout row">';
+						$reino_after  = '</div>';//. post-layout
 					}
-					if ( 'author_list_style' === $vamico_author_style ) {
-						$vamico_before = '<div class="post__layout"><div class="post__layout-list">';
-						$vamico_after  = '</div></div>';//. post-layout
+					if ( 'author_list_style' === $reino_author_style ) {
+						$reino_before = '<div class="post__layout"><div class="post__layout-list">';
+						$reino_after  = '</div></div>';//. post-layout
 					}
-					echo wp_kses_post( $vamico_before );
+					echo wp_kses_post( $reino_before );
 					if ( have_posts() ) :
 						while ( have_posts() ) :
-							$vamico_post_count++;
+							$reino_post_count++;
 							the_post();
-							switch ( $vamico_author_style ) {
+							switch ( $reino_author_style ) {
 								case 'author_standard_style':
 									get_template_part( 'templates/content', 'standard' );
 									break;
@@ -60,21 +60,21 @@ get_header(); ?>
 					<?php endwhile; ?>
 							<?php
 							// Pagination
-							if ( function_exists( 'vamico_pagination' ) ) {
-								vamico_pagination();
+							if ( function_exists( 'reino_pagination' ) ) {
+								reino_pagination();
 							}
 							?>
 					<?php else : ?>
-					<div class="alert alert-warning"><?php esc_html_e( 'Sorry, but nothing matched your search terms. Please try again with some different keywords.', 'vamico' ); ?></div>
+					<div class="alert alert-warning"><?php esc_html_e( 'Sorry, but nothing matched your search terms. Please try again with some different keywords.', 'reino' ); ?></div>
 					<?php get_search_form(); ?>
 					<?php
 					endif;
 ?>
-					<?php echo wp_kses_post( $vamico_before ); ?>
+					<?php echo wp_kses_post( $reino_before ); ?>
 				</div>
 			</main><!-- .content-area -->
 			<?php
-			if ( vamico_generator( 'vamico_sidebar_option', get_the_ID() ) !== 'fullwidth' ) {
+			if ( reino_generator( 'reino_sidebar_option', get_the_ID() ) !== 'fullwidth' ) {
 				get_sidebar();
 			}
 			?>

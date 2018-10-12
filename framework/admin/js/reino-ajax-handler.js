@@ -46,7 +46,7 @@ jQuery(document).ready(function(){
 	});
 	// Resetoption confirm box Message
 	jQuery( '#atpform-reset' ).on("submit", function() {
-		return confirm( vamico_admin_js_param.themeoption_reset );
+		return confirm( reino_admin_js_param.themeoption_reset );
 	});
 	//Save everything else
 	jQuery('#atpform').submit(function(){
@@ -65,7 +65,7 @@ jQuery(document).ready(function(){
 		if(querystring_page == 'optionsframework') {
 			var data = {
 				type: 'options',
-				action: 'vamico_ajax_upload',
+				action: 'reino_ajax_upload',
 				data: serializedReturn
 			};
 		}
@@ -103,7 +103,7 @@ jQuery(document).ready(function(){
 		});
 		sys_social_data = sys_social_data.substr(0, sys_social_data.length - 2);
 		if(sys_social_data != ''){
-			document.getElementById('vamico_social_bookmark').value = sys_social_data;
+			document.getElementById('reino_social_bookmark').value = sys_social_data;
 		}
 	});
     var iva_social_icon_names = '';
@@ -139,12 +139,12 @@ jQuery(document).ready(function(){
 				type: "POST",
 				url:ajaxurl,
 				data: {
-					action: "vamico_import_ob_from_file" ,
+					action: "reino_import_ob_from_file" ,
 					"import_ob_file": import_ob_input_value,
 					},
 				success: function( response ){
 
-					jQuery(".iva_import_ob_msg").html( vamico_admin_js_param.importer_success );
+					jQuery(".iva_import_ob_msg").html( reino_admin_js_param.importer_success );
 					jQuery(".iva_import_ob_msg").css( "display", "block" );
 
 					window.location = iva_admin_url;
@@ -157,18 +157,18 @@ jQuery(document).ready(function(){
 	jQuery(".ob_delete").click(function(){
 		var ob_delete_file = jQuery(this).attr("data-delete");
 		var iva_admin_url = jQuery(this).attr("data-url");
-		if( confirm( vamico_admin_js_param.importer_delete_confirm ) ){
+		if( confirm( reino_admin_js_param.importer_delete_confirm ) ){
 			jQuery(this).parent().parent().parent().remove();
 			jQuery.ajax({
 				type: "POST",
 				url:ajaxurl,
 				data: {
-					action: "vamico_delete_ob" ,
+					action: "reino_delete_ob" ,
 					"delete_file": ob_delete_file,
 					},
 				success: function( response ){
 
-					jQuery(".iva_import_ob_msg").html( vamico_admin_js_param.importer_delete_success );
+					jQuery(".iva_import_ob_msg").html( reino_admin_js_param.importer_delete_success );
 					jQuery(".iva_import_ob_msg").css( "display", "block" );
 
 					window.location = iva_admin_url;
@@ -186,11 +186,11 @@ jQuery(document).ready(function(){
 			type: "POST",
 			url:ajaxurl,
 			data: {
-				action: "vamico_import_ob" ,
+				action: "reino_import_ob" ,
 				"ob_import":iva_ob_import,
 			},
 			success: function( response ){
-				jQuery(".iva_import_ob_msg").html( vamico_admin_js_param.ob_import_success );
+				jQuery(".iva_import_ob_msg").html( reino_admin_js_param.ob_import_success );
 				jQuery(".iva_import_ob_msg").css( "display", "block" );
 				setInterval(function(){
 					jQuery(".iva_import_ob_msg").css( "display", "none" );
@@ -217,7 +217,7 @@ jQuery(document).ready(function(){
 		jQuery.ajax({
 			type: "POST",
 			url:ajaxurl,
-			data: { action: "vamico_export_ob" },
+			data: { action: "reino_export_ob" },
 			success: function( response ){
 				jQuery(".iva_export_ob_msg").html("Export Options Backup Successfully Please wait a few seconds untill reload the page");
 				jQuery(".iva_export_ob_msg").css( "display", "block" );

@@ -43,65 +43,65 @@ styleSelect = {
 		postformat_meta();
 		styleSelect.init();
 
-		jQuery('#vamico_featured_img_pos').change( function(){
-			jQuery(".vamico_featured_img_type").hide();
-			var selected_option = jQuery("#vamico_featured_img_pos option:selected").val();
+		jQuery('#reino_featured_img_pos').change( function(){
+			jQuery(".reino_featured_img_type").hide();
+			var selected_option = jQuery("#reino_featured_img_pos option:selected").val();
 			jQuery( '.' + selected_option ).show();
 		}).change();
 
-		jQuery('#vamico_featured_img_type').change( function(){
-			jQuery(".vamico_slider_bg_color").hide();
-			var selected_option = jQuery("#vamico_featured_img_type option:selected").val();
+		jQuery('#reino_featured_img_type').change( function(){
+			jQuery(".reino_slider_bg_color").hide();
+			var selected_option = jQuery("#reino_featured_img_type option:selected").val();
 			jQuery( '.' + selected_option ).show();
 		}).change();
 
 		/*-- postlinkurl selection--*/
-		jQuery("#vamico_postlinktype_options").change(function () {
+		jQuery("#reino_postlinktype_options").change(function () {
 			jQuery(".linkoption").hide();
-			var selected_ptoption = jQuery("#vamico_postlinktype_options option:selected").val();
+			var selected_ptoption = jQuery("#reino_postlinktype_options option:selected").val();
 			jQuery("."+selected_ptoption).show();
 		}).change();
 
 		/*-- custom Logo option selection--*/
-		jQuery("#vamico_logo").change(function () {
+		jQuery("#reino_logo").change(function () {
 			jQuery(".title").slideUp();
 			jQuery(".logo").slideUp();
-			var selected_teaser = jQuery("#vamico_logo option:selected").val();
+			var selected_teaser = jQuery("#reino_logo option:selected").val();
 			jQuery("."+selected_teaser).slideDown();
 		}).change();
 
 		/*-- Custom Slider Selection--*/
-		jQuery("#vamico_slider").change(function () {
+		jQuery("#reino_slider").change(function () {
 			jQuery(".iva_of_sliders").hide();
 			jQuery(".subtoggle").hide();
-			var selected_slider = jQuery("#vamico_slider option:selected").val();
+			var selected_slider = jQuery("#reino_slider option:selected").val();
 			if(selected_slider != "") {
 				jQuery("."+selected_slider).show();
 			}
 		}).change();
 
 		//
-		jQuery("#vamico_owl_slider_type").change(function () {
+		jQuery("#reino_owl_slider_type").change(function () {
 			jQuery(".owl_slider_type").hide();
-			var selected_slider = jQuery("#vamico_owl_slider_type option:selected").val();
+			var selected_slider = jQuery("#reino_owl_slider_type option:selected").val();
 			if(selected_slider != "") {
 				jQuery("."+selected_slider).show();
 			}
 		}).change();
 
 		//
-		jQuery("#vamico_slider_post_from").change(function () {
+		jQuery("#reino_slider_post_from").change(function () {
 			jQuery(".slider_post_from").hide();
-			var selected_slider = jQuery("#vamico_slider_post_from option:selected").val();
+			var selected_slider = jQuery("#reino_slider_post_from option:selected").val();
 			if(selected_slider != "") {
 				jQuery("."+selected_slider).show();
 			}
 		}).change();
 
 		//Header
-		jQuery("#vamico_headerstyle").change(function () {
+		jQuery("#reino_headerstyle").change(function () {
 			jQuery(".iva_of_headerstyle").hide();
-			var selected_headerstyle = jQuery("#vamico_headerstyle option:selected").val();
+			var selected_headerstyle = jQuery("#reino_headerstyle option:selected").val();
 			if( selected_headerstyle !== '' ) {
 				jQuery("."+selected_headerstyle).show();
 			}
@@ -122,11 +122,11 @@ styleSelect = {
 		});
 
 		/*-- layout mode selection--*/
-		jQuery("#vamico_page_layout").change(function(){
-			if(jQuery('#vamico_page_layout').is(':checked') != true) {
-				jQuery(".vamico_page_bg").hide();
+		jQuery("#reino_page_layout").change(function(){
+			if(jQuery('#reino_page_layout').is(':checked') != true) {
+				jQuery(".reino_page_bg").hide();
 			}else{
-				jQuery(".vamico_page_bg").show();
+				jQuery(".reino_page_bg").show();
 			}
 		}).change();
 
@@ -340,7 +340,7 @@ styleSelect = {
 		}); // each
 
 	// Icon Box Widget
-	jQuery('.vamico-font-icon-name').each(function() {
+	jQuery('.reino-font-icon-name').each(function() {
 		jQuery(this).click( function(){
 			var w_data_id = jQuery(this).closest('.widget').attr('id');
 			var icon_name =jQuery(this).attr('data-icon');
@@ -350,7 +350,7 @@ styleSelect = {
 
 	// Dynamic Footer script with ui sider
 	var cols = jQuery('.slider_result_db_cols').val();
-	jQuery('#vamico_footer_widget_layout_number').change(function () {
+	jQuery('#reino_footer_widget_layout_number').change(function () {
 			var columns = jQuery(this).val();
 			var slider_values = widget_slider( columns, cols );
 	}).change();
@@ -380,11 +380,11 @@ styleSelect = {
 			}
 		}
 
-		if ( undefined !== jQuery("#vamico_ui_slider").slider( 'instance' ) ) {
-			jQuery("#vamico_ui_slider").slider( 'destroy' );
+		if ( undefined !== jQuery("#reino_ui_slider").slider( 'instance' ) ) {
+			jQuery("#reino_ui_slider").slider( 'destroy' );
 		}
 		var setSlider = function ( values ) {
-			jQuery("#vamico_ui_slider").slider({
+			jQuery("#reino_ui_slider").slider({
 				values: values,
 				min: 0,
 				max: 12,
@@ -400,7 +400,7 @@ styleSelect = {
 
 		var val = slider_values;
 		setSlider( val );
-		var values = $( "#vamico_ui_slider" ).slider( "values" );
+		var values = $( "#reino_ui_slider" ).slider( "values" );
 		$(".slider_result").val( values );
 	}
 });
@@ -411,20 +411,20 @@ styleSelect = {
 jQuery( function( $ ){
 
 	// Product gallery file uploads
-	var vamico_gallery_frame;
-	var $image_gallery_ids = $('#vamico_image_gallery');
-	var $vamico_images = $('#vamico_images_container ul.vamico_images');
-	jQuery('.add_vamico_images').on( 'click', 'a', function( event ) {
+	var reino_gallery_frame;
+	var $image_gallery_ids = $('#reino_image_gallery');
+	var $reino_images = $('#reino_images_container ul.reino_images');
+	jQuery('.add_reino_images').on( 'click', 'a', function( event ) {
 		var $el = $(this);
 		var attachment_ids = $image_gallery_ids.val();
 		event.preventDefault();
 		// If the media frame already exists, reopen it.
-		if ( vamico_gallery_frame ) {
-			vamico_gallery_frame.open();
+		if ( reino_gallery_frame ) {
+			reino_gallery_frame.open();
 			return;
 		}
 		// Create the media frame.
-		vamico_gallery_frame = wp.media.frames.vamico_gallery = wp.media({
+		reino_gallery_frame = wp.media.frames.reino_gallery = wp.media({
 			// Set the title of the modal.
 			title: $el.data('choose'),
 			button: {
@@ -439,14 +439,14 @@ jQuery( function( $ ){
 			]
 		});
 		// When an image is selected, run a callback.
-		vamico_gallery_frame.on( 'select', function() {
-			var selection = vamico_gallery_frame.state().get('selection');
+		reino_gallery_frame.on( 'select', function() {
+			var selection = reino_gallery_frame.state().get('selection');
 			// jQuery('.delete').click(function(event){ event.preventDefault();});
 			selection.map( function( attachment ) {
 				attachment = attachment.toJSON();
 				if ( attachment.id ) {
 				attachment_ids = attachment_ids ? attachment_ids + "," + attachment.id : attachment.id;
-				$vamico_images.append('\
+				$reino_images.append('\
 					<li class="image" data-attachment_id="' + attachment.id + '">\
 						<img src="' + attachment.sizes.thumbnail.url + '" />\
 						<ul class="actions">\
@@ -458,10 +458,10 @@ jQuery( function( $ ){
 			$image_gallery_ids.val( attachment_ids );
 		});
 		// Finally, open the modal.
-		vamico_gallery_frame.open();
+		reino_gallery_frame.open();
 	});
 	// Image ordering
-	$vamico_images.sortable({
+	$reino_images.sortable({
 		items: 'li.image',
 		cursor: 'move',
 		scrollSensitivity:40,
@@ -478,7 +478,7 @@ jQuery( function( $ ){
 		},
 		update: function(event, ui) {
 			var attachment_ids = '';
-			$('#vamico_images_container ul li.image').css('cursor','default').each(function() {
+			$('#reino_images_container ul li.image').css('cursor','default').each(function() {
 				var attachment_id = jQuery(this).attr( 'data-attachment_id' );
 				attachment_ids = attachment_ids + attachment_id + ',';
 			});
@@ -486,10 +486,10 @@ jQuery( function( $ ){
 		}
 	});
 	// Remove images
-	$('#vamico_images_container').on( 'click', 'a.delete', function() {
+	$('#reino_images_container').on( 'click', 'a.delete', function() {
 		$(this).closest('li.image').remove();
 		var attachment_ids = '';
-		$('#vamico_images_container ul li.image').css('cursor','default').each(function() {
+		$('#reino_images_container ul li.image').css('cursor','default').each(function() {
 			var attachment_id = jQuery(this).attr( 'data-attachment_id' );
 			attachment_ids = attachment_ids + attachment_id + ',';
 		});
@@ -498,4 +498,4 @@ jQuery( function( $ ){
 		return false;
 	});
 });
-// Vamico metabox gallery ends here
+// Reino metabox gallery ends here

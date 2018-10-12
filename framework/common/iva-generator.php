@@ -1,10 +1,10 @@
 <?php
-if ( ! class_exists( 'Vamico_Generator_Class' ) ) {
-	class Vamico_Generator_Class {
+if ( ! class_exists( 'Reino_Generator_Class' ) ) {
+	class Reino_Generator_Class {
 
 		// P R I M A R Y   M E N U
 		//--------------------------------------------------------
-		function vamico_primary_menu() {
+		function reino_primary_menu() {
 			if ( has_nav_menu( 'primary-menu' ) ) {
 				wp_nav_menu(array(
 					'container'     => false,
@@ -17,15 +17,15 @@ if ( ! class_exists( 'Vamico_Generator_Class' ) ) {
 					'link_before'   => '',
 					'link_after'    => '',
 					'depth'         => 0,
-					'walker'        => new Vamico_Custom_Menu_Walker(),
+					'walker'        => new Reino_Custom_Menu_Walker(),
 				));
 			} else {
-				echo '<ul class="iva_menu sf-menu"><li><a href="' . esc_url( home_url( '/' ) ) . 'wp-admin/nav-menus.php">' . esc_html__( 'Primary Menu is not assigned or created.', 'vamico' ) . '</a></li></ul>';
+				echo '<ul class="iva_menu sf-menu"><li><a href="' . esc_url( home_url( '/' ) ) . 'wp-admin/nav-menus.php">' . esc_html__( 'Primary Menu is not assigned or created.', 'reino' ) . '</a></li></ul>';
 			}
 		}
 		// S E C O N D A R Y   M E N U
 		//--------------------------------------------------------
-		function vamico_secondary_menu() {
+		function reino_secondary_menu() {
 			if ( has_nav_menu( 'secondary-menu' ) ) {
 				wp_nav_menu(array(
 					'container'     => false,
@@ -38,13 +38,13 @@ if ( ! class_exists( 'Vamico_Generator_Class' ) ) {
 					'link_before'   => '',
 					'link_after'    => '',
 					'depth'         => 0,
-					'walker'        => new Vamico_Custom_Menu_Walker(),
+					'walker'        => new Reino_Custom_Menu_Walker(),
 				));
 			} else {
-				echo '<ul class="iva_menu sf-menu"><li><a href="' . esc_url( home_url( '/' ) ) . 'wp-admin/nav-menus.php">' . esc_html__( 'Secondary Menu is not assigned or created.', 'vamico' ) . '</a></li></ul>';
+				echo '<ul class="sec-menu sf-menu"><li><a href="' . esc_url( home_url( '/' ) ) . 'wp-admin/nav-menus.php">' . esc_html__( 'Secondary Menu is not assigned or created.', 'reino' ) . '</a></li></ul>';
 			}
 		}
-		function vamico_mobile_menu() {
+		function reino_mobile_menu() {
 			if ( has_nav_menu( 'primary-menu' ) ) {
 				wp_nav_menu(array(
 					'container'     => 'div',
@@ -57,21 +57,21 @@ if ( ! class_exists( 'Vamico_Generator_Class' ) ) {
 					'link_before'   => '',
 					'link_after'    => '',
 					'depth'         => 0,
-					'walker'        => new Vamico_Mobile_Custom_Menu_Walker(),
+					'walker'        => new Reino_Mobile_Custom_Menu_Walker(),
 				));
 			}
 		}
 
 		// L O G O   G E N E R A T O R
 		//--------------------------------------------------------
-		function vamico_logo( $vamico_logoid ) {
-			$vamico_logo = get_option( 'vamico_logo' );
-			if ( 'logo' == $vamico_logo ) {
-				$vamico_img_attachment_id = vamico_get_attachment_id_from_src( get_option( $vamico_logoid ) );
-				$vamico_image_attributes  = wp_get_attachment_image_src( $vamico_img_attachment_id , 'full' ); // returns an array
+		function reino_logo( $reino_logoid ) {
+			$reino_logo = get_option( 'reino_logo' );
+			if ( 'logo' == $reino_logo ) {
+				$reino_img_attachment_id = reino_get_attachment_id_from_src( get_option( $reino_logoid ) );
+				$reino_image_attributes  = wp_get_attachment_image_src( $reino_img_attachment_id , 'full' ); // returns an array
 				?>
 				<a href="<?php echo esc_url( home_url( '/' ) ); ?>" title="<?php bloginfo( 'name' ); ?>" class="iva-logo-link">
-					<img src="<?php echo esc_url( $vamico_image_attributes[0] ); ?>" alt="<?php bloginfo( 'name' ); ?>"  width="<?php echo esc_attr( $vamico_image_attributes[1] ); ?>" height="<?php echo esc_attr( $vamico_image_attributes[2] ); ?>" />
+					<img src="<?php echo esc_url( $reino_image_attributes[0] ); ?>" alt="<?php bloginfo( 'name' ); ?>"  width="<?php echo esc_attr( $reino_image_attributes[1] ); ?>" height="<?php echo esc_attr( $reino_image_attributes[2] ); ?>" />
 				</a>
 				<?php
 			} else { ?>
@@ -82,65 +82,65 @@ if ( ! class_exists( 'Vamico_Generator_Class' ) ) {
 		}
 		// S I D E B A R   P O S I T I O N S
 		//--------------------------------------------------------
-		function vamico_sidebar_option( $postid ) {
+		function reino_sidebar_option( $postid ) {
 			// Get sidebar class and adds sub class to pagemid block layout
-			$vamico_sidebar_layout = get_option( 'vamico_defaultlayout' ) ? get_option( 'vamico_defaultlayout' ) : 'rightsidebar';
-			$vamico_archive_layout = get_option( 'vamico_archive_layout' ) ? get_option( 'vamico_archive_layout' ) : 'rightsidebar';
-			$vamico_author_layout  = get_option( 'vamico_author_layout' ) ? get_option( 'vamico_author_layout' ) : 'rightsidebar';
-			$vamico_sidebaroption  = get_post_meta( $postid, 'vamico_sidebar_options', true ) ? get_post_meta( $postid, 'vamico_sidebar_options', true ) : $vamico_sidebar_layout;
+			$reino_sidebar_layout = get_option( 'reino_defaultlayout' ) ? get_option( 'reino_defaultlayout' ) : 'rightsidebar';
+			$reino_archive_layout = get_option( 'reino_archive_layout' ) ? get_option( 'reino_archive_layout' ) : 'rightsidebar';
+			$reino_author_layout  = get_option( 'reino_author_layout' ) ? get_option( 'reino_author_layout' ) : 'rightsidebar';
+			$reino_sidebaroption  = get_post_meta( $postid, 'reino_sidebar_options', true ) ? get_post_meta( $postid, 'reino_sidebar_options', true ) : $reino_sidebar_layout;
 
-			switch ( $vamico_sidebaroption ) {
+			switch ( $reino_sidebaroption ) {
 				case 'rightsidebar':
-					$vamico_sidebaroption = 'rightsidebar';
+					$reino_sidebaroption = 'rightsidebar';
 					break;
 				case 'leftsidebar':
-					$vamico_sidebaroption = 'leftsidebar';
+					$reino_sidebaroption = 'leftsidebar';
 					break;
 				case 'fullwidth':
-					$vamico_sidebaroption = 'fullwidth';
+					$reino_sidebaroption = 'fullwidth';
 					break;
 				default:
-					$vamico_sidebaroption = $vamico_sidebaroption;
+					$reino_sidebaroption = $reino_sidebaroption;
 			}
 
 			if ( is_archive() ) {
-				$vamico_sidebaroption = $vamico_archive_layout;
+				$reino_sidebaroption = $reino_archive_layout;
 			}
 			if ( is_404() ) {
-				$vamico_sidebaroption = 'fullwidth';
+				$reino_sidebaroption = 'fullwidth';
 			}
 
 			if ( is_author() ) {
-				$vamico_sidebaroption = $vamico_author_layout;
+				$reino_sidebaroption = $reino_author_layout;
 			}
-			return $vamico_sidebaroption;
+			return $reino_sidebaroption;
 		}
 
 		/***
 		 * P O S T   L I N K   T Y P E
 		 *--------------------------------------------------------
-		 * vamico_post_link_to - generates URL based on link type
+		 * reino_post_link_to - generates URL based on link type
 		 * @param - string link_type - Type of link
 		 * @return - string URL
 		 *
 		 */
-		function vamico_post_link_to( $vamico_link_type ) {
+		function reino_post_link_to( $reino_link_type ) {
 
 			global $post;
 
 			//use switch to generate URL based on link type
-			switch ( $vamico_link_type ) {
+			switch ( $reino_link_type ) {
 				case 'linkpage':
-					return get_page_link( get_post_meta( $post->ID, 'vamico_linkpage', true ) );
+					return get_page_link( get_post_meta( $post->ID, 'reino_linkpage', true ) );
 					break;
 				case 'linktocategory':
-					return get_category_link( get_post_meta( $post->ID, 'vamico_linktocategory', true ) );
+					return get_category_link( get_post_meta( $post->ID, 'reino_linktocategory', true ) );
 					break;
 				case 'linktopost':
-					return get_permalink( get_post_meta( $post->ID, 'vamico_linktopost', true ) );
+					return get_permalink( get_post_meta( $post->ID, 'reino_linktopost', true ) );
 					break;
 				case 'linkmanually':
-					return esc_url( get_post_meta( $post->ID, 'vamico_linkmanually', true ) );
+					return esc_url( get_post_meta( $post->ID, 'reino_linkmanually', true ) );
 					break;
 				case 'nolink':
 					return 'nolink';
@@ -150,13 +150,13 @@ if ( ! class_exists( 'Vamico_Generator_Class' ) ) {
 
 		// A B O U T   A U T H O R
 		//--------------------------------------------------------
-		function vamico_about_author() {
-			$vamico_author_style = get_option( 'vamico_author_style' ) ? get_option( 'vamico_author_style' ) : '';
+		function reino_about_author() {
+			$reino_author_style = get_option( 'reino_author_style' ) ? get_option( 'reino_author_style' ) : '';
 			if ( '' !== get_the_author_meta( 'description' ) ) { ?>
-				<div class="post__author <?php echo esc_attr( $vamico_author_style ); ?>">
+				<div class="post__author <?php echo esc_attr( $reino_author_style ); ?>">
 					<div class="author__avatar"><?php echo get_avatar( get_the_author_meta( 'email' ), $size = '100', $default = '' ); ?></div>
 					<div class="author__description">
-						<div class="author__label"><?php echo esc_html__( 'Posted By', 'vamico' ); ?></div>
+						<div class="author__label"><?php echo esc_html__( 'Posted By', 'reino' ); ?></div>
 						<h4><?php echo the_author_posts_link(); ?></h4>
 						<?php
 						echo '<ul class="at__social">';
@@ -188,34 +188,34 @@ if ( ! class_exists( 'Vamico_Generator_Class' ) ) {
 		}
 		// Navigation for single posts
 		//--------------------------------------------------------
-		function vamico_single_navigation() {
+		function reino_single_navigation() {
 			$previous_post = get_previous_post();
 			$next_post = get_next_post();
 			if ( is_singular( 'attachment' ) ) {
 				// Parent post navigation.
 				the_post_navigation( array(
-					'prev_text' => _x( '<span class="meta-nav">Published in</span><span class="post-title">%title</span>', 'Parent post link', 'vamico' ),
+					'prev_text' => _x( '<span class="meta-nav">Published in</span><span class="post-title">%title</span>', 'Parent post link', 'reino' ),
 				) );
 			}
 			if ( is_singular( 'post' ) ) {
 				// Previous/next post navigation.
 				the_post_navigation( array(
-					'next_text' => '<span class="meta-nav">' . __( 'Next Article:', 'vamico' ) . '</span>%title',
-					'prev_text' => '<span class="meta-nav">' . __( 'Previous Article:', 'vamico' ) . '</span>%title',
+					'next_text' => '<span class="meta-nav">' . __( 'Next Article:', 'reino' ) . '</span>%title',
+					'prev_text' => '<span class="meta-nav">' . __( 'Previous Article:', 'reino' ) . '</span>%title',
 				) );
 			}
 		}
 
 		// R E L A T E D   P O S T S
 		//--------------------------------------------------------
-		function vamico_related_posts() {
+		function reino_related_posts() {
 
 			global $post;
 
-			do_action( 'vamico_theme_owlslider', $post->ID );
+			do_action( 'reino_theme_owlslider', $post->ID );
 
-			$vamico_related_limit = get_option( 'vamico_related_limit' )
-									? get_option( 'vamico_related_limit' )
+			$reino_related_limit = get_option( 'reino_related_limit' )
+									? get_option( 'reino_related_limit' )
 									: 3;
 
 			$exclude_post = $post->ID;
@@ -226,7 +226,7 @@ if ( ! class_exists( 'Vamico_Generator_Class' ) ) {
 			// Get all the categories for the current post
 			$post_categories = wp_get_post_categories( $post->ID );
 
-			$vamico_post_args = array(
+			$reino_post_args = array(
 				'category__in'   => $post_categories,
 				'post_type'      => array( 'post' ),
 				'posts_per_page' => 12,
@@ -235,13 +235,13 @@ if ( ! class_exists( 'Vamico_Generator_Class' ) ) {
 				'post__not_in'   => array( $exclude_post ),
 			);
 
-			$vamico_related_query = new WP_Query( $vamico_post_args );
+			$reino_related_query = new WP_Query( $reino_post_args );
 
-			if ( $vamico_related_query->have_posts() ) {
-				echo '<h3 class="related__posts-title">' . esc_html__( 'You might also like', 'vamico' ) . '</h3>';
+			if ( $reino_related_query->have_posts() ) {
+				echo '<h3 class="related__posts-title">' . esc_html__( 'You might also like', 'reino' ) . '</h3>';
 				echo '<div class="owl-carousel post__related" id="owl-carousel-related">';
-				while ( $vamico_related_query->have_posts() ) {
-					$vamico_related_query->the_post();
+				while ( $reino_related_query->have_posts() ) {
+					$reino_related_query->the_post();
 					// Check var $do_not_duplicate array for duplicate IDs
 					if ( !in_array( $post->ID, $do_not_duplicate ) ) {
 
@@ -252,16 +252,16 @@ if ( ! class_exists( 'Vamico_Generator_Class' ) ) {
 							echo '<article id="post-' . $post->ID . '" class="' . join( ' ', get_post_class( 'post__related-item' ) ) . '">';
 							if ( has_post_thumbnail() ) {
 								echo '<div class="post__thumbnail">';
-								echo get_the_post_thumbnail( $post->ID, 'vamico-small-square' );
+								echo get_the_post_thumbnail( $post->ID, 'reino-small-square' );
 								echo '<div class="post__thumbnail-meta">';
-								vamico_the_post_meta( array( 'readtime', 'views' ), true );
+								reino_the_post_meta( array( 'readtime', 'views' ), true );
 								echo '</div>';//.post__thumbnail-meta
 								echo '<a class="hover__link" href="' . esc_url( get_permalink( $post->ID ) ) . '"></a>';
 								echo '</div>';//.post__thumbnail
 							}
 							echo '<h2 class="entry-title"><a href="' . esc_url( get_permalink( $post->ID ) ) . '">' . get_the_title() . '</a></h2>';
-							if ( get_option( 'vamico_postmeta' ) !== 'on' ) {
-								vamico_the_post_meta( array( 'date' ) );
+							if ( get_option( 'reino_postmeta' ) !== 'on' ) {
+								reino_the_post_meta( array( 'date' ) );
 							}
 							echo '</article>';
 						}
@@ -279,7 +279,7 @@ if ( ! class_exists( 'Vamico_Generator_Class' ) ) {
 * Description Walker Class for Custom Menu
 */
 //http://code.tutsplus.com/tutorials/understanding-the-walker-class--wp-25401
-class Vamico_Custom_Menu_Walker extends Walker_Nav_Menu {
+class Reino_Custom_Menu_Walker extends Walker_Nav_Menu {
 
 	// columns
 	var $columns  = 0;
@@ -288,7 +288,7 @@ class Vamico_Custom_Menu_Walker extends Walker_Nav_Menu {
 	var $rows   = 1;
 	var $arows   = array();
 	// mega menu
-	var $vamico_megamenu = 0;
+	var $reino_megamenu = 0;
 
 	function start_lvl( &$output, $depth = 0, $args = array() ) {
 
@@ -430,7 +430,7 @@ class Vamico_Custom_Menu_Walker extends Walker_Nav_Menu {
 /**
  * Description Walker Class for Mobile Menu
  */
-class Vamico_Mobile_Custom_Menu_Walker extends Walker_Nav_Menu {
+class Reino_Mobile_Custom_Menu_Walker extends Walker_Nav_Menu {
 	function start_el( &$output, $object, $depth = 4, $args = array(), $current_object_id = 0 ) {
 
 		global $wp_query;
@@ -490,24 +490,24 @@ class Vamico_Mobile_Custom_Menu_Walker extends Walker_Nav_Menu {
 //--------------------------------------------------------
 
 /**
- * function vamico_generator()
+ * function reino_generator()
  * link @ http://php.net/manual/en/function.call-user-func-array.php
  * link @ http://php.net/manual/en/function.func-get-args.php
  */
-function vamico_generator( $function ) {
+function reino_generator( $function ) {
 
-	global $vamico_generator;
+	global $reino_generator;
 
-	$vamico_generator = new Vamico_Generator_Class;
-	$vamico_args = array_slice( func_get_args(), 1 );
+	$reino_generator = new Reino_Generator_Class;
+	$reino_args = array_slice( func_get_args(), 1 );
 
-	return call_user_func_array( array( &$vamico_generator, $function ), $vamico_args );
+	return call_user_func_array( array( &$reino_generator, $function ), $reino_args );
 }
 
 // C U S T O M   C O M M E N T   T E M P L A T E
 //--------------------------------------------------------
 
-function vamico_custom_comment( $comment, $args, $depth ) {
+function reino_custom_comment( $comment, $args, $depth ) {
 
 	global $post;
 
@@ -516,7 +516,7 @@ function vamico_custom_comment( $comment, $args, $depth ) {
 		case 'trackback':
 			?>
 			<li <?php comment_class(); ?> id="comment-<?php comment_ID(); ?>">
-				<p><?php esc_html_e( 'Pingback:', 'vamico' ); ?> <?php comment_author_link(); ?> <?php edit_comment_link( esc_html__( 'Edit', 'vamico' ), '<span class="edit-link">', '</span>' ); ?></p>
+				<p><?php esc_html_e( 'Pingback:', 'reino' ); ?> <?php comment_author_link(); ?> <?php edit_comment_link( esc_html__( 'Edit', 'reino' ), '<span class="edit-link">', '</span>' ); ?></p>
 			<?php
 			break;
 		default:
@@ -530,23 +530,23 @@ function vamico_custom_comment( $comment, $args, $depth ) {
 						printf( '<cite class="fn">%1$s %2$s</cite>',
 							get_comment_author_link(),
 							// If current post author is also comment author, make it known visually.
-							( $comment->user_id === $post->post_author ) ? '<span> ' . esc_html__( 'Post author', 'vamico' ) . '</span>' : ''
+							( $comment->user_id === $post->post_author ) ? '<span> ' . esc_html__( 'Post author', 'reino' ) . '</span>' : ''
 						);
 						echo '<div class="comment-metadata">';
 						printf( '<a href="%1$s"><time pubdate datetime="%2$s">%3$s</time></a>',
 							esc_url( get_comment_link( $comment->comment_ID ) ),
 							get_comment_time( 'c' ),
 							/* translators: 1: date, 2: time */
-							sprintf( esc_html__( '%1$s at %2$s', 'vamico' ), get_comment_date(), get_comment_time() )
+							sprintf( esc_html__( '%1$s at %2$s', 'reino' ), get_comment_date(), get_comment_time() )
 						);
 
-						edit_comment_link( esc_html__( 'Edit', 'vamico' ), '<span class="edit-link">', '</span>' );
+						edit_comment_link( esc_html__( 'Edit', 'reino' ), '<span class="edit-link">', '</span>' );
 						echo '</div>';
 					?>
 				</header><!-- .comment-meta -->
 				<div class="comment-content">
 					<?php if ( '0' == $comment->comment_approved ) : ?>
-					<p class="comment-awaiting-moderation"><?php esc_html_e( 'Your comment is awaiting moderation.', 'vamico' ); ?></p>
+					<p class="comment-awaiting-moderation"><?php esc_html_e( 'Your comment is awaiting moderation.', 'reino' ); ?></p>
 					<?php endif; ?>
 					<?php comment_text(); ?>
 					<div class="reply">

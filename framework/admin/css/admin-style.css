@@ -1414,25 +1414,25 @@ li:hover .rwmb-image-bar {
 
 /* Post Gallery Meta Box
 ==================================================== */
-#Vamico-gallery-meta-box .inside { margin: 0; padding: 0; }
-.add_vamico_images { padding: 0 12px 12px; }
-#vamico_images_container { padding: 0 0 0 9px; }
-#vamico_images_container ul {
+#Reino-gallery-meta-box .inside { margin: 0; padding: 0; }
+.add_reino_images { padding: 0 12px 12px; }
+#reino_images_container { padding: 0 0 0 9px; }
+#reino_images_container ul {
 	*zoom: 1;
 	margin: 0;
 	padding: 0;
 }
-#vamico_images_container ul:before,
-#vamico_images_container ul:after {
+#reino_images_container ul:before,
+#reino_images_container ul:after {
 	content: " ";
 	display: table;
 }
-#vamico_images_container ul:after {
+#reino_images_container ul:after {
 	clear: both;
 }
-#vamico_images_container ul li.image,
-#vamico_images_container ul li.add,
-#vamico_images_container ul li.rh-metabox-sortable-placeholder {
+#reino_images_container ul li.image,
+#reino_images_container ul li.add,
+#reino_images_container ul li.rh-metabox-sortable-placeholder {
 	width: 72px;
 	float: left;
 	cursor: move;
@@ -1450,18 +1450,18 @@ li:hover .rwmb-image-bar {
 	box-sizing: border-box;
 	/* Opera/IE 8+ */
 }
-#vamico_images_container ul li.image img,
-#vamico_images_container ul li.add img,
-#vamico_images_container ul li.rh-metabox-sortable-placeholder img {
+#reino_images_container ul li.image img,
+#reino_images_container ul li.add img,
+#reino_images_container ul li.rh-metabox-sortable-placeholder img {
 	width: 100%;
 	height: auto;
 	display: block;
 }
-#vamico_images_container ul li.rh-metabox-sortable-placeholder {
+#reino_images_container ul li.rh-metabox-sortable-placeholder {
 	border: 3px dashed #dddddd;
 	position: relative;
 }
-#vamico_images_container ul li.rh-metabox-sortable-placeholder:after {
+#reino_images_container ul li.rh-metabox-sortable-placeholder:after {
 	font-family: 'dashicons';
 	speak: none;
 	font-weight: normal;
@@ -1482,18 +1482,18 @@ li:hover .rwmb-image-bar {
 	line-height: 72px;
 	color: #ddd;
 }
-#vamico_images_container ul ul.actions {
+#reino_images_container ul ul.actions {
 	position: absolute;
 	top: -8px;
 	right: -8px;
 	padding: 2px;
 	display: none;
 }
-#vamico_images_container ul ul.actions li {
+#reino_images_container ul ul.actions li {
 	float: right;
 	margin: 0 0 0 2px;
 }
-#vamico_images_container ul ul.actions li a {
+#reino_images_container ul ul.actions li a {
 	width: 1em;
 	height: 1em;
 	margin: 0;
@@ -1501,10 +1501,10 @@ li:hover .rwmb-image-bar {
 	display: block;
 	overflow: hidden;
 }
-#vamico_images_container ul ul.actions li a.tips {
+#reino_images_container ul ul.actions li a.tips {
 	cursor: pointer;
 }
-#vamico_images_container ul ul.actions li a.view {
+#reino_images_container ul ul.actions li a.view {
 	display: block;
 	text-indent: -9999px;
 	position: relative;
@@ -1512,7 +1512,7 @@ li:hover .rwmb-image-bar {
 	width: 1em;
 	font-size: 1.4em;
 }
-#vamico_images_container ul ul.actions li a.view:before {
+#reino_images_container ul ul.actions li a.view:before {
 	font-family: 'dashicons';
 	speak: none;
 	font-weight: normal;
@@ -1532,7 +1532,7 @@ li:hover .rwmb-image-bar {
 	background-color: #000;
 	color: #fff;
 }
-#vamico_images_container ul ul.actions li a.delete {
+#reino_images_container ul ul.actions li a.delete {
 	display: block;
 	text-indent: -9999px;
 	position: relative;
@@ -1540,7 +1540,7 @@ li:hover .rwmb-image-bar {
 	width: 1em;
 	font-size: 1.4em;
 }
-#vamico_images_container ul ul.actions li a.delete:before {
+#reino_images_container ul ul.actions li a.delete:before {
 	font-family: 'dashicons';
 	speak: none;
 	font-weight: normal;
@@ -1563,9 +1563,9 @@ li:hover .rwmb-image-bar {
 	border-radius: 100%;
 	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
 }
- #vamico_images_container ul ul.actions li a.delete:hover:before {
+ #reino_images_container ul ul.actions li a.delete:hover:before {
 	background-color: red;
 }
-#vamico_images_container ul li:hover ul.actions {
+#reino_images_container ul li:hover ul.actions {
 	display: block;
 }

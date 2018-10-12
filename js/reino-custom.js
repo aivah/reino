@@ -11,7 +11,7 @@
 		/* ShareLinls popup       */
 		/* ====================== */
 		$('.meta-share .customer.share').on("click", function(e) {
-		  $(this).vamico_share_popup(e);
+		  $(this).reino_share_popup(e);
 		});
 
 		/* Justified Gallery      */
@@ -186,7 +186,7 @@
 				    },
 				});
 				// Post Gallery  Carousel
-				$("#vamico_postformat_gallery").owlCarousel({
+				$("#reino_postformat_gallery").owlCarousel({
 					autoplay: owlcarousel_args.galleryspeed,
 					pagination: owl_navigation,
 					nav: true,
@@ -204,25 +204,7 @@
 				});
 				// center
 				var owl_autoplay = owlcarousel_args.autoplay == 'true' ? true : false;
-				$('.owl-center').owlCarousel({
-					autoplay: true,
-					autoplayTimeout : parseInt(owlcarousel_args.timeout),
-					margin : parseInt(owlcarousel_args.margin),
-					loop: true,
-					center: true,
-					items: 2,
-					dots: false,
-					nav: true,
-					navText: [ "<div class='owl-btn'><i class='fa fa-angle-left'></i></div>", "<div class='owl-btn'><i class='fa fa-angle-right'></i></div>"],
-					pagination: false,
-					responsive:{
-						1200:{
-						    items:4
-						}
-					},
-					onInitialized: this.e,
-					onResized: this.f
-				});
+
 				jQuery('.owl-boxed').owlCarousel({
 					autoplay: owl_autoplay,
 					autoplayTimeout : parseInt(owlcarousel_args.timeout),
@@ -247,7 +229,7 @@
 					onInitialized: this.e,
 					onResized: this.f
 				 });
-				jQuery('.owl-large').owlCarousel({
+				jQuery('.owl-fullscreen').owlCarousel({
 					nav : true,
 					navText: [ "<div class='owl-btn'><i class='fa fa-angle-left'></i></div>", "<div class='owl-btn'><i class='fa fa-angle-right'></i></div>"],
 					pagination : false,
@@ -268,15 +250,22 @@
 					jQuery(".featured_slider").css("margin-top", -c - b + "px"),
 					k >= 600 ? jQuery(".owl__post img").css("height", k) : jQuery(".owl__post img").css("height", "600px");
 				}
-				var owl_multi = $(".owl-multiple").data("slidesnumber");
-				$('.owl-multiple').owlCarousel({
+
+                // Owl Slider Columns
+				var owl_columns = $(".owl-columns").data("slidesnumber");
+				$('.owl-columns').owlCarousel({
+                    items: owl_columns,
 					nav : true,
-					dots : false,
+					dots : true,
 					navText: [
 					  "<div class='owl-btn'><i class='fa fa-angle-left'></i></div>",
 					  "<div class='owl-btn'><i class='fa fa-angle-right'></i></div>"
 					],
-					items: owl_multi,
+                    autoplay: owl_autoplay,
+					autoplayTimeout : parseInt(owlcarousel_args.timeout),
+					margin : parseInt(owlcarousel_args.margin),
+					loop: true,
+					stagePadding: 10,
 					responsive: {
 						0: {
 							nav: !1,
@@ -293,41 +282,11 @@
 						1200: {
 							nav: !0,
 							loop: !0,
-							stagePadding: 100,
+							stagePadding: 0,
 						}
 					},
-					autoplay: owl_autoplay,
-					autoplayTimeout : parseInt(owlcarousel_args.timeout),
-					margin : parseInt(owlcarousel_args.margin),
-					loop: true,
-					stagePadding: 100,
-					onInitialized: this.e,
-            		onResized: this.f
 				});
 
-
-				// add animate.css class(es) to the elements to be animated
-				function setAnimation ( _elem, _InOut ) {
-					// Store all animationend event name in a string.
-					// cf animate.css documentation
-					var animationEndEvent = 'webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend';
-
-					_elem.each ( function () {
-						var $elem = $(this);
-						var $animationType = 'animated ' + $elem.data( 'animation-' + _InOut );
-
-						$elem.addClass($animationType).one(animationEndEvent, function () {
-						$elem.removeClass($animationType); // remove animate.css Class at the end of the animations
-						});
-					});
-				}
-
-				// Fired after current slide has been changed
-				owl.on('translate.owl.carousel', function(event) {
-					var $currentItem = $('.owl-item article', owl);
-					var $elemsToanim = $currentItem.find("[data-animation-in]");
-					setAnimation ($elemsToanim, 'in');
-				})
 			}
 		}
 
@@ -367,9 +326,9 @@
 		$('#search_input').on('input', function() {
 			$('.loading-wrapper').addClass('loading');
 			$.ajax({
-				url:vamico_localize_script_param .ajaxurl,
+				url:reino_localize_script_param .ajaxurl,
 				type:'POST',
-				data:'action=vamico_post_ajax_search&s='+jQuery('#search_input').val(),
+				data:'action=reino_post_ajax_search&s='+jQuery('#search_input').val(),
 				success:function(results) {
 					$("#autocomplete").html(results);
 					$('.loading-wrapper').removeClass('loading');
@@ -399,7 +358,7 @@
 			var $id = $(this).attr('id');
 			if($loveLink.hasClass('loved')) return false;
 			var $sendTheData = {
-				action: 'vamico-love',
+				action: 'reino-love',
 				loves_id: $id
 			}
 			$.post(ivaLove.ajaxurl, $sendTheData, function(data){
@@ -425,7 +384,7 @@
 
 //Wait for window load
 jQuery(window).load(function() {
-	jQuery('.vamico_page_loader').fadeOut(800);
+	jQuery('.reino_page_loader').fadeOut(800);
 });
 
 /*!

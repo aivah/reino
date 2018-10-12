@@ -14,16 +14,16 @@ if ( is_active_sidebar( 'footer_instagram_widget' ) ) {
 <div id="footer" class="footer-wrap">
 	<?php
 	// Footer Area Top
-	if ( 'on' !== get_option( 'vamico_footer_area_top' ) ) {
+	if ( 'on' !== get_option( 'reino_footer_area_top' ) ) {
 		if ( is_active_sidebar( 'footer_area_top' ) ) {
 			echo '<div class="footer-area-top"><div class="inner">';
 			dynamic_sidebar( 'footer_area_top' );
 			echo '</div></div>';
 		}
 	}
-	if ( 'on' !== get_option( 'vamico_footer_sidebar' ) ) {
+	if ( 'on' !== get_option( 'reino_footer_sidebar' ) ) {
 		// Get footer sidebar widgets
-		if ( 'on' !== get_option( 'vamico_footer_sidebar' )
+		if ( 'on' !== get_option( 'reino_footer_sidebar' )
 			&& is_active_sidebar( 'footer-widgets' )
 			) {
 			echo '<div class="footer-area-middle">';
@@ -38,7 +38,7 @@ if ( is_active_sidebar( 'footer_instagram_widget' ) ) {
 		}
 	}
 	// Footer Area Bottom
-	if ( 'on' !== get_option( 'vamico_footer_area_bottom' ) ) {
+	if ( 'on' !== get_option( 'reino_footer_area_bottom' ) ) {
 		if ( is_active_sidebar( 'footer_area_bottom' ) ) {
 			echo '<div class="footer-area-bottom"><div class="inner">';
 			dynamic_sidebar( 'footer_area_bottom' );
@@ -64,7 +64,7 @@ if ( is_active_sidebar( 'footer_instagram_widget' ) ) {
 						dynamic_sidebar( 'footer_rightcopyright' );
 					endif;
 					if ( is_active_sidebar( 'footer-branches' ) ) {
-						echo '<a class="at-footer-branches">' . esc_html__( 'More Branches', 'vamico' ) . '</a>';
+						echo '<a class="at-footer-branches">' . esc_html__( 'More Branches', 'reino' ) . '</a>';
 					}
 					?>
 				</div><!-- .copyright-right -->
@@ -88,7 +88,7 @@ if ( is_active_sidebar( 'footer_instagram_widget' ) ) {
 	<?php } ?>
 </div>
 <div id="back-top">
-	<a href="#header" title="<?php echo esc_html__( 'Scroll Top', 'vamico' ); ?>">
+	<a href="#header" title="<?php echo esc_html__( 'Scroll Top', 'reino' ); ?>">
 		<span class="fa fa-angle-up fa-fw fa-lg"></span>
 	</a>
 </div>

@@ -8,22 +8,22 @@
  *
  */
 // Register Widget
-function vamico_promo_banner_widget() {
-	register_widget( 'Vamico_Promo_Banner_Widget' );
+function reino_promo_banner_widget() {
+	register_widget( 'Reino_Promo_Banner_Widget' );
 }
 
 /* Add our function to the widgets_init hook. */
-add_action( 'widgets_init', 'vamico_promo_banner_widget' );
+add_action( 'widgets_init', 'reino_promo_banner_widget' );
 
 // Define the Widget as an extension of WP_Widget
-class Vamico_Promo_Banner_Widget extends WP_Widget {
+class Reino_Promo_Banner_Widget extends WP_Widget {
 
 	function __construct() {
 
 		/* Widget settings. */
 		$widget_ops = array(
 			'classname'	 => 'promo__banner-wg',
-			'description' => esc_html__( 'A widget that displays a Promotion Banner', 'vamico' ),
+			'description' => esc_html__( 'A widget that displays a Promotion Banner', 'reino' ),
 		);
 
 		/* Widget control settings. */
@@ -32,7 +32,7 @@ class Vamico_Promo_Banner_Widget extends WP_Widget {
 		);
 
 		/* Create the widget. */
-		parent::__construct( 'promo_banner_widget', sprintf( esc_html__( ' %s: Promo Banner', 'vamico' ), VAMICO_THEME_NAME ), $widget_ops, $control_ops );
+		parent::__construct( 'promo_banner_widget', sprintf( esc_html__( ' %s: Promo Banner', 'reino' ), REINO_THEME_NAME ), $widget_ops, $control_ops );
 	}
 
 	// outputs the content of the widget
@@ -77,15 +77,15 @@ class Vamico_Promo_Banner_Widget extends WP_Widget {
 		$image_url = isset( $instance['image_url'] ) ? esc_attr( $instance['image_url'] ) : '';
 		?>
 		<p>
-			<label for="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>"><?php esc_html_e( 'Title:', 'vamico' ); ?></label>
+			<label for="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>"><?php esc_html_e( 'Title:', 'reino' ); ?></label>
 			<input class="widefat" id="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'title' ) ); ?>" type="text" value="<?php echo esc_attr( $title ); ?>" />
 		</p>
 		<p>
-			<label for="<?php echo esc_attr( $this->get_field_id( 'image_url' ) ); ?>"><?php esc_html_e( 'Promo Image URL:', 'vamico' ); ?></label>
+			<label for="<?php echo esc_attr( $this->get_field_id( 'image_url' ) ); ?>"><?php esc_html_e( 'Promo Image URL:', 'reino' ); ?></label>
 			<input class="widefat" id="<?php echo esc_attr( $this->get_field_id( 'image_url' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'image_url' ) ); ?>" type="text" value="<?php echo esc_attr( $image_url ); ?>" />
 		</p>
 		<p>
-			<label for="<?php echo esc_attr( $this->get_field_id( 'link_url' ) ); ?>"><?php esc_html_e( 'Promo Link URL:', 'vamico' ); ?></label>
+			<label for="<?php echo esc_attr( $this->get_field_id( 'link_url' ) ); ?>"><?php esc_html_e( 'Promo Link URL:', 'reino' ); ?></label>
 			<input class="widefat" id="<?php echo esc_attr( $this->get_field_id( 'link_url' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'link_url' ) ); ?>" type="text" value="<?php echo esc_attr( $link_url ); ?>" />
 		</p>
 	<?php

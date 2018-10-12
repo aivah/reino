@@ -20,7 +20,7 @@
  * Include the TGM_Plugin_Activation class.
  */
 require  get_parent_theme_file_path() . '/framework/includes/class-tgm-plugin-activation.php';
-add_action( 'tgmpa_register', 'vamico_theme_register_required_plugins' );
+add_action( 'tgmpa_register', 'reino_theme_register_required_plugins' );
 /**
  * Register the required plugins for this theme.
  *
@@ -33,7 +33,7 @@ add_action( 'tgmpa_register', 'vamico_theme_register_required_plugins' );
  * This function is hooked into tgmpa_init, which is fired within the
  * TGM_Plugin_Activation class constructor.
  */
-function vamico_theme_register_required_plugins() {
+function reino_theme_register_required_plugins() {
 
 	/**
 	 * Array of plugin arrays. Required keys are name and slug.
@@ -41,20 +41,20 @@ function vamico_theme_register_required_plugins() {
 	 */
 	$plugins = array(
 		array(
-			'name'					=> esc_html__( 'One Click Demo Import', 'vamico' ),
+			'name'					=> esc_html__( 'One Click Demo Import', 'reino' ),
 			'slug'					=> 'one-click-demo-import',
 			'required'				=> false,
 		),
 		array(
-			'name'					=> esc_html__( 'WP Instagram Widget', 'vamico' ),
+			'name'					=> esc_html__( 'WP Instagram Widget', 'reino' ),
 			'slug'					=> 'wp-instagram-widget',
 			'required'				=> false,
 		),
 		array(
-			'name'					=> esc_html__( 'Vamico User Details', 'vamico' ),
-			'slug'					=> 'vamico-user-details',
+			'name'					=> esc_html__( 'Reino Socials', 'reino' ),
+			'slug'					=> 'reino-socials',
 			'required'				=> false,
-			'source'	   		 	=> get_parent_theme_file_path() . '/framework/includes/plugins/vamico-user-details.zip',
+			'source'	   		 	=> get_parent_theme_file_path() . '/framework/includes/plugins/reino-socials.zip',
 			'required'	 		 	=> false,
 			'version'	 		 	=> '1.0',
 		),
@@ -69,7 +69,7 @@ function vamico_theme_register_required_plugins() {
 	 * Only uncomment the strings in the config array if you want to customize the strings.
 	 */
 	$config = array(
-		'id'           => 'vamico',      // Unique ID for hashing notices for multiple instances of TGMPA.
+		'id'           => 'reino',      // Unique ID for hashing notices for multiple instances of TGMPA.
 		'default_path' => '',                      // Default absolute path to bundled plugins.
 		'menu'         => 'tgmpa-install-plugins', // Menu slug.
 		'has_notices'  => true,                    // Show admin notices or not.

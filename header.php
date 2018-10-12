@@ -2,8 +2,8 @@
 /**
  * The template for displaying the header
  * @package WordPress
- * @subpackage Vamico
- * @since Vamico 1.0
+ * @subpackage Reino
+ * @since Reino 1.0
  */
 ?><!DOCTYPE html>
 <html <?php language_attributes(); ?> class="no-js">
@@ -14,8 +14,8 @@
 	<?php
 	// Adds site icon with a fallback
 	if ( ! ( function_exists( 'has_site_icon' ) && has_site_icon() ) ) {
-		if ( get_option( 'vamico_custom_favicon' ) ) {
-			echo '<link rel="shortcut icon" href="' . esc_url( get_option( 'vamico_custom_favicon' ) ) . '" type="image/x-icon">';
+		if ( get_option( 'reino_custom_favicon' ) ) {
+			echo '<link rel="shortcut icon" href="' . esc_url( get_option( 'reino_custom_favicon' ) ) . '" type="image/x-icon">';
 		}
 	}
 	?>
@@ -30,45 +30,45 @@ if (
 	is_404() ||
 	is_home()
 ) {
-	$vamico_frontpageid = '';
+	$reino_frontpageid = '';
 } else {
 	if ( class_exists( 'woocommerce' ) ) {
 		if ( is_shop() ) {
-			$vamico_frontpageid = get_option( 'woocommerce_shop_page_id' );
+			$reino_frontpageid = get_option( 'woocommerce_shop_page_id' );
 		} elseif ( is_cart( get_option( 'woocommerce_cart_page_id' ) ) ) {
-			$vamico_frontpageid = get_option( 'woocommerce_cart_page_id' );
+			$reino_frontpageid = get_option( 'woocommerce_cart_page_id' );
 		} else {
-			$vamico_frontpageid = $post->ID;
+			$reino_frontpageid = $post->ID;
 		}
 	} else {
-		$vamico_frontpageid = $post->ID;
+		$reino_frontpageid = $post->ID;
 	}
 }
 // General Preloader
-$vamico_page_preloader = get_option( 'vamico_page_preloader' ) ? get_option( 'vamico_page_preloader' ) : '';
-if ( 'on' !== $vamico_page_preloader ) {
-	echo '<div class="vamico_page_loader"></div>';
+$reino_page_preloader = get_option( 'reino_page_preloader' ) ? get_option( 'reino_page_preloader' ) : '';
+if ( 'on' !== $reino_page_preloader ) {
+	echo '<div class="reino_page_loader"></div>';
 }
 
-$vamico_body_pattern     = get_option( 'vamico_overlayimages' );
-$vamico_page_layout_mode = get_option( 'vamico_layoutoption' ) ? esc_attr( get_option( 'vamico_layoutoption' ) ) : 'stretched';
-$vamico_page_layout      = get_post_meta( $vamico_frontpageid, 'vamico_page_layout', true );
-if ( 'on' === $vamico_page_layout ) {
-	$vamico_page_layout_mode = 'boxed';
+$reino_body_pattern     = get_option( 'reino_overlayimages' );
+$reino_page_layout_mode = get_option( 'reino_layoutoption' ) ? esc_attr( get_option( 'reino_layoutoption' ) ) : 'stretched';
+$reino_page_layout      = get_post_meta( $reino_frontpageid, 'reino_page_layout', true );
+if ( 'on' === $reino_page_layout ) {
+	$reino_page_layout_mode = 'boxed';
 }
 
 ?>
-<div class="<?php echo esc_attr( $vamico_page_layout_mode ); ?>" id="<?php echo esc_attr( $vamico_page_layout_mode ); ?>">
+<div class="<?php echo esc_attr( $reino_page_layout_mode ); ?>" id="<?php echo esc_attr( $reino_page_layout_mode ); ?>">
 	<?php
-	if ( ! empty( $vamico_body_pattern ) ) {
+	if ( ! empty( $reino_body_pattern ) ) {
 		echo '<div class="bodyoverlay"></div>';
 	}
 	?>
 	<div id="wrapper" class="wrapper">
 	<?php
 	// Switch Headers
-	$vamico_headerstyle = get_option( 'vamico_headerstyle' ) ? get_option( 'vamico_headerstyle' ) : '';
-	switch ( $vamico_headerstyle ) {
+	$reino_headerstyle = get_option( 'reino_headerstyle' ) ? get_option( 'reino_headerstyle' ) : '';
+	switch ( $reino_headerstyle ) {
 		case 'headerstyle1':
 			get_template_part( 'headers/header', 'style1' );
 			break;
@@ -86,9 +86,9 @@ if ( 'on' === $vamico_page_layout ) {
 	}
 	if ( is_front_page() ) {
 		// Get Slider based on the option selected in theme options panel
-		if ( get_option( 'vamico_slidervisble' ) !== 'on' ) {
-			$vamico_chooseslider = get_option( 'vamico_slider' );
-			switch ( $vamico_chooseslider ) :
+		if ( get_option( 'reino_slidervisble' ) !== 'on' ) {
+			$reino_chooseslider = get_option( 'reino_slider' );
+			switch ( $reino_chooseslider ) :
 				case 'static_image':
 					get_template_part( 'slider/static', 'slider' );
 					break;

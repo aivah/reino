@@ -18,32 +18,36 @@ get_header(); ?>
 			<main class="content-area">
 				<div class="entry-content-wrapper clearfix">
 					<div class="archive-box">
-						<?php vamico_page_title(); ?>
+						<div class="archive-img">
+						<?php reino_category_img( 'thumbnail' ); ?>
+						</div>
+						<?php reino_page_title(); ?>
 					</div>
-					<?php $vamico_post_count = 0; ?>
 					<?php
-					$vamico_before = '';
-					$vamico_after  = '';
+					$reino_post_count = 0;
 
-					$vamico_archive_style = get_option( 'vamico_archive_style' ) ? get_option( 'vamico_archive_style' ) : '';
-					if ( 'archive_standard_style' === $vamico_archive_style ) {
-						$vamico_before = '<div class="post__layout"><div class="post__layout-standard">';
-						$vamico_after  = '</div></div>';//. post-layout
+					$reino_before = '';
+					$reino_after  = '';
+
+					$reino_archive_style = get_option( 'reino_archive_style' ) ? get_option( 'reino_archive_style' ) : '';
+					if ( 'archive_standard_style' === $reino_archive_style ) {
+						$reino_before = '<div class="post__layout"><div class="post__layout-standard">';
+						$reino_after  = '</div></div>';//. post-layout
 					}
-					if ( 'archive_grid_style' === $vamico_archive_style ) {
-						$vamico_before = '<div class="post__layout post-masonry-grid row"><div class="grid-sizer"></div>';
-						$vamico_after  = '</div>';//. post-layout
+					if ( 'archive_grid_style' === $reino_archive_style ) {
+						$reino_before = '<div class="post__layout post-masonry-grid row"><div class="grid-sizer"></div>';
+						$reino_after  = '</div>';//. post-layout
 					}
-					if ( 'archive_list_style' === $vamico_archive_style ) {
-						$vamico_before = '<div class="post__layout"><div class="post__layout-list">';
-						$vamico_after  = '</div></div>';//. post-layout
+					if ( 'archive_list_style' === $reino_archive_style ) {
+						$reino_before = '<div class="post__layout"><div class="post__layout-list">';
+						$reino_after  = '</div></div>';//. post-layout
 					}
-					echo wp_kses_post( $vamico_before );
+					echo wp_kses_post( $reino_before );
 					if ( have_posts() ) :
 						while ( have_posts() ) :
-							$vamico_post_count++;
+							$reino_post_count++;
 							the_post();
-							switch ( $vamico_archive_style ) {
+							switch ( $reino_archive_style ) {
 								case 'archive_standard_style':
 									get_template_part( 'templates/content', 'standard' );
 									break;
@@ -59,15 +63,15 @@ get_header(); ?>
 							}
 							?>
 					<?php endwhile; ?>
-						<?php echo wp_kses_post( $vamico_after ); ?>
+						<?php echo wp_kses_post( $reino_after ); ?>
 							<?php
 								// Pagination
-							if ( function_exists( 'vamico_pagination' ) ) {
-								vamico_pagination();
+							if ( function_exists( 'reino_pagination' ) ) {
+								reino_pagination();
 							}
 							?>
 					<?php else : ?>
-					<div class="alert alert-warning"><?php esc_html_e( 'Sorry, but nothing matched your search terms. Please try again with some different keywords.', 'vamico' ); ?></div>
+					<div class="alert alert-warning"><?php esc_html_e( 'Sorry, but nothing matched your search terms. Please try again with some different keywords.', 'reino' ); ?></div>
 					<?php get_search_form(); ?>
 					<?php endif; ?>
 
@@ -75,7 +79,7 @@ get_header(); ?>
 			</main><!-- .content-area -->
 
 			<?php
-			if ( vamico_generator( 'vamico_sidebar_option', get_the_ID() ) != 'fullwidth' ) {
+			if ( reino_generator( 'reino_sidebar_option', get_the_ID() ) != 'fullwidth' ) {
 				get_sidebar();
 			}
 			?>

@@ -8,22 +8,22 @@
  *
  */
 // Register Widget
-function vamico_facebook_like_widget() {
-	register_widget( 'Vamico_Facebook_Like_Widget' );
+function reino_facebook_like_widget() {
+	register_widget( 'Reino_Facebook_Like_Widget' );
 }
 
 /* Add our function to the widgets_init hook. */
-add_action( 'widgets_init', 'vamico_facebook_like_widget' );
+add_action( 'widgets_init', 'reino_facebook_like_widget' );
 
 // Define the Widget as an extension of WP_Widget
-class Vamico_Facebook_Like_Widget extends WP_Widget {
+class Reino_Facebook_Like_Widget extends WP_Widget {
 
 	function __construct() {
 
 		/* Widget settings. */
 		$widget_ops = array(
 			'classname' => 'facebook-like-wg',
-			'description' => esc_html__( 'A widget that displays a Facebook Like Box', 'vamico' ),
+			'description' => esc_html__( 'A widget that displays a Facebook Like Box', 'reino' ),
 		);
 
 		/* Widget control settings. */
@@ -32,7 +32,7 @@ class Vamico_Facebook_Like_Widget extends WP_Widget {
 		);
 
 		/* Create the widget. */
-		parent::__construct( 'facebook_like_widget', sprintf( esc_html__( ' %s: Facebook Like Box', 'vamico' ), VAMICO_THEME_NAME ), $widget_ops, $control_ops );
+		parent::__construct( 'facebook_like_widget', sprintf( esc_html__( ' %s: Facebook Like Box', 'reino' ), REINO_THEME_NAME ), $widget_ops, $control_ops );
 	}
 
 	// outputs the content of the widget
@@ -89,25 +89,25 @@ class Vamico_Facebook_Like_Widget extends WP_Widget {
 		$cover = isset( $instance['cover'] ) ? (bool) $instance['cover'] : false;
 		?>
 		<p>
-			<label for="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>"><?php esc_html_e( 'Title:','vamico' ); ?></label>
+			<label for="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>"><?php esc_html_e( 'Title:','reino' ); ?></label>
 			<input class="widefat" id="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'title' ) ); ?>" type="text" value="<?php echo esc_attr( $title ); ?>" />
 		</p>
 		<p>
-			<label for="<?php echo esc_attr( $this->get_field_id( 'page_url' ) ); ?>"><?php esc_html_e( 'Face Page URL:','vamico' ); ?></label>
+			<label for="<?php echo esc_attr( $this->get_field_id( 'page_url' ) ); ?>"><?php esc_html_e( 'Face Page URL:','reino' ); ?></label>
 			<input class="widefat" id="<?php echo esc_attr( $this->get_field_id( 'page_url' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'page_url' ) ); ?>" type="text" value="<?php echo esc_attr( $page_url ); ?>" />
-			<small><?php esc_html_e( 'e.g. http://www.facebook.com/envato', 'vamico' ); ?></small>
+			<small><?php esc_html_e( 'e.g. http://www.facebook.com/envato', 'reino' ); ?></small>
 		</p>
 		<p>
 			<input class="checkbox" type="checkbox" <?php checked( $faces ); ?> id="<?php echo esc_attr( $this->get_field_id( 'faces' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'faces' ) ); ?>" />
-			<label for="<?php echo esc_attr( $this->get_field_id( 'faces' ) ); ?>"><?php esc_html_e( 'Show Faces:','vamico' ); ?></label>
+			<label for="<?php echo esc_attr( $this->get_field_id( 'faces' ) ); ?>"><?php esc_html_e( 'Show Faces:','reino' ); ?></label>
 		</p>
 		<p>
 			<input class="checkbox" type="checkbox" <?php checked( $stream ); ?> id="<?php echo esc_attr( $this->get_field_id( 'stream' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'stream' ) ); ?>" />
-			<label for="<?php echo esc_attr( $this->get_field_id( 'stream' ) ); ?>"><?php esc_html_e( 'Show Stream:','vamico' ); ?></label>
+			<label for="<?php echo esc_attr( $this->get_field_id( 'stream' ) ); ?>"><?php esc_html_e( 'Show Stream:','reino' ); ?></label>
 		</p>
 		<p>
 			<input class="checkbox" type="checkbox" <?php checked( $cover ); ?> id="<?php echo esc_attr( $this->get_field_id( 'cover' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'cover' ) ); ?>" />
-			<label for="<?php echo esc_attr( $this->get_field_id( 'cover' ) ); ?>"><?php esc_html_e( 'Show Page Cover Image','vamico' ); ?></label>
+			<label for="<?php echo esc_attr( $this->get_field_id( 'cover' ) ); ?>"><?php esc_html_e( 'Show Page Cover Image','reino' ); ?></label>
 		</p>
 	<?php
 	}

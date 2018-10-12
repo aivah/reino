@@ -1,11 +1,11 @@
 <?php
 /**
- * function vamico_fw_optionsframework_add_admin - Load static framework options pages
+ * function reino_fw_optionsframework_add_admin - Load static framework options pages
  * Credits to Devin too for using some coding from his framework https://github.com/devinsays
  */
-function vamico_fw_optionsframework_add_admin() {
+function reino_fw_optionsframework_add_admin() {
 
-	global $vamico_options, $vamico_icon;
+	global $reino_options, $reino_icon;
 	/**
 	 * Save Options Settings
 	 */
@@ -13,7 +13,7 @@ function vamico_fw_optionsframework_add_admin() {
 
 		if ( isset( $_REQUEST['iva_save'] ) && 'reset' === $_REQUEST['iva_save'] ) {
 
-			vamico_fw_optionsframework_reset_options( $vamico_options, 'optionsframework' );
+			reino_fw_optionsframework_reset_options( $reino_options, 'optionsframework' );
 
 			header( 'Location: admin.php?page=optionsframework&reset=true' );
 			die;
@@ -22,80 +22,80 @@ function vamico_fw_optionsframework_add_admin() {
 	/**
 	 * Add a top level menu page in the 'objects' section
 	 *
-	 * @param string 'VAMICO_THEME_NAME' The text to be displayed in the title tags of the page when the menu is selected
-	 * @param string 'VAMICO_THEME_NAME' The text to be used for the menu
+	 * @param string 'REINO_THEME_NAME' The text to be displayed in the title tags of the page when the menu is selected
+	 * @param string 'REINO_THEME_NAME' The text to be used for the menu
 	 * @param string 'edit_theme_options' The capability required for this menu to be displayed to the user.
-	 * @param string 'optionsframework' The slug name to refer to this menu by $vamico_sociable(should be unique for this menu)
+	 * @param string 'optionsframework' The slug name to refer to this menu by $reino_sociable(should be unique for this menu)
 	 * @param callback 'optionsframework_options_page' The function to be called to output the content for this page.
-	 * @param string '$vamico_icon' The url to the icon to be used for this menu
+	 * @param string '$reino_icon' The url to the icon to be used for this menu
 	 *
 	 * @return string The resulting page's hook_suffix
 	 */
-	add_theme_page( VAMICO_THEME_NAME, VAMICO_THEME_NAME, 'edit_theme_options', 'optionsframework', 'vamico_fw_optionsframework_options_page', $vamico_icon );
+	add_theme_page( REINO_THEME_NAME, REINO_THEME_NAME, 'edit_theme_options', 'optionsframework', 'reino_fw_optionsframework_options_page', $reino_icon );
 
 	/**
 	 * Hooks a function on to a specific action.
 	 * Runs in the HTML header so a admin framework can add JavaScript scripts to all admin pages.
 	 */
-	add_action( 'admin_print_scripts', 'vamico_admin_print_scripts' );
+	add_action( 'admin_print_scripts', 'reino_admin_print_scripts' );
 }
 
 /**
  * Hooks for adding admin menu
  */
-add_action( 'admin_menu', 'vamico_fw_optionsframework_add_admin' );
+add_action( 'admin_menu', 'reino_fw_optionsframework_add_admin' );
 
 /**
- * Function vamico_fw_optionsframework_reset_options
- * updates the vamico_theme_option_values option value in wp_options table
+ * Function reino_fw_optionsframework_reset_options
+ * updates the reino_theme_option_values option value in wp_options table
  */
-function vamico_fw_optionsframework_reset_options( $vamico_options, $page = 'optionsframework' ) {
+function reino_fw_optionsframework_reset_options( $reino_options, $page = 'optionsframework' ) {
 
-	$output = unserialize( json_decode( get_option( 'vamico_default_theme_option_values' ) ) );
+	$output = unserialize( json_decode( get_option( 'reino_default_theme_option_values' ) ) );
 
-	vamico_update_option_values( $vamico_options, $output );
-	update_option( 'vamico_theme_option_values', $output );
+	reino_update_option_values( $reino_options, $output );
+	update_option( 'reino_theme_option_values', $output );
 }
 
 /**
- * function vamico_fw_optionsframework_options_page -  Builds the Options Page
+ * function reino_fw_optionsframework_options_page -  Builds the Options Page
  */
-function vamico_fw_optionsframework_options_page() {
+function reino_fw_optionsframework_options_page() {
 
-	global $vamico_options;
+	global $reino_options;
 
-	$vamico_theme_data	= wp_get_theme();
-	$vamico_theme_version = $vamico_theme_data->get( 'Version' );
-	$vamico_theme_name    = $vamico_theme_data->get( 'Name' );
+	$reino_theme_data	= wp_get_theme();
+	$reino_theme_version = $reino_theme_data->get( 'Version' );
+	$reino_theme_name    = $reino_theme_data->get( 'Name' );
 
 	$user_id 		= get_current_user_id();
 	$current_user 	= wp_get_current_user();
 	$avatar 		= get_avatar( $user_id, 50 );
-	$howdy  		= sprintf( esc_html__( 'Howdy, %1$s','vamico' ), $current_user->display_name );
+	$howdy  		= sprintf( esc_html__( 'Howdy, %1$s','reino' ), $current_user->display_name );
 	?>
 	<div class="iva_container_wrap">
 		<div class="iva_container">
-			<div class="page_load"><?php esc_html_e( 'Loading Theme Options...','vamico' ); ?></div>
+			<div class="page_load"><?php esc_html_e( 'Loading Theme Options...','reino' ); ?></div>
 
 			<form action="" enctype="multipart/form-data" id="atpform" method='post'>
 
-				<div id="atp-popup-save" class="atp-save-popup"><div class="atp-save-save"><?php esc_html_e( 'Options Updated','vamico' ); ?></div></div>
-				<div id="atp-popup-reset" class="atp-save-popup"><div class="atp-save-reset"><?php esc_html_e( 'Options Reset','vamico' ); ?></div></div>
+				<div id="atp-popup-save" class="atp-save-popup"><div class="atp-save-save"><?php esc_html_e( 'Options Updated','reino' ); ?></div></div>
+				<div id="atp-popup-reset" class="atp-save-popup"><div class="atp-save-reset"><?php esc_html_e( 'Options Reset','reino' ); ?></div></div>
 
 				<div class="iva_ofw_header clearfix">
 					<div class="leftpane">
 						<div class="headinfo">
 							<div class="atp_avatar"><?php echo wp_kses_post( $avatar ); ?></div>
 							<h4><?php echo wp_kses_post( $howdy ); ?> </h4>
-							<h5><span><?php esc_html_e( 'Theme Options Panel', 'vamico' );?></span></h5>
+							<h5><span><?php esc_html_e( 'Theme Options Panel', 'reino' );?></span></h5>
 						</div>
 					</div>
 					<div class="rightpane">
 						<div class="headlogo">
-							<h1><?php echo esc_html( $vamico_theme_name ); ?></h1>
+							<h1><?php echo esc_html( $reino_theme_name ); ?></h1>
 						</div>
 						<div class="panelinfo">
-							<div class="themename"><?php esc_html_e( 'Version', 'vamico' );?> <span class="details orange"><?php echo esc_html( $vamico_theme_version ); ?></span></div>
+							<div class="themename"><?php esc_html_e( 'Version', 'reino' );?> <span class="details orange"><?php echo esc_html( $reino_theme_version ); ?></span></div>
 						</div>
 					</div>
 				</div>	<!-- #atp_header -->
@@ -104,7 +104,7 @@ function vamico_fw_optionsframework_options_page() {
 				// Get all the options based on menu/page selection
 				switch ( $_GET['page'] ) {
 					case 'optionsframework' :
-						$return = vamico_fw_optionsframework_machine( $vamico_options );
+						$return = reino_fw_optionsframework_machine( $reino_options );
 						break;
 				}
 				?>
@@ -222,13 +222,13 @@ function vamico_fw_optionsframework_options_page() {
 
 				<div class="savebar">
 					<div class="savelink">
-						<img style="display:none" src="<?php echo esc_url( VAMICO_ADMIN_URI . '/images/spinner.gif' ); ?>" class="ajax-loading-img ajax-loading-img-bottom" alt="<?php echo esc_html__( 'saving...', 'vamico' ); ?>" />
-						<input type="submit" value="<?php echo esc_html__( 'Save All Changes', 'vamico' ); ?>" class="green-button button button-hero right button-primary" />
+						<img style="display:none" src="<?php echo esc_url( REINO_ADMIN_URI . '/images/spinner.gif' ); ?>" class="ajax-loading-img ajax-loading-img-bottom" alt="<?php echo esc_html__( 'saving...', 'reino' ); ?>" />
+						<input type="submit" value="<?php echo esc_html__( 'Save All Changes', 'reino' ); ?>" class="green-button button button-hero right button-primary" />
 					</div><!-- savelink-->
 				</form>
 				<form action="" method="post" style="display:inline" id="atpform-reset">
 					<span class="submit-footer-reset">
-						<input name="reset" type="submit" value="<?php echo esc_html__( 'Reset Options', 'vamico' );?>" class="red-button button button-secondary" />
+						<input name="reset" type="submit" value="<?php echo esc_html__( 'Reset Options', 'reino' );?>" class="red-button button button-secondary" />
 						<input type="hidden" name="iva_save" value="reset" />
 					</span>
 				</form>
@@ -246,62 +246,62 @@ function vamico_fw_optionsframework_options_page() {
 /**
  * Load required javascripts for Options Page - of_load_only
  */
-function vamico_admin_print_scripts() {
+function reino_admin_print_scripts() {
 
-	$vamico_sociable = array(
-		'adn'        	=> esc_html__( 'ADN', 'vamico' ),
-		'android'    	=> esc_html__( 'Android', 'vamico' ),
-		'behance'   	=> esc_html__( 'Behance', 'vamico' ),
-		'delicious'  	=> esc_html__( 'Delicious', 'vamico' ),
-		'deviantart' 	=> esc_html__( 'DeviantArt', 'vamico' ),
-		'digg'       	=> esc_html__( 'Digg', 'vamico' ),
-		'dribbble'   	=> esc_html__( 'Dribbble', 'vamico' ),
-		'facebook'  	=> esc_html__( 'Facebook', 'vamico' ),
-		'flickr'	 	=> esc_html__( 'Flickr', 'vamico' ),
-		'google-plus' 	=> esc_html__( 'Google Plus', 'vamico' ),
-		'instagram'  	=> esc_html__( 'Instagram', 'vamico' ),
-		'lastfm'     	=> esc_html__( 'Lastfm', 'vamico' ),
-		'linkedin'   	=> esc_html__( 'LinkedIn', 'vamico' ),
-		'pinterest-p' 	=> esc_html__( 'Pinterest', 'vamico' ),
-		'reddit'     	=> esc_html__( 'Reddit', 'vamico' ),
-		'skype'      	=> esc_html__( 'Skype', 'vamico' ),
-		'soundcloud' 	=> esc_html__( 'SoundCloud', 'vamico' ),
-		'stumbleupon' 	=> esc_html__( 'Stumbleupon', 'vamico' ),
-		'snapchat' 		=> esc_html__( 'Snapchat', 'vamico' ),
-		'twitter'     	=> esc_html__( 'Twitter', 'vamico' ),
-		'vimeo-square' 	=> esc_html__( 'Vimeo', 'vamico' ),
-		'whatsapp'   	=> esc_html__( 'Whatsapp', 'vamico' ),
-		'yahoo'      	=> esc_html__( 'Yahoo', 'vamico' ),
-		'yelp'       	=> esc_html__( 'Yelp', 'vamico' ),
-		'youtube'    	=> esc_html__( 'Youtube', 'vamico' ),
-		'vk'         	=> esc_html__( 'VK', 'vamico' ),
-		'paypal'	 	=> esc_html__( 'Paypal', 'vamico' ),
-		'rss'	 	=> esc_html__( 'RSS', 'vamico' ),
-		'dropbox'    	=> esc_html__( 'Dropbox', 'vamico' ),
-		'envelope'	 	=> esc_html__( 'Email', 'vamico' ),
+	$reino_sociable = array(
+		'adn'        	=> esc_html__( 'ADN', 'reino' ),
+		'android'    	=> esc_html__( 'Android', 'reino' ),
+		'behance'   	=> esc_html__( 'Behance', 'reino' ),
+		'delicious'  	=> esc_html__( 'Delicious', 'reino' ),
+		'deviantart' 	=> esc_html__( 'DeviantArt', 'reino' ),
+		'digg'       	=> esc_html__( 'Digg', 'reino' ),
+		'dribbble'   	=> esc_html__( 'Dribbble', 'reino' ),
+		'facebook'  	=> esc_html__( 'Facebook', 'reino' ),
+		'flickr'	 	=> esc_html__( 'Flickr', 'reino' ),
+		'google-plus' 	=> esc_html__( 'Google Plus', 'reino' ),
+		'instagram'  	=> esc_html__( 'Instagram', 'reino' ),
+		'lastfm'     	=> esc_html__( 'Lastfm', 'reino' ),
+		'linkedin'   	=> esc_html__( 'LinkedIn', 'reino' ),
+		'pinterest-p' 	=> esc_html__( 'Pinterest', 'reino' ),
+		'reddit'     	=> esc_html__( 'Reddit', 'reino' ),
+		'skype'      	=> esc_html__( 'Skype', 'reino' ),
+		'soundcloud' 	=> esc_html__( 'SoundCloud', 'reino' ),
+		'stumbleupon' 	=> esc_html__( 'Stumbleupon', 'reino' ),
+		'snapchat' 		=> esc_html__( 'Snapchat', 'reino' ),
+		'twitter'     	=> esc_html__( 'Twitter', 'reino' ),
+		'vimeo-square' 	=> esc_html__( 'Vimeo', 'reino' ),
+		'whatsapp'   	=> esc_html__( 'Whatsapp', 'reino' ),
+		'yahoo'      	=> esc_html__( 'Yahoo', 'reino' ),
+		'yelp'       	=> esc_html__( 'Yelp', 'reino' ),
+		'youtube'    	=> esc_html__( 'Youtube', 'reino' ),
+		'vk'         	=> esc_html__( 'VK', 'reino' ),
+		'paypal'	 	=> esc_html__( 'Paypal', 'reino' ),
+		'rss'	 	=> esc_html__( 'RSS', 'reino' ),
+		'dropbox'    	=> esc_html__( 'Dropbox', 'reino' ),
+		'envelope'	 	=> esc_html__( 'Email', 'reino' ),
 	);
 	wp_enqueue_script( 'jquery-ui-core' );
-	wp_enqueue_script( 'vamico-ajax-handler', VAMICO_FRAMEWORK_URI . 'admin/js/vamico-ajax-handler.js', array( 'jquery' ) );
-	wp_enqueue_script( 'vamico-of-medialibrary-uploader', VAMICO_FRAMEWORK_URI . 'admin/js/vamico-of-medialibrary-uploader.js', array( 'jquery', 'thickbox' ) );
+	wp_enqueue_script( 'reino-ajax-handler', REINO_FRAMEWORK_URI . 'admin/js/reino-ajax-handler.js', array( 'jquery' ) );
+	wp_enqueue_script( 'reino-of-medialibrary-uploader', REINO_FRAMEWORK_URI . 'admin/js/reino-of-medialibrary-uploader.js', array( 'jquery', 'thickbox' ) );
 	wp_enqueue_script( 'media-upload' );
 	wp_enqueue_script( 'underscore' );
 	wp_enqueue_media();
-	wp_localize_script( 'vamico-ajax-handler', 'sociables_args', $vamico_sociable );
+	wp_localize_script( 'reino-ajax-handler', 'sociables_args', $reino_sociable );
 
 	$querystring_reset = isset( $_REQUEST['reset'] ) ? esc_html( $_REQUEST['reset'] ) : '';
 	$admin_ajax_url = esc_url( admin_url( 'admin-ajax.php' ) );
 	$querystring_page = isset( $_REQUEST['page'] ) ? esc_html( $_REQUEST['page'] ):'';
-	wp_add_inline_script( 'vamico-ajax-handler', "var querystring_reset='$querystring_reset', admin_ajax_url='$admin_ajax_url', querystring_page='$querystring_page'" );
+	wp_add_inline_script( 'reino-ajax-handler', "var querystring_reset='$querystring_reset', admin_ajax_url='$admin_ajax_url', querystring_page='$querystring_page'" );
 }
 
 /**
 * Ajax Save Action - of_ajax_callback
 */
-add_action( 'wp_ajax_vamico_ajax_upload', 'vamico_ajax_callback' );
+add_action( 'wp_ajax_reino_ajax_upload', 'reino_ajax_callback' );
 
-function vamico_ajax_callback() {
+function reino_ajax_callback() {
 
-	global $wpdb,$vamico_options; // this is how you get access to the database
+	global $wpdb,$reino_options; // this is how you get access to the database
 
 	$save_type = $_POST['type'];
 
@@ -333,23 +333,23 @@ function vamico_ajax_callback() {
 
 		parse_str( $data,$output );
 
-		vamico_update_option_values( $vamico_options,$output );
+		reino_update_option_values( $reino_options,$output );
 
-		if ( $output['vamico_theme_option_values'] != '' ) {
+		if ( $output['reino_theme_option_values'] != '' ) {
 
-			$vamico_import_output = unserialize( json_decode( $output['vamico_theme_option_values'] ) );
-			if ( $vamico_import_output ) {
+			$reino_import_output = unserialize( json_decode( $output['reino_theme_option_values'] ) );
+			if ( $reino_import_output ) {
 
-				update_option( 'vamico_theme_option_values',$vamico_import_output );
+				update_option( 'reino_theme_option_values',$reino_import_output );
 
-				if ( count( $vamico_import_output ) > 1 ) {
-					vamico_update_option_values( $vamico_options,$vamico_import_output );
+				if ( count( $reino_import_output ) > 1 ) {
+					reino_update_option_values( $reino_options,$reino_import_output );
 				}
 			}
 		}
-		$output['vamico_theme_option_values'] = ''; //remove the content of vamico_theme_option_values
+		$output['reino_theme_option_values'] = ''; //remove the content of reino_theme_option_values
 
-		update_option( 'vamico_theme_option_values', $output );//updates the vamico_theme_option_values option value
+		update_option( 'reino_theme_option_values', $output );//updates the reino_theme_option_values option value
 		die();
 	} // End if().
 }
@@ -358,10 +358,10 @@ function vamico_ajax_callback() {
  * ARRAY TYPES
  * U P D A T E   O P T I O N S   V A L U E S
  */
-function vamico_update_option_values( $vamico_options, $output ) {
+function reino_update_option_values( $reino_options, $output ) {
 
 	// loop through the template options
-	foreach ( $vamico_options as $option_array ) {
+	foreach ( $reino_options as $option_array ) {
 
 		$new_value = '';
 
@@ -488,11 +488,11 @@ function vamico_update_option_values( $vamico_options, $output ) {
  * Generates The Options Within the Panel -
  * O P T I O N S F R A M E W O R K   M A C H I N E
  */
-function vamico_fw_optionsframework_machine( $vamico_options ) {
+function reino_fw_optionsframework_machine( $reino_options ) {
 	$counter = 0;
 	$menu = $output = '';
 	$menuitems = $s_headings = array();
-	foreach ( $vamico_options as $key => $value ) {
+	foreach ( $reino_options as $key => $value ) {
 		if ( $value['type'] == 'heading' || $value['type'] == 'subnav' ) {
 			$s_headings[] = $value;
 		}
@@ -510,7 +510,7 @@ function vamico_fw_optionsframework_machine( $vamico_options ) {
 		}
 	}
 
-	foreach ( $vamico_options as $value ) {
+	foreach ( $reino_options as $value ) {
 
 		$counter++;
 		$val = '';
@@ -599,57 +599,57 @@ function vamico_fw_optionsframework_machine( $vamico_options ) {
 			// S O C I A B L E S
 			//---------------------------------
 			case 'custom_socialbook_mark':
-				global $socialimages_select,$vamico_sociable;
+				global $socialimages_select,$reino_sociable;
 				$output .= '<h3>' . $value['name'] . '</h3>' . "\n";
 				$output .= '<div class="explain">' . $explain_value . '</div><br>';
 				$output .= '<div class="controls" >' . "\n";
 				$output .= '<div id="sys_social_book">';
 				$output .= '<table id="sys_socialbookmark" class="fancy_table">';
 				$output .= '<tr>';
-				$output .= '<th width="100">' . esc_html__( 'Website', 'vamico' ) . '</th>';
-				$output .= '<th width="100">' . esc_html__( 'URL', 'vamico' ) . '</th>';
-				$output .= '<th width="100">' . esc_html__( 'Name', 'vamico' ) . '</th>';
-				$output .= '<th align="center" width="70">' . esc_html__( 'Delete', 'vamico' ) . '</th>';
+				$output .= '<th width="100">' . esc_html__( 'Website', 'reino' ) . '</th>';
+				$output .= '<th width="100">' . esc_html__( 'URL', 'reino' ) . '</th>';
+				$output .= '<th width="100">' . esc_html__( 'Name', 'reino' ) . '</th>';
+				$output .= '<th align="center" width="70">' . esc_html__( 'Delete', 'reino' ) . '</th>';
 				$output .= '</tr>';
-				$vamico_sociable = array(
-					'adn'        	=> esc_html__( 'ADN', 'vamico' ),
-					'android'    	=> esc_html__( 'Android', 'vamico' ),
-					'behance'   	=> esc_html__( 'Behance', 'vamico' ),
-					'delicious'  	=> esc_html__( 'Delicious', 'vamico' ),
-					'deviantart' 	=> esc_html__( 'DeviantArt', 'vamico' ),
-					'digg'       	=> esc_html__( 'Digg', 'vamico' ),
-					'dribbble'   	=> esc_html__( 'Dribbble', 'vamico' ),
-					'facebook'  	=> esc_html__( 'Facebook', 'vamico' ),
-					'flickr'	 	=> esc_html__( 'Flickr', 'vamico' ),
-					'google-plus' 	=> esc_html__( 'Google Plus', 'vamico' ),
-					'instagram'  	=> esc_html__( 'Instagram', 'vamico' ),
-					'lastfm'     	=> esc_html__( 'Lastfm', 'vamico' ),
-					'linkedin'   	=> esc_html__( 'LinkedIn', 'vamico' ),
-					'pinterest-p' 	=> esc_html__( 'Pinterest', 'vamico' ),
-					'reddit'     	=> esc_html__( 'Reddit', 'vamico' ),
-					'skype'      	=> esc_html__( 'Skype', 'vamico' ),
-					'soundcloud' 	=> esc_html__( 'SoundCloud', 'vamico' ),
-					'stumbleupon' 	=> esc_html__( 'Stumbleupon', 'vamico' ),
-					'snapchat' 		=> esc_html__( 'Snapchat', 'vamico' ),
-					'twitter'     	=> esc_html__( 'Twitter', 'vamico' ),
-					'vimeo-square' 	=> esc_html__( 'Vimeo', 'vamico' ),
-					'whatsapp'   	=> esc_html__( 'Whatsapp', 'vamico' ),
-					'yahoo'      	=> esc_html__( 'Yahoo', 'vamico' ),
-					'yelp'       	=> esc_html__( 'Yelp', 'vamico' ),
-					'youtube'    	=> esc_html__( 'Youtube', 'vamico' ),
-					'vk'         	=> esc_html__( 'VK', 'vamico' ),
-					'paypal'	 	=> esc_html__( 'Paypal', 'vamico' ),
-					'dropbox'    	=> esc_html__( 'Dropbox', 'vamico' ),
-					'envelope'	 	=> esc_html__( 'Email', 'vamico' ),
+				$reino_sociable = array(
+					'adn'        	=> esc_html__( 'ADN', 'reino' ),
+					'android'    	=> esc_html__( 'Android', 'reino' ),
+					'behance'   	=> esc_html__( 'Behance', 'reino' ),
+					'delicious'  	=> esc_html__( 'Delicious', 'reino' ),
+					'deviantart' 	=> esc_html__( 'DeviantArt', 'reino' ),
+					'digg'       	=> esc_html__( 'Digg', 'reino' ),
+					'dribbble'   	=> esc_html__( 'Dribbble', 'reino' ),
+					'facebook'  	=> esc_html__( 'Facebook', 'reino' ),
+					'flickr'	 	=> esc_html__( 'Flickr', 'reino' ),
+					'google-plus' 	=> esc_html__( 'Google Plus', 'reino' ),
+					'instagram'  	=> esc_html__( 'Instagram', 'reino' ),
+					'lastfm'     	=> esc_html__( 'Lastfm', 'reino' ),
+					'linkedin'   	=> esc_html__( 'LinkedIn', 'reino' ),
+					'pinterest-p' 	=> esc_html__( 'Pinterest', 'reino' ),
+					'reddit'     	=> esc_html__( 'Reddit', 'reino' ),
+					'skype'      	=> esc_html__( 'Skype', 'reino' ),
+					'soundcloud' 	=> esc_html__( 'SoundCloud', 'reino' ),
+					'stumbleupon' 	=> esc_html__( 'Stumbleupon', 'reino' ),
+					'snapchat' 		=> esc_html__( 'Snapchat', 'reino' ),
+					'twitter'     	=> esc_html__( 'Twitter', 'reino' ),
+					'vimeo-square' 	=> esc_html__( 'Vimeo', 'reino' ),
+					'whatsapp'   	=> esc_html__( 'Whatsapp', 'reino' ),
+					'yahoo'      	=> esc_html__( 'Yahoo', 'reino' ),
+					'yelp'       	=> esc_html__( 'Yelp', 'reino' ),
+					'youtube'    	=> esc_html__( 'Youtube', 'reino' ),
+					'vk'         	=> esc_html__( 'VK', 'reino' ),
+					'paypal'	 	=> esc_html__( 'Paypal', 'reino' ),
+					'dropbox'    	=> esc_html__( 'Dropbox', 'reino' ),
+					'envelope'	 	=> esc_html__( 'Email', 'reino' ),
 				);
-				if ( get_option( 'vamico_social_bookmark' ) != '' ) {
-					$sys_social_items = explode( '#;', get_option( 'vamico_social_bookmark' ) );
+				if ( get_option( 'reino_social_bookmark' ) != '' ) {
+					$sys_social_items = explode( '#;', get_option( 'reino_social_bookmark' ) );
 					for ( $i = 0;$i < count( $sys_social_items );$i++ ) {
 						$sys_social_item = explode( '#|', $sys_social_items[ $i ] );
 						$output .= '<tr>';
 						$output .= '<td>';
 						$output .= '<select id="sys_social_file_icon" class="sys_social_file_icon" name="sys_social_file_icon"  width="300">';
-						foreach ( $vamico_sociable as $key => $values ) {
+						foreach ( $reino_sociable as $key => $values ) {
 							$selected = $sys_social_item[1] == $key ? ' selected="selected"' : '';
 							$output .= '<option ' . $selected . ' value="' . $key . '" >' . $values . '</option>';
 							$selected = '';
@@ -658,14 +658,14 @@ function vamico_fw_optionsframework_machine( $vamico_options ) {
 						$output .= '</td>';
 						$output .= '<td><input type="text" class="sys_social_account_url" value="' . $sys_social_item[2] . '" /></td>';
 						$output .= '<td><input type="text" class="sys_social_title" value="' . $sys_social_item[0] . '" /></td>';
-						$output .= '<td><a href="#" class="sys_social_item_delete button button-primary red-button">' . esc_html__( 'Delete', 'vamico' ) . '</a></td>';
+						$output .= '<td><a href="#" class="sys_social_item_delete button button-primary red-button">' . esc_html__( 'Delete', 'reino' ) . '</a></td>';
 						$output .= '</tr>';
 					}
 				}
 				$output .= '</table>';
 				$output .= '<p>';
-				$output .= '<button name="sys_add_social_book" id="sys_add_social_item" type="button" value="' . esc_attr__( 'Add New Row', 'vamico' ) . '" class="button button-primary red-button" /><span>' . esc_html__( 'Add New', 'vamico' ) . '</span></button>';
-				$output .= '<input type="hidden" id="vamico_social_bookmark" name="vamico_social_bookmark"/>';
+				$output .= '<button name="sys_add_social_book" id="sys_add_social_item" type="button" value="' . esc_attr__( 'Add New Row', 'reino' ) . '" class="button button-primary red-button" /><span>' . esc_html__( 'Add New', 'reino' ) . '</span></button>';
+				$output .= '<input type="hidden" id="reino_social_bookmark" name="reino_social_bookmark"/>';
 				$output .= '</p>';
 				$output .= '</div></div>';
 				break;
@@ -682,10 +682,10 @@ function vamico_fw_optionsframework_machine( $vamico_options ) {
 				$output .= '<tbody>';
 				if ( $custom_sidebar_arr != '' ) {
 					foreach ( $custom_sidebar_arr as $custom_sidebar_code ) {
-						$output .= '<tr><td><input type="text" name="' . $value['id'] . '[]" value="' . $custom_sidebar_code . '"  size="30" style="width:97%" /></td><td><span class="button red-button iva_custom_siderbar_del">' . esc_html__( 'Delete', 'vamico' ) . '</span></td></tr>';
+						$output .= '<tr><td><input type="text" name="' . $value['id'] . '[]" value="' . $custom_sidebar_code . '"  size="30" style="width:97%" /></td><td><span class="button red-button iva_custom_siderbar_del">' . esc_html__( 'Delete', 'reino' ) . '</span></td></tr>';
 					}
 				}
-				$output .= '</tbody></table><button type="button" class="button blue-button button-large iva_custom_sidebar" id="' . esc_attr( $value['id'] ) . '[]"  name="add_custom_widget" value="' . esc_attr__( 'Add Sidebar', 'vamico' ) . '" >' . esc_html__( 'Add Sidebar', 'vamico' ) . '</button></div>';
+				$output .= '</tbody></table><button type="button" class="button blue-button button-large iva_custom_sidebar" id="' . esc_attr( $value['id'] ) . '[]"  name="add_custom_widget" value="' . esc_attr__( 'Add Sidebar', 'reino' ) . '" >' . esc_html__( 'Add Sidebar', 'reino' ) . '</button></div>';
 				$output .= '</div>';
 				$output .= '<div class="explain">' . $explain_value . '</div>';
 				break;
@@ -786,7 +786,7 @@ function vamico_fw_optionsframework_machine( $vamico_options ) {
 			case 'upload':
 				$output .= '<h3>' . $value['name'] . '</h3>' . "\n";
 				$output .= '<div class="controls" >' . "\n";
-				$output .= vamico_fw_optionsframework_mediaupload( $value['id'], $val, null );
+				$output .= reino_fw_optionsframework_mediaupload( $value['id'], $val, null );
 				$output .= '</div>';
 				$output .= '<div class="explain">' . $explain_value . '</div>';
 				break;
@@ -827,7 +827,7 @@ function vamico_fw_optionsframework_machine( $vamico_options ) {
 				$val = $default['size'];
 				if ( $typography_stored['size'] != '' ) { $val = $typography_stored['size']; }
 				$output .= '<div class="atp-typo-size"><div class="select_wrapper"><select class="select" name="' . $value['id'] . '_size" id="' . $value['id'] . '_size">';
-				$output .= '<option value="">' . esc_html__( 'Font Size', 'vamico' ) . '</option>';
+				$output .= '<option value="">' . esc_html__( 'Font Size', 'reino' ) . '</option>';
 				for ( $i = 9; $i < 71; $i++ ) {
 					if ( $val == $i ) {
 						$active = 'selected="selected"';
@@ -842,7 +842,7 @@ function vamico_fw_optionsframework_machine( $vamico_options ) {
 				$val = $default['lineheight'];
 				if ( $typography_stored['lineheight'] != '' ) { $val = $typography_stored['lineheight']; }
 				$output .= '<div class="atp-typo-lineheight"><div class="select_wrapper"><select class="select" name="' . $value['id'] . '_lineheight" id="' . $value['id'] . '_lineheight">';
-				$output .= '<option value="">' . esc_html__( 'Line Height', 'vamico' ) . '</option>';
+				$output .= '<option value="">' . esc_html__( 'Line Height', 'reino' ) . '</option>';
 				for ( $i = 9; $i < 71; $i++ ) {
 					if ( $val == $i ) {
 						$active = 'selected="selected"';
@@ -861,9 +861,9 @@ function vamico_fw_optionsframework_machine( $vamico_options ) {
 				if ( $val == 'normal' ) { $normal = 'selected="selected"'; }
 				if ( $val == 'italic' ) { $italic = 'selected="selected"'; }
 				$output .= '<div class="atp-typo-style"><div class="select_wrapper"><select class="select" name="' . $value['id'] . '_style" id="' . $value['id'] . '_style">';
-				$output .= '<option value="">' . esc_html__( 'Font-Style', 'vamico' ) . '</option>';
-				$output .= '<option value="normal" ' . $normal . '>' . esc_html__( 'Normal', 'vamico' ) . '</option>';
-				$output .= '<option value="italic" ' . $italic . '>' . esc_html__( 'Italic', 'vamico' ) . '</option>';
+				$output .= '<option value="">' . esc_html__( 'Font-Style', 'reino' ) . '</option>';
+				$output .= '<option value="normal" ' . $normal . '>' . esc_html__( 'Normal', 'reino' ) . '</option>';
+				$output .= '<option value="italic" ' . $italic . '>' . esc_html__( 'Italic', 'reino' ) . '</option>';
 				$output .= '</select></div></div>';
 
 				// F O N T   V A R I A N T
@@ -872,9 +872,9 @@ function vamico_fw_optionsframework_machine( $vamico_options ) {
 				}
 				if ( $typography_stored['fontvariant'] != '' ) { $val = $typography_stored['fontvariant']; }
 				$array_weight = array(
-					'normal'  => esc_html__( 'Normal', 'vamico' ),
-					'bold' 	  => esc_html__( 'Bold', 'vamico' ),
-					'lighter' => esc_html__( 'Lighter', 'vamico' ),
+					'normal'  => esc_html__( 'Normal', 'reino' ),
+					'bold' 	  => esc_html__( 'Bold', 'reino' ),
+					'lighter' => esc_html__( 'Lighter', 'reino' ),
 					'100' => '100',
 					'200' => '200',
 					'300' => '300',
@@ -887,7 +887,7 @@ function vamico_fw_optionsframework_machine( $vamico_options ) {
 				 );
 
 				$output .= '<div class="atp-typo-fontvariant"><div class="select_wrapper"><select class="select" name="' . $value['id'] . '_fontvariant" id="' . $value['id'] . '_fontvariant">';
-				$output .= '<option value="">' . esc_html__( 'Font-Variant', 'vamico' ) . '</option>';
+				$output .= '<option value="">' . esc_html__( 'Font-Variant', 'reino' ) . '</option>';
 				foreach ( $array_weight as $key => $values ) {
 					$fontselected = '';
 					if ( $val == $key ) { $fontselected = 'selected="selected"'; }
@@ -902,7 +902,7 @@ function vamico_fw_optionsframework_machine( $vamico_options ) {
 			// F O N T  F A M I L Y S E L E C T
 			// --------------------------------------------------
 			case 'custom_google_fonts':
-				global $vamico_fontface;
+				global $reino_fontface;
 				$output .= '<h3>' . $value['name'] . '</h3>' . "\n";
 				$output .= '<div class="controls" >' . "\n";
 				$output .= '<div class="select_wrapper ' . $value['class'] . '">';
@@ -910,9 +910,9 @@ function vamico_fw_optionsframework_machine( $vamico_options ) {
 				foreach ( $value['options'] as $select_key => $option ) {
 					$output .= '<option value="' . $select_key . '" ' . selected( get_option( $value['id'] ),$key, false ) . ' />' . $option . '</option>';
 				}
-				$vamico_google_fonts = vamico_google_fonts();
+				$reino_google_fonts = reino_google_fonts();
 				$output .= '<optgroup label="Google Web Fonts">';
-				foreach ( $vamico_google_fonts as $key => $googlefont ) {
+				foreach ( $reino_google_fonts as $key => $googlefont ) {
 					$name = $googlefont['name'];
 					$output .= '<option value="' . $name . '" ' . selected( get_option( $value['id'] ),$name, false ) . ' />' . $name . '</option>';
 				}
@@ -953,7 +953,7 @@ function vamico_fw_optionsframework_machine( $vamico_options ) {
 				$imgid = $value['id'] . '_image';
 				if ( $background_stored['image'] != '' ) { $val = $background_stored['image']; }
 				$output .= '<div class="atp-background-upload clearfix">';
-				$output .= vamico_fw_optionsframework_mediaupload( $imgid,$val,null );
+				$output .= reino_fw_optionsframework_mediaupload( $imgid,$val,null );
 				$output .= '</div>';
 
 				// C O L O R
@@ -978,10 +978,10 @@ function vamico_fw_optionsframework_machine( $vamico_options ) {
 				$output .= '<div class="atp-background-repeat">';
 				$output .= '<div class="select_wrapper">';
 				$output .= '<select class="atp-background select" name="' . $value['id'] . '_repeat" id="' . $value['id'] . '_repeat">';
-				$output .= '<option value="repeat" ' . $repeat . '>' . esc_html__( 'Repeat', 'vamico' ) . '</option>';
-				$output .= '<option value="no-repeat" ' . $norepeat . '>' . esc_html__( 'No-Repeat', 'vamico' ) . ' </option>';
-				$output .= '<option value="repeat-x" ' . $repeatx . '>' . esc_html__( 'Repeat-X', 'vamico' ) . '</option>';
-				$output .= '<option value="repeat-y" ' . $repeaty . '>' . esc_html__( 'Repeat-Y', 'vamico' ) . '</option>';
+				$output .= '<option value="repeat" ' . $repeat . '>' . esc_html__( 'Repeat', 'reino' ) . '</option>';
+				$output .= '<option value="no-repeat" ' . $norepeat . '>' . esc_html__( 'No-Repeat', 'reino' ) . ' </option>';
+				$output .= '<option value="repeat-x" ' . $repeatx . '>' . esc_html__( 'Repeat-X', 'reino' ) . '</option>';
+				$output .= '<option value="repeat-y" ' . $repeaty . '>' . esc_html__( 'Repeat-Y', 'reino' ) . '</option>';
 				$output .= '</select>';
 				$output .= '</div></div>';
 
@@ -1003,15 +1003,15 @@ function vamico_fw_optionsframework_machine( $vamico_options ) {
 				$output .= '<div class="atp-background-position">';
 				$output .= '<div class="select_wrapper">';
 				$output .= '<select class="atp-background select" name="' . $value['id'] . '_position" id="' . $value['id'] . '_position">';
-				$output .= '<option value="left top" ' . $lefttop . '>' . esc_html__( 'Left Top', 'vamico' ) . '</option>';
-				$output .= '<option value="left center" ' . $leftcenter . '>' . esc_html__( 'Left Center', 'vamico' ) . '</option>';
-				$output .= '<option value="left bottom" ' . $leftbottom . '>' . esc_html__( 'Left Bottom', 'vamico' ) . '</option>';
-				$output .= '<option value="right top" ' . $righttop . '>' . esc_html__( 'Right Top', 'vamico' ) . '</option>';
-				$output .= '<option value="right center" ' . $rightcenter . '>' . esc_html__( 'Right Center', 'vamico' ) . '</option>';
-				$output .= '<option value="right bottom" ' . $rightbottom . '>' . esc_html__( 'Right Bottom', 'vamico' ) . '</option>';
-				$output .= '<option value="center top" ' . $centertop . '>' . esc_html__( 'Center Top', 'vamico' ) . '</option>';
-				$output .= '<option value="center center" ' . $centercenter . '>' . esc_html__( 'Center Center', 'vamico' ) . '</option>';
-				$output .= '<option value="center bottom" ' . $centerbottom . '>' . esc_html__( 'Center Bottom', 'vamico' ) . '</option>';
+				$output .= '<option value="left top" ' . $lefttop . '>' . esc_html__( 'Left Top', 'reino' ) . '</option>';
+				$output .= '<option value="left center" ' . $leftcenter . '>' . esc_html__( 'Left Center', 'reino' ) . '</option>';
+				$output .= '<option value="left bottom" ' . $leftbottom . '>' . esc_html__( 'Left Bottom', 'reino' ) . '</option>';
+				$output .= '<option value="right top" ' . $righttop . '>' . esc_html__( 'Right Top', 'reino' ) . '</option>';
+				$output .= '<option value="right center" ' . $rightcenter . '>' . esc_html__( 'Right Center', 'reino' ) . '</option>';
+				$output .= '<option value="right bottom" ' . $rightbottom . '>' . esc_html__( 'Right Bottom', 'reino' ) . '</option>';
+				$output .= '<option value="center top" ' . $centertop . '>' . esc_html__( 'Center Top', 'reino' ) . '</option>';
+				$output .= '<option value="center center" ' . $centercenter . '>' . esc_html__( 'Center Center', 'reino' ) . '</option>';
+				$output .= '<option value="center bottom" ' . $centerbottom . '>' . esc_html__( 'Center Bottom', 'reino' ) . '</option>';
 				$output .= '</select>';
 				$output .= '</div></div>';
 
@@ -1033,8 +1033,8 @@ function vamico_fw_optionsframework_machine( $vamico_options ) {
 				$output .= '<div class="atp-background-attachment">';
 				$output .= '<div class="select_wrapper">';
 				$output .= '<select class="atp-background select" name="' . $value['id'] . '_attachment" id="' . $value['id'] . '_attachment">';
-				$output .= '<option value="fixed" ' . $fixed . '>' . esc_html__( 'Fixed', 'vamico' ) . '</option>';
-				$output .= '<option value="scroll" ' . $scroll . '>' . esc_html__( 'Scroll', 'vamico' ) . '</option>';
+				$output .= '<option value="fixed" ' . $fixed . '>' . esc_html__( 'Fixed', 'reino' ) . '</option>';
+				$output .= '<option value="scroll" ' . $scroll . '>' . esc_html__( 'Scroll', 'reino' ) . '</option>';
 				$output .= '</select>';
 				$output .= '</div></div>';
 				$output .= '</div>'; //controls part end
@@ -1109,7 +1109,7 @@ function vamico_fw_optionsframework_machine( $vamico_options ) {
 				$output .= '<div class="iva_export_ob_msg"></div>';
 
 				// Export Backup options
-				$output .= '<span class="iva_style_wrap"><a href="#" class="export-data-btn button button-hero blue-button" data-url= ' . admin_url( 'admin.php?page=optionsframework' ) . '>' . esc_html__( 'Export Options','vamico' ) . '</a></span>';
+				$output .= '<span class="iva_style_wrap"><a href="#" class="export-data-btn button button-hero blue-button" data-url= ' . admin_url( 'admin.php?page=optionsframework' ) . '>' . esc_html__( 'Export Options','reino' ) . '</a></span>';
 				$output .= '<div class="clearfix"></div>';
 				$output .= '</div>';//.controls
 				$output .= '<div class="explain">' . $explain_value . '</div>';
@@ -1123,9 +1123,9 @@ function vamico_fw_optionsframework_machine( $vamico_options ) {
 				$output .= '<div class="iva_import_ob_msg"></div>';
 				$output .= '<div class="clearfix"></div>';
 				$theme_options_txt_files  = array();
-				$theme_options_backup_dir = list_files( VAMICO_FRAMEWORK_DIR . '/admin/options-importer/export_options' );
+				$theme_options_backup_dir = list_files( REINO_FRAMEWORK_DIR . '/admin/options-importer/export_options' );
 				foreach ( $theme_options_backup_dir as $file ) {
-				    if ( ! is_dir( VAMICO_FRAMEWORK_DIR . '/admin/options-importer/export_options' . $file ) ) {
+				    if ( ! is_dir( REINO_FRAMEWORK_DIR . '/admin/options-importer/export_options' . $file ) ) {
 						if ( stristr( $file, '.txt' ) !== false ) {
 							$theme_options_txt_files[ $file ] = $file;
 						}
@@ -1140,8 +1140,8 @@ function vamico_fw_optionsframework_machine( $vamico_options ) {
 						$output .= '<div class="export_wrap">';
 						$output .= '<div class="export_ob_wrap"><div class="export_ob_title">' . $i . ' . ' . $ob_file_name . '</div></div>';
 						$output .= '<div class="export_ob_btn">';
-						$output .= '<span><a class="ob_import button green-button" data-url= ' . admin_url( 'admin.php?page=optionsframework' ) . ' data-import="' . $ob_file_name . '">' . esc_html__( 'Import','vamico' ) . '</a></span>';
-						$output .= '<span><a class="ob_delete button red-button" data-url= ' . admin_url( 'admin.php?page=optionsframework' ) . ' data-delete="' . $ob_file_name . '" >' . esc_html__( 'Delete','vamico' ) . '</a></span>';
+						$output .= '<span><a class="ob_import button green-button" data-url= ' . admin_url( 'admin.php?page=optionsframework' ) . ' data-import="' . $ob_file_name . '">' . esc_html__( 'Import','reino' ) . '</a></span>';
+						$output .= '<span><a class="ob_delete button red-button" data-url= ' . admin_url( 'admin.php?page=optionsframework' ) . ' data-delete="' . $ob_file_name . '" >' . esc_html__( 'Delete','reino' ) . '</a></span>';
 						$output .= '</div>';//.export_ob_btn
 						$output .= '</div>';//.export_wrap
 						$i++;
@@ -1149,15 +1149,15 @@ function vamico_fw_optionsframework_machine( $vamico_options ) {
 				}
 				$output .= '<div class="clearfix"></div>';
 
-				$vamico_ob_txtarea_cols = '8';
+				$reino_ob_txtarea_cols = '8';
 				$output .= '<div class="import-options-bkp">';
-				$output .= '<p>' . wp_kses( __( 'Input your sample options data exported in a text file to restore. Copy the content from the text file then place in below textarea and hit <strong>Import File</strong> button', 'vamico' ),
+				$output .= '<p>' . wp_kses( __( 'Input your sample options data exported in a text file to restore. Copy the content from the text file then place in below textarea and hit <strong>Import File</strong> button', 'reino' ),
 					array(
 						'strong' => array(),
 					)
 				) . '</p>';
-				$output .= '<textarea class="atp-input import_ob_input" id="import_ob_input" cols="' . $vamico_ob_txtarea_cols . '" rows="8" data-url= ' . admin_url( 'admin.php?page=optionsframework' ) . '></textarea>';
-				$output .= '<span><a class="import_options_btn button green-button button-hero" data-url= ' . admin_url( 'admin.php?page=optionsframework' ) . '>' . esc_html__( 'Import File', 'vamico' ) . '</a></span>';
+				$output .= '<textarea class="atp-input import_ob_input" id="import_ob_input" cols="' . $reino_ob_txtarea_cols . '" rows="8" data-url= ' . admin_url( 'admin.php?page=optionsframework' ) . '></textarea>';
+				$output .= '<span><a class="import_options_btn button green-button button-hero" data-url= ' . admin_url( 'admin.php?page=optionsframework' ) . '>' . esc_html__( 'Import File', 'reino' ) . '</a></span>';
 				$output .= '</div>';
 				$output .= '</div>';//.controls
 				$output .= '<div class="explain">' . $explain_value . '</div>';
@@ -1183,7 +1183,7 @@ function vamico_fw_optionsframework_machine( $vamico_options ) {
 				}
 
 				$output .= '<div class="mm_upload atp-background-upload clearfix">';
-				$output .= vamico_fw_optionsframework_mediaupload( $mm_img_id,$mm_img_val,null );
+				$output .= reino_fw_optionsframework_mediaupload( $mm_img_id,$mm_img_val,null );
 				$output .= '</div>';
 
 				$position_lb = $position_rb = $position_cb = '';
@@ -1193,28 +1193,28 @@ function vamico_fw_optionsframework_machine( $vamico_options ) {
 				if ( $mm_position == 'right bottom' ) { $position_rb = 'selected="selected"' ; }
 				if ( $mm_position == 'center bottom' ) { $position_cb = 'selected="selected"' ; }
 
-				$output .= '<div class="mm_desc">' . esc_html__( 'Background position', 'vamico' ) . '</div>';
+				$output .= '<div class="mm_desc">' . esc_html__( 'Background position', 'reino' ) . '</div>';
 				$output .= '<div class="select_wrapper select200">';
 				$output .= '<select class="atp-background select" name="' . $value['id'] . '_position" id="' . $value['id'] . '_position">';
-				$output .= '<option value="left bottom" ' . $position_lb . '>' . esc_html__( 'Left Bottom', 'vamico' ) . '</option>';
-				$output .= '<option value="right bottom" ' . $position_rb . '>' . esc_html__( 'Right Bottom', 'vamico' ) . '</option>';
-				$output .= '<option value="center bottom" ' . $position_cb . '>' . esc_html__( 'Center Bottom', 'vamico' ) . '</option>';
+				$output .= '<option value="left bottom" ' . $position_lb . '>' . esc_html__( 'Left Bottom', 'reino' ) . '</option>';
+				$output .= '<option value="right bottom" ' . $position_rb . '>' . esc_html__( 'Right Bottom', 'reino' ) . '</option>';
+				$output .= '<option value="center bottom" ' . $position_cb . '>' . esc_html__( 'Center Bottom', 'reino' ) . '</option>';
 				$output .= '</select>';
 				$output .= '</div>';//select_wrapper
 
 				$output .= '<div class="clear"></div>';
 
 				$output .= '<div class="mm_wrap">';
-				$output .= '<div class="mm_desc">' . esc_html__( 'Padding', 'vamico' ) . '</div>';
+				$output .= '<div class="mm_desc">' . esc_html__( 'Padding', 'reino' ) . '</div>';
 				$output .= '<input class="input40 input_disable" name="' . $value['id'] . '_ptop" id="' . $value['id'] . '_ptop" type="text" readonly="readonly" value="25"/>';
 				$output .= '<input class="input40" name="' . $value['id'] . '_pright" id="' . $value['id'] . '_pright" type="text"  value="' . $mm_pright . '" />';
 				$output .= '<input class="input40" name="' . $value['id'] . '_pbottom" id="' . $value['id'] . '_pbottom" type="text" value="' . $mm_pbottom . '" />';
 				$output .= '<input class="input40" name="' . $value['id'] . '_pleft" id="' . $value['id'] . '_pleft" type="text" value="' . $mm_pleft . '" />';
 				$output .= '<div class="mm_desc">';
-				$output .= '<span>' . esc_html__( 'Top', 'vamico' ) . '</span>';
-				$output .= '<span>' . esc_html__( 'Right', 'vamico' ) . '</span>';
-				$output .= '<span>' . esc_html__( 'Bottom', 'vamico' ) . '</span>';
-				$output .= '<span>' . esc_html__( 'Left', 'vamico' ) . '</span>';
+				$output .= '<span>' . esc_html__( 'Top', 'reino' ) . '</span>';
+				$output .= '<span>' . esc_html__( 'Right', 'reino' ) . '</span>';
+				$output .= '<span>' . esc_html__( 'Bottom', 'reino' ) . '</span>';
+				$output .= '<span>' . esc_html__( 'Left', 'reino' ) . '</span>';
 				$output .= '</div>';
 				$output .= '</div>';//mm_wrap
 				$output .= '</div>'; //controls part end
@@ -1239,7 +1239,7 @@ function vamico_fw_optionsframework_machine( $vamico_options ) {
 					$output .= '</div>';
 					$output .= '<div class="clear"></div>';
 					// Slider
-					$output .= '<div id="vamico_ui_slider" class="cus-col-slider"></div>';
+					$output .= '<div id="reino_ui_slider" class="cus-col-slider"></div>';
 					$output .= '<input type="hidden" class="slider_result" value="' . $result . '" name="' . $value['id'] . '_result" id="' . $value['id'] . '_result"  />';
 					$output .= '<input type="hidden" class="slider_result_db_values" value="' . $result . '">';
 					$output .= '<input type="hidden" class="slider_result_db_cols" value="' . $number . '">';
@@ -1327,8 +1327,8 @@ function vamico_fw_optionsframework_machine( $vamico_options ) {
  * Dependencies:
  * - optionsframework_mlu_get_silentpost()
  */
-if ( ! function_exists( 'vamico_fw_optionsframework_mediaupload' ) ) {
-	function vamico_fw_optionsframework_mediaupload( $_id, $_value, $_mode = 'full', $_desc = '', $_postid = 0, $_name = '' ) {
+if ( ! function_exists( 'reino_fw_optionsframework_mediaupload' ) ) {
+	function reino_fw_optionsframework_mediaupload( $_id, $_value, $_mode = 'full', $_desc = '', $_postid = 0, $_name = '' ) {
 
 		/* new code*/
 		$option_name = get_option( $_id );
@@ -1350,7 +1350,7 @@ if ( ! function_exists( 'vamico_fw_optionsframework_mediaupload' ) ) {
 		if ( $value ) { $class = ' has-file'; }
 
 		$output .= '<input id="' . $id . '" class="upload' . $class . '" type="text" name="' . $id . '" value="' . $value . '" />' . "\n";
-		$output .= '<input id="upload_' . $id . '" class="upload_button button-primary button-large" type="button" value="' . esc_html__( 'Upload', 'vamico' ) . '" rel="' . $int . '" />' . "\n";
+		$output .= '<input id="upload_' . $id . '" class="upload_button button-primary button-large" type="button" value="' . esc_html__( 'Upload', 'reino' ) . '" rel="' . $int . '" />' . "\n";
 
 		if ( $_desc != '' ) {
 			$output .= '<span class="of_metabox_desc">' . $_desc . '</span>' . "\n";
@@ -1363,9 +1363,9 @@ if ( ! function_exists( 'vamico_fw_optionsframework_mediaupload' ) ) {
 			$image = preg_match( '/(^.*\.jpg|jpeg|png|gif*)/i', $value );
 
 			if ( $image ) {
-				$image_attributes = wp_get_attachment_image_src( vamico_get_attachment_id_from_src( $value ) );
+				$image_attributes = wp_get_attachment_image_src( reino_get_attachment_id_from_src( $value ) );
 
-				$attachments_id = vamico_get_attachment_id_from_src( $value );
+				$attachments_id = reino_get_attachment_id_from_src( $value );
 
 				$alt_text = get_post_meta( $attachments_id, '_wp_attachment_image_alt', true );
 				if ( empty( $alt_text ) ) { // If not, Use the Caption
@@ -1392,7 +1392,7 @@ if ( ! function_exists( 'vamico_fw_optionsframework_mediaupload' ) ) {
 				$output .= '';
 
 				// Standard generic output if it's not an image.
-				$title = esc_html__( 'View File', 'vamico' );
+				$title = esc_html__( 'View File', 'reino' );
 				$output .= '<div class="no_image"><span class="file_link"></span>' . $remove . '</div>';
 			}
 		}

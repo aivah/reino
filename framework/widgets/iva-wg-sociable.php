@@ -8,22 +8,22 @@
  *
  */
 // Register Widget
-function vamico_sociable_widget() {
-	register_widget( 'Vamico_Sociable_Widget' );
+function reino_sociable_widget() {
+	register_widget( 'Reino_Sociable_Widget' );
 }
 
 /* Add our function to the widgets_init hook. */
-add_action( 'widgets_init', 'vamico_sociable_widget' );
+add_action( 'widgets_init', 'reino_sociable_widget' );
 
 // Define the Widget as an extension of WP_Widget
-class Vamico_Sociable_Widget extends WP_Widget {
+class Reino_Sociable_Widget extends WP_Widget {
 
 	function __construct() {
 
 		/* Widget settings. */
 		$widget_ops = array(
 			'classname' => 'socials-wg',
-			'description' => esc_html__( 'Sociable widget for sidebar.', 'vamico' ),
+			'description' => esc_html__( 'Sociable widget for sidebar.', 'reino' ),
 		);
 
 		/* Widget control settings. */
@@ -32,7 +32,7 @@ class Vamico_Sociable_Widget extends WP_Widget {
 		);
 
 		/* Create the widget. */
-		parent::__construct( 'sociable_widget', sprintf( esc_html__( ' %s: Sociables', 'vamico' ), VAMICO_THEME_NAME ), $widget_ops, $control_ops );
+		parent::__construct( 'sociable_widget', sprintf( esc_html__( ' %s: Sociables', 'reino' ), REINO_THEME_NAME ), $widget_ops, $control_ops );
 	}
 
 	// outputs the content of the widget
@@ -45,7 +45,7 @@ class Vamico_Sociable_Widget extends WP_Widget {
 		if ( $title ) {
 			echo wp_kses_post( $before_title . $title . $after_title );
 		}
-		echo wp_kses_post( vamico_sociables( $color ) );
+		echo wp_kses_post( reino_sociables( $color ) );
 
 		echo wp_kses_post( $after_widget );
 	}
@@ -73,14 +73,14 @@ class Vamico_Sociable_Widget extends WP_Widget {
 		$color = strip_tags( $instance['color'] );
 		?>
 		<p>
-			<label for="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>"><?php esc_html_e( 'Title:', 'vamico' ); ?></label>
+			<label for="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>"><?php esc_html_e( 'Title:', 'reino' ); ?></label>
 			<input type="text" id="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'title' ) ); ?>" value="<?php echo esc_attr( $title ); ?>" style="width:100%;" />
 		</p>
 		<p>
-			<label for="<?php echo esc_attr( $this->get_field_id( 'Color' ) ); ?>"><?php esc_html_e( 'Color:', 'vamico' ); ?></label>
+			<label for="<?php echo esc_attr( $this->get_field_id( 'Color' ) ); ?>"><?php esc_html_e( 'Color:', 'reino' ); ?></label>
 			<select id="<?php echo esc_attr( $this->get_field_id( 'color' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'color' ) ); ?>">
-				<option value="black" <?php if ( 'black' === $color ) { echo 'selected="selected"'; } ?>><?php esc_html_e( 'Black','vamico' ); ?></option>
-				<option value="white" <?php if ( 'white' === $color ) { echo 'selected="selected"'; } ?>><?php esc_html_e( 'White','vamico' ); ?></option>
+				<option value="black" <?php if ( 'black' === $color ) { echo 'selected="selected"'; } ?>><?php esc_html_e( 'Black','reino' ); ?></option>
+				<option value="white" <?php if ( 'white' === $color ) { echo 'selected="selected"'; } ?>><?php esc_html_e( 'White','reino' ); ?></option>
 			</select>
 		</p>
 	<?php

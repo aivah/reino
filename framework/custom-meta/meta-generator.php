@@ -1,38 +1,38 @@
 <?php
 // CUSTOM META BOXES
 //--------------------------------------------------------
-if ( ! class_exists( 'Vamico_MetaBox_Fields' ) ) {
-	class Vamico_MetaBox_Fields {
+if ( ! class_exists( 'Reino_MetaBox_Fields' ) ) {
+	class Reino_MetaBox_Fields {
 
-		function __construct( $vamico_meta_box ) {
+		function __construct( $reino_meta_box ) {
 
-			$this->_meta_box = $vamico_meta_box;
-			add_action( 'admin_menu', array( &$this, 'vamico_metabox' ) );
-			add_action( 'save_post', array( &$this, 'vamico_metabox_save' ), 10, 2 );
-			add_action( 'admin_enqueue_scripts', array( &$this, 'vamico_metabox_scripts' ) );
+			$this->_meta_box = $reino_meta_box;
+			add_action( 'admin_menu', array( &$this, 'reino_metabox' ) );
+			add_action( 'save_post', array( &$this, 'reino_metabox_save' ), 10, 2 );
+			add_action( 'admin_enqueue_scripts', array( &$this, 'reino_metabox_scripts' ) );
 			//
-			add_action( 'wp_ajax_rwmb_attach_file', array( &$this, 'vamico_wp_ajax_attach_file' ) );
-			add_action( 'print_media_templates', array( &$this, 'vamico_print_templates' ) );
-			add_action( 'wp_ajax_rwmb_delete_file', array( &$this, 'vamico_wp_ajax_delete_file' ) );
-			add_action( 'wp_ajax_rwmb_reorder_files', array( &$this, 'vamico_wp_ajax_reorder_files' ) );
+			add_action( 'wp_ajax_rwmb_attach_file', array( &$this, 'reino_wp_ajax_attach_file' ) );
+			add_action( 'print_media_templates', array( &$this, 'reino_print_templates' ) );
+			add_action( 'wp_ajax_rwmb_delete_file', array( &$this, 'reino_wp_ajax_delete_file' ) );
+			add_action( 'wp_ajax_rwmb_reorder_files', array( &$this, 'reino_wp_ajax_reorder_files' ) );
 		}
 
 		// Add meta box
-		function vamico_metabox() {
+		function reino_metabox() {
 			foreach ( $this->_meta_box['page'] as $page ) {
-				add_meta_box( $this->_meta_box['id'], $this->_meta_box['title'], array( &$this, 'vamico_show_metabox' ), $page, $this->_meta_box['context'], $this->_meta_box['priority'] );
+				add_meta_box( $this->_meta_box['id'], $this->_meta_box['title'], array( &$this, 'reino_show_metabox' ), $page, $this->_meta_box['context'], $this->_meta_box['priority'] );
 			}
 		}
 
 		//  Media Library
-		function vamico_metabox_scripts() {
+		function reino_metabox_scripts() {
 			wp_enqueue_media();
-			wp_enqueue_script( 'vamico-file-advance', VAMICO_FRAMEWORK_URI . 'admin/js/vamico-file-advance.js', array( 'jquery-ui-sortable', 'wp-ajax-response' ) );
-			wp_localize_script( 'vamico-file-advance', 'rwmbFileAdvanced', array(
-				'frameTitle' => esc_html__( 'Select Files', 'vamico' ),
+			wp_enqueue_script( 'reino-file-advance', REINO_FRAMEWORK_URI . 'admin/js/reino-file-advance.js', array( 'jquery-ui-sortable', 'wp-ajax-response' ) );
+			wp_localize_script( 'reino-file-advance', 'rwmbFileAdvanced', array(
+				'frameTitle' => esc_html__( 'Select Files', 'reino' ),
 			) );
 		}
-		function vamico_wp_ajax_attach_file() {
+		function reino_wp_ajax_attach_file() {
 			$post_id        = isset( $_REQUEST['post_id'] ) ? intval( $_REQUEST['post_id'] ) : 0;
 			$field_id       = isset( $_POST['field_id'] ) ? $_POST['field_id'] : 0;
 			$attachment_ids = isset( $_POST['attachment_ids'] ) ? (array) $_POST['attachment_ids'] : array();
@@ -43,9 +43,9 @@ if ( ! class_exists( 'Vamico_MetaBox_Fields' ) ) {
 			}
 			wp_send_json_success();
 		}
-		function vamico_print_templates() {
-			$i18n_delete = apply_filters( 'rwmb_file_delete_string', esc_html_x( 'Delete', 'file upload', 'vamico' ) );
-			$i18n_edit   = apply_filters( 'rwmb_file_edit_string', esc_html_x( 'Edit', 'file upload', 'vamico' ) );
+		function reino_print_templates() {
+			$i18n_delete = apply_filters( 'rwmb_file_delete_string', esc_html_x( 'Delete', 'file upload', 'reino' ) );
+			$i18n_edit   = apply_filters( 'rwmb_file_edit_string', esc_html_x( 'Edit', 'file upload', 'reino' ) );
 			?>
 			<script id="tmpl-rwmb-file-advanced" type="text/html">
 				<# _.each( attachments, function( attachment ) { #>
@@ -62,7 +62,7 @@ if ( ! class_exists( 'Vamico_MetaBox_Fields' ) ) {
 			</script>
 		<?php
 		}
-		function vamico_wp_ajax_delete_file() {
+		function reino_wp_ajax_delete_file() {
 			global $post;
 
 			$post_id       = isset( $_POST['post_id'] ) ? intval( $_POST['post_id'] ) : 0;
@@ -79,10 +79,10 @@ if ( ! class_exists( 'Vamico_MetaBox_Fields' ) ) {
 			if ( $ok ) {
 				wp_send_json_success();
 			} else {
-				wp_send_json_error( esc_html__( 'Error: Cannot delete file', 'vamico' ) );
+				wp_send_json_error( esc_html__( 'Error: Cannot delete file', 'reino' ) );
 			}
 		}
-		function vamico_wp_ajax_reorder_files() {
+		function reino_wp_ajax_reorder_files() {
 
 			$field_id = isset( $_POST['field_id'] ) ? $_POST['field_id'] : 0;
 			$order    = isset( $_POST['order'] ) ? $_POST['order'] : '';
@@ -99,7 +99,7 @@ if ( ! class_exists( 'Vamico_MetaBox_Fields' ) ) {
 			}
 			wp_send_json_success();
 		}
-		function vamico_get_uploaded_files( $files, $field ) {
+		function reino_get_uploaded_files( $files, $field ) {
 
 			$reorder_nonce = wp_create_nonce( "rwmb-reorder-files_{$field['id']}" );
 			$delete_nonce  = wp_create_nonce( "rwmb-delete-file_{$field['id']}" );
@@ -129,7 +129,7 @@ if ( ! class_exists( 'Vamico_MetaBox_Fields' ) ) {
 			foreach ( $files as $attachment_id ) {
 				$attach_image = wp_attachment_is_image( $attachment_id );
 				if ( $attach_image ) {
-					$html .= $this->vamico_file_html( $attachment_id );
+					$html .= $this->reino_file_html( $attachment_id );
 				}
 			}
 			$html .= '</ul>';
@@ -137,9 +137,9 @@ if ( ! class_exists( 'Vamico_MetaBox_Fields' ) ) {
 			return $html;
 		}
 
-		function vamico_file_html( $attachment_id ) {
-			$i18n_delete = apply_filters( 'rwmb_file_delete_string', esc_html_x( 'Delete', 'file upload', 'vamico' ) );
-			$i18n_edit   = apply_filters( 'rwmb_file_edit_string', esc_html_x( 'Edit', 'file upload', 'vamico' ) );
+		function reino_file_html( $attachment_id ) {
+			$i18n_delete = apply_filters( 'rwmb_file_delete_string', esc_html_x( 'Delete', 'file upload', 'reino' ) );
+			$i18n_edit   = apply_filters( 'rwmb_file_edit_string', esc_html_x( 'Edit', 'file upload', 'reino' ) );
 			$li          = '
 			<li id="item_%s" class="media-item">
 				%s
@@ -169,14 +169,14 @@ if ( ! class_exists( 'Vamico_MetaBox_Fields' ) ) {
 		}
 
 		// Callback function to show fields in meta box
-		function vamico_show_metabox() {
+		function reino_show_metabox() {
 
-			global $page_layout, $post,$vamico_meta_box;
+			global $page_layout, $post,$reino_meta_box;
 			// Defines custom sidebar widget based on custom option
-			$vamico_sidebar_widget = get_option( 'vamico_customsidebar' );
-			$vamico_page_nonce     = wp_create_nonce( 'meta-nonce' );
+			$reino_sidebar_widget = get_option( 'reino_customsidebar' );
+			$reino_page_nonce     = wp_create_nonce( 'meta-nonce' );
 			// Use nonce for verification
-			echo '<input type="hidden" name="page_page_layout_nonce" value="' . esc_attr( $vamico_page_nonce ) . '" />';
+			echo '<input type="hidden" name="page_page_layout_nonce" value="' . esc_attr( $reino_page_nonce ) . '" />';
 
 			// M E T A B O X   W R A P
 			//--------------------------------------------------------
@@ -231,28 +231,28 @@ if ( ! class_exists( 'Vamico_MetaBox_Fields' ) ) {
 						echo '</select></div>';
 						break;
 					case 'post_gallery_meta':
-						$vamico_image_gallery = '';
-						echo '<div id="vamico_images_container">';
-						echo '<ul class="vamico_images">';
+						$reino_image_gallery = '';
+						echo '<div id="reino_images_container">';
+						echo '<ul class="reino_images">';
 						if ( metadata_exists( 'post', $post->ID, $field['id'] ) ) {
-							$vamico_image_gallery = get_post_meta( $post->ID, $field['id'], true );
+							$reino_image_gallery = get_post_meta( $post->ID, $field['id'], true );
 						}
-						$attachments = array_filter( explode( ',', $vamico_image_gallery ) );
+						$attachments = array_filter( explode( ',', $reino_image_gallery ) );
 						if ( $attachments ) {
 							foreach ( $attachments as $attachment_id ) {
 								echo '<li class="image" data-attachment_id="' . esc_attr( $attachment_id ) . '">
 								' . wp_get_attachment_image( $attachment_id, 'thumbnail' ) . '
 								<ul class="actions">
-								<li><a href="#" class="delete tips" data-tip="' . esc_html__( 'Delete image', 'vamico' ) . '">' . esc_html__( 'Delete', 'vamico' ) . '</a></li>
+								<li><a href="#" class="delete tips" data-tip="' . esc_html__( 'Delete image', 'reino' ) . '">' . esc_html__( 'Delete', 'reino' ) . '</a></li>
 								</ul>
 								</li>';
 							}
 						}
 						echo '</ul>';
-						echo '<input type="hidden" id="vamico_image_gallery" name="' . $field['id'] . '" value="' . esc_attr( $vamico_image_gallery ) . '" />';
+						echo '<input type="hidden" id="reino_image_gallery" name="' . $field['id'] . '" value="' . esc_attr( $reino_image_gallery ) . '" />';
 						echo '</div>';
-						echo '<p class="add_vamico_images hide-if-no-js">';
-						echo '<a href="#" data-choose="' . esc_html__( 'Add Images to Vamico Gallery', 'vamico' ) . '" data-update="' . esc_html__( 'Add to gallery', 'vamico' ) . '" data-delete="' . esc_html__( 'Delete image', 'vamico' ) . '" data-text="' . esc_html__( 'Delete', 'vamico' ) . '">' . esc_html__( 'Add vamico gallery images', 'vamico' ) . '</a>';
+						echo '<p class="add_reino_images hide-if-no-js">';
+						echo '<a href="#" data-choose="' . esc_html__( 'Add Images to Reino Gallery', 'reino' ) . '" data-update="' . esc_html__( 'Add to gallery', 'reino' ) . '" data-delete="' . esc_html__( 'Delete image', 'reino' ) . '" data-text="' . esc_html__( 'Delete', 'reino' ) . '">' . esc_html__( 'Add reino gallery images', 'reino' ) . '</a>';
 						echo '</p>';
 						break;
 					case 'multiselect':
@@ -265,16 +265,16 @@ if ( ! class_exists( 'Vamico_MetaBox_Fields' ) ) {
 							}
 							echo '</select>';
 							echo '<div class="clear"></div>';
-							echo '<span class="iva_select_all button red-button button-primary button-large" data-id="' . esc_attr( $field['id'] ) . '">' . esc_html__( 'Select All', 'vamico' ) . '</span>';
+							echo '<span class="iva_select_all button red-button button-primary button-large" data-id="' . esc_attr( $field['id'] ) . '">' . esc_html__( 'Select All', 'reino' ) . '</span>';
 						} else {
-							echo '<strong>' . esc_html__( 'No Posts IN Categories', 'vamico' ) . '</strong>';
+							echo '<strong>' . esc_html__( 'No Posts IN Categories', 'reino' ) . '</strong>';
 						}
 						echo '</div>';
 						break;
 					case 'customselect':
 						echo '<div class="select_wrapper ',esc_attr( $field['class'] ), '"><select class="select" name="', $field['id'], '" id="', $field['id'], '">';
-						echo '<option value="">' . esc_html__( 'Select', 'vamico' ) . '</option>';
-						if ( '' !== $vamico_sidebar_widget ) {
+						echo '<option value="">' . esc_html__( 'Select', 'reino' ) . '</option>';
+						if ( '' !== $reino_sidebar_widget ) {
 							foreach ( $field['options'] as $key => $value ) {
 								echo '<option value="' . esc_attr( $value ) . '"', $meta == $value ? ' selected="selected"' : '', '>' , esc_html( $value ) , '</option>';
 							}
@@ -283,12 +283,12 @@ if ( ! class_exists( 'Vamico_MetaBox_Fields' ) ) {
 						break;
 					case 'upload':
 						echo'<input name="' . $field['id'] . '" id="' . esc_attr( $field['id'] ) . '"  type="hidden" class="custom_upload_image" value="' . esc_attr( wp_kses_stripslashes( get_post_meta( $post->ID, $field['id'], true ) ) ) . '" />';
-						echo'<input name="' . $field['id'] . '" id="' . $field['id'] . '" class="custom_upload_image_button button button-primary button-large clearfix" type="button" value="' . esc_attr__( 'Choose Image', 'vamico' ) . '" />';
+						echo'<input name="' . $field['id'] . '" id="' . $field['id'] . '" class="custom_upload_image_button button button-primary button-large clearfix" type="button" value="' . esc_attr__( 'Choose Image', 'reino' ) . '" />';
 						echo'<div id="iva_imagepreview-' . $field['id'] . '" class="iva-screenshot">';
 						if ( get_post_meta( $post->ID, $field['id'], true ) ) {
 
-							$vamico_img     = get_post_meta( $post->ID, $field['id'], true );
-							$attachments_id = vamico_get_attachment_id_from_src( $bg_image );
+							$reino_img     = get_post_meta( $post->ID, $field['id'], true );
+							$attachments_id = reino_get_attachment_id_from_src( $bg_image );
 
 							$alt_text = get_post_meta( $attachments_id, '_wp_attachment_image_alt', true );
 							if ( empty( $alt_text ) ) { // If not, Use the Caption
@@ -300,12 +300,12 @@ if ( ! class_exists( 'Vamico_MetaBox_Fields' ) ) {
 								$alt_text   = trim( strip_tags( $attachment->post_title ) );
 							}
 
-							$image_attributes = wp_get_attachment_image_src( vamico_get_attachment_id_from_src( $vamico_img ) );
+							$image_attributes = wp_get_attachment_image_src( reino_get_attachment_id_from_src( $reino_img ) );
 							if ( '' !== $image_attributes[0] ) {
 								echo '<img src="' . esc_url( $image_attributes[0] ) . '"  class="custom_preview_image" alt="' . esc_attr( $alt_text ) . '" />';
 								echo '<a href="#" class="cimage_remove button button-primary">x</a>';
 							} else {
-								echo '<img src="' . esc_url( $vamico_img ) . '"  class="custom_preview_image" alt="' . esc_attr( $alt_text ) . '" />';
+								echo '<img src="' . esc_url( $reino_img ) . '"  class="custom_preview_image" alt="' . esc_attr( $alt_text ) . '" />';
 								echo '<a href="#" class="cimage_remove button button-primary">x</a>';
 							}
 						}
@@ -360,29 +360,29 @@ if ( ! class_exists( 'Vamico_MetaBox_Fields' ) ) {
 
 						// Position Properties Array
 						$positionarray = array(
-							'left top'      => esc_html__( 'Left Top', 'vamico' ),
-							'left center'   => esc_html__( 'Left Center', 'vamico' ),
-							'left bottom'   => esc_html__( 'Left Bottom', 'vamico' ),
-							'right top'     => esc_html__( 'Right Top', 'vamico' ),
-							'right center'  => esc_html__( 'Right Center', 'vamico' ),
-							'right bottom'  => esc_html__( 'Right Bottom', 'vamico' ),
-							'center top'    => esc_html__( 'Center Top', 'vamico' ),
-							'center center' => esc_html__( 'Center Center', 'vamico' ),
-							'center bottom' => esc_html__( 'Center Bottom', 'vamico' ),
+							'left top'      => esc_html__( 'Left Top', 'reino' ),
+							'left center'   => esc_html__( 'Left Center', 'reino' ),
+							'left bottom'   => esc_html__( 'Left Bottom', 'reino' ),
+							'right top'     => esc_html__( 'Right Top', 'reino' ),
+							'right center'  => esc_html__( 'Right Center', 'reino' ),
+							'right bottom'  => esc_html__( 'Right Bottom', 'reino' ),
+							'center top'    => esc_html__( 'Center Top', 'reino' ),
+							'center center' => esc_html__( 'Center Center', 'reino' ),
+							'center bottom' => esc_html__( 'Center Bottom', 'reino' ),
 						);
 
 						// Repeat Properties Array
 						$repeatarray = array(
-							'repeat'    => esc_html__( 'Repeat', 'vamico' ),
-							'no-repeat' => esc_html__( 'No-Repeat', 'vamico' ),
-							'repeat-x'  => esc_html__( 'Repeat-X', 'vamico' ),
-							'repeat-y'  => esc_html__( 'Repeat-Y', 'vamico' ),
+							'repeat'    => esc_html__( 'Repeat', 'reino' ),
+							'no-repeat' => esc_html__( 'No-Repeat', 'reino' ),
+							'repeat-x'  => esc_html__( 'Repeat-X', 'reino' ),
+							'repeat-y'  => esc_html__( 'Repeat-Y', 'reino' ),
 						);
 
 						// Attachment Properties Array
 						$attacharray = array(
-							'scroll' => esc_html__( 'Scroll', 'vamico' ),
-							'fixed'  => esc_html__( 'Fixed', 'vamico' ),
+							'scroll' => esc_html__( 'Scroll', 'reino' ),
+							'fixed'  => esc_html__( 'Fixed', 'reino' ),
 						);
 
 						echo '<div class="section section-background">';
@@ -390,12 +390,12 @@ if ( ! class_exists( 'Vamico_MetaBox_Fields' ) ) {
 						// Upload Field
 						echo '<div class="atp-background-upload clearfix">';
 						echo '<input type="text"  name="' . $field['id'] . '_image" id="' . $field['id'] . '_image" class="custom_upload_image" value="' . $bg_image . '" />';
-						echo '<input type="button" name="' . $field['id'] . '_image" class="custom_upload_image_button button button-primary button-large" value="' . esc_html__( 'Choose Image', 'vamico' ) . '" />';
+						echo '<input type="button" name="' . $field['id'] . '_image" class="custom_upload_image_button button button-primary button-large" value="' . esc_html__( 'Choose Image', 'reino' ) . '" />';
 						echo '<div class="clear"></div>';
 						echo '<div id="iva_imagepreview-' . $field['id'] . '_image" class="iva-screenshot">';
 						if ( '' !== $bg_image ) {
 
-							$attachments_id = vamico_get_attachment_id_from_src( $bg_image );
+							$attachments_id = reino_get_attachment_id_from_src( $bg_image );
 
 							$alt_text = get_post_meta( $attachments_id, '_wp_attachment_image_alt', true );
 							if ( empty( $alt_text ) ) { // If not, Use the Caption
@@ -407,7 +407,7 @@ if ( ! class_exists( 'Vamico_MetaBox_Fields' ) ) {
 								$alt_text   = trim( strip_tags( $attachment->post_title ) );
 							}
 
-							$image_attributes = wp_get_attachment_image_src( vamico_get_attachment_id_from_src( $bg_image ) );
+							$image_attributes = wp_get_attachment_image_src( reino_get_attachment_id_from_src( $bg_image ) );
 
 							if ( '' !== $image_attributes[0] ) {
 								echo '<img src="' . esc_url( $image_attributes[0] ) . '"  class="custom_preview_image" alt="' . esc_attr( $alt_text ) . '" />';
@@ -473,18 +473,18 @@ if ( ! class_exists( 'Vamico_MetaBox_Fields' ) ) {
 							'tabindex' 		=> 4,
 							'teeny' 		=> true,
 						);
-						$vamico_meta_box_value = $meta ? $meta : $field['std'];
-						wp_editor( $vamico_meta_box_value, $field['id'],$editor_settings );
+						$reino_meta_box_value = $meta ? $meta : $field['std'];
+						wp_editor( $reino_meta_box_value, $field['id'],$editor_settings );
 						break;
 					// Media Library
 					case 'medialibrary':
 						global $post;
-						$i18n_title   = apply_filters( 'rwmb_file_advanced_select_string', esc_html_x( 'Select or Upload Files', 'file upload', 'vamico' ), $field['id'] );
+						$i18n_title   = apply_filters( 'rwmb_file_advanced_select_string', esc_html_x( 'Select or Upload Files', 'file upload', 'reino' ), $field['id'] );
 						$attach_nonce = wp_create_nonce( "rwmb-attach-file_{$field['id']}" );
 
 						// Uploaded files
 						$meta = get_post_meta( $post->ID, $field['id'] );
-						$medial_html = $this->vamico_get_uploaded_files( $meta, $field );
+						$medial_html = $this->reino_get_uploaded_files( $meta, $field );
 
 						// Show form upload
 						$classes = array( 'button', 'rwmb-file-advanced-upload', 'hide-if-no-js', 'new-files' );
@@ -538,7 +538,7 @@ if ( ! class_exists( 'Vamico_MetaBox_Fields' ) ) {
 
 		// S A V E   M E T A   D A T A
 		//--------------------------------------------------------
-		function vamico_metabox_save( $post_id, $post ) {
+		function reino_metabox_save( $post_id, $post ) {
 
 			/* Verify the nonce before proceeding. */
 			if ( ! isset( $_POST['page_page_layout_nonce'] ) || ! wp_verify_nonce( $_POST['page_page_layout_nonce'], 'meta-nonce' ) ) {
@@ -596,6 +596,6 @@ if ( ! class_exists( 'Vamico_MetaBox_Fields' ) ) {
 		}
 	}
 } // End if().
-foreach ( $this->meta_box as $vamico_meta_box ) {
-	$vamico_customfields = new Vamico_MetaBox_Fields( $vamico_meta_box );
+foreach ( $this->meta_box as $reino_meta_box ) {
+	$reino_customfields = new Reino_MetaBox_Fields( $reino_meta_box );
 }

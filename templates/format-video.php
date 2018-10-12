@@ -1,8 +1,8 @@
 <?php
-$video_embed  = get_post_meta( get_the_ID(), 'vamico_video_embed', true );
-$video_m4v    = get_post_meta( get_the_ID(), 'vamico_video_m4v', true );
-$video_ogv    = get_post_meta( get_the_ID(), 'vamico_video_ogv', true );
-$video_poster = get_post_meta( get_the_ID(), 'vamico_video_poster', true );
+$video_embed  = get_post_meta( get_the_ID(), 'reino_video_embed', true );
+$video_m4v    = get_post_meta( get_the_ID(), 'reino_video_m4v', true );
+$video_ogv    = get_post_meta( get_the_ID(), 'reino_video_ogv', true );
+$video_poster = get_post_meta( get_the_ID(), 'reino_video_poster', true );
 if ( ! empty( $video_embed ) || ! empty( $video_m4v ) || ! empty( $video_ogv ) ) {
 	$wp_version = floatval( get_bloginfo( 'version' ) );
 	// video embed

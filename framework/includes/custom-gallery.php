@@ -2,9 +2,9 @@
 // Filters the default gallery shortcode output.
 // If the filtered output isn’t empty, it will be used instead of generating the default gallery template.
 
-add_filter( 'post_gallery', 'vamico_post_gallery', 10, 3 );
+add_filter( 'post_gallery', 'reino_post_gallery', 10, 3 );
 
-function vamico_post_gallery( $output = '', $atts, $instance ) {
+function reino_post_gallery( $output = '', $atts, $instance ) {
 
 	$post = get_post();
 
@@ -118,10 +118,10 @@ function vamico_post_gallery( $output = '', $atts, $instance ) {
 		}
 
 		if ( 'slider' === $type ) {
-			do_action( 'vamico_theme_owlslider', get_the_ID() );
+			do_action( 'reino_theme_owlslider', get_the_ID() );
 			if ( ! empty( $attachments ) ) {
 				$output .= '<div class="owl-container gallery-slider">';
-				$output .= '<div class="owl-carousel" id="vamico_postformat_gallery">';
+				$output .= '<div class="owl-carousel" id="reino_postformat_gallery">';
 				foreach ( $attachments as $id => $attachment ) {
 					$output .= '<div class="owl-item">' . wp_get_attachment_image( $id, 'full' ) . '</div>';
 				}
@@ -185,15 +185,15 @@ add_action('print_media_templates', function() {
 
 	$gallery_types = apply_filters('print_media_templates_gallery_settings_types',
 		array(
-			'default_val' => esc_html__( 'Default','vamico' ),
-			'justified' => esc_html__( 'Justified','vamico' ),
-			'grid'      => esc_html__( 'Grid','vamico' ),
-			'slider'    => esc_html__( 'Slider','vamico' ),
+			'default_val' => esc_html__( 'Default','reino' ),
+			'justified' => esc_html__( 'Justified','reino' ),
+			'grid'      => esc_html__( 'Grid','reino' ),
+			'slider'    => esc_html__( 'Slider','reino' ),
 		)
 	);
 	echo '<div id="tmpl-custom-gallery-type">';
 	echo '<label class="setting">';
-	echo '<span>' . esc_html__( 'Layout Type','vamico' ) . '</span>';
+	echo '<span>' . esc_html__( 'Layout Type','reino' ) . '</span>';
 	echo '<select data-setting="type">';
 	foreach ( $gallery_types as $key => $value ) {
 		echo '<option value="' . esc_attr( $key ) . '">' . esc_html( $value ) . '</option>';
@@ -202,7 +202,7 @@ add_action('print_media_templates', function() {
 	echo '</label>';
 	echo '</div>';
 });
-add_action( 'wp_enqueue_media', 'vamico_gallery_enqueue_media' );
-function vamico_gallery_enqueue_media() {
-	wp_enqueue_script( 'vamico-custom-gallery-settings', VAMICO_FRAMEWORK_URI . 'admin/js/vamico-custom-gallery.js', array(), '' );
+add_action( 'wp_enqueue_media', 'reino_gallery_enqueue_media' );
+function reino_gallery_enqueue_media() {
+	wp_enqueue_script( 'reino-custom-gallery-settings', REINO_FRAMEWORK_URI . 'admin/js/reino-custom-gallery.js', array(), '' );
 }

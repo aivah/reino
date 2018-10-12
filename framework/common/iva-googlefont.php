@@ -1,16 +1,17 @@
 <?php
 	// G O O G L E   W E B   F O N T S
 	//--------------------------------------------------------
-add_action( 'wp_enqueue_scripts', 'vamico_google_fonts' );
-if ( ! function_exists( 'vamico_google_fonts' ) ) {
-	function vamico_google_fonts() {
-		global $vamico_options;
-			$vamico_google_fonts = array(
+add_action( 'wp_enqueue_scripts', 'reino_google_fonts' );
+if ( ! function_exists( 'reino_google_fonts' ) ) {
+	function reino_google_fonts() {
+		global $reino_options;
+			$reino_google_fonts = array(
 			array(
 				'name'    => 'ABeeZee',
 				'variant' => ':400,400italic',
 			),
 			array( 'name' => 'Abel', 'variant' => ':400' ),
+			array( 'name' => 'Abhaya Libre', 'variant' => ':400,700' ),
 			array( 'name' => 'Abril Fatface', 'variant' => ':400' ),
 			array( 'name' => 'Aclonica', 'variant' => ':400' ),
 			array( 'name' => 'Acme', 'variant' => ':400' ),
@@ -791,16 +792,16 @@ if ( ! function_exists( 'vamico_google_fonts' ) ) {
 		);
 		$fonts = array();
 		// Go through the font options
-		if ( ! empty( $vamico_options ) ) {
-			foreach ( $vamico_options as $key => $option ) {
+		if ( ! empty( $reino_options ) ) {
+			foreach ( $reino_options as $key => $option ) {
 
 				$option_types = $option['type'];
 
 				if ( $option_types == 'custom_google_fonts' ) {
 
-					foreach ( $vamico_google_fonts as $font ) {
-						$vamico_googlefont = get_option( $option['id'] );
-						if ( $vamico_googlefont === $font['name'] && ! in_array( $font['name'], $fonts ) ) {
+					foreach ( $reino_google_fonts as $font ) {
+						$reino_googlefont = get_option( $option['id'] );
+						if ( $reino_googlefont === $font['name'] && ! in_array( $font['name'], $fonts ) ) {
 							$fonts[] = str_replace( ' ', '+', $font['name'] ) . $font['variant'];
 						}
 					}
@@ -809,17 +810,17 @@ if ( ! function_exists( 'vamico_google_fonts' ) ) {
 		}
 
 		// Output google font css in header
-		$vamico_google_font_url = '';
+		$reino_google_font_url = '';
 		// Output google font css in header
 		if ( ! is_admin() ) {
 			if ( $fonts ) {
 				$query_args = array( 'family' => implode( '%7c', $fonts ) );
-				$vamico_google_font_url = add_query_arg( $query_args, '//fonts.googleapis.com/css' );
+				$reino_google_font_url = add_query_arg( $query_args, '//fonts.googleapis.com/css' );
 			}
 		}
-		if ( $vamico_google_font_url  ) {
-			wp_enqueue_style( 'vamico_google_fonts', $vamico_google_font_url, null, null );
+		if ( $reino_google_font_url  ) {
+			wp_enqueue_style( 'reino_google_fonts', $reino_google_font_url, null, null );
 		}
-		return $vamico_google_fonts;
+		return $reino_google_fonts;
 }
 }

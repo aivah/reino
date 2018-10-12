@@ -7,22 +7,22 @@
  * Author URI: http://www.aivahthemes.com
  */
 // Register Widget
-function vamico_aboutme_widget() {
-	register_widget( 'Vamico_AboutMe_Widget' );
+function reino_aboutme_widget() {
+	register_widget( 'Reino_AboutMe_Widget' );
 }
 
 /* Add our function to the widgets_init hook. */
-add_action( 'widgets_init', 'vamico_aboutme_widget' );
+add_action( 'widgets_init', 'reino_aboutme_widget' );
 
 // Define the Widget as an extension of WP_Widget
-class Vamico_AboutMe_Widget extends WP_Widget {
+class Reino_AboutMe_Widget extends WP_Widget {
 
 	function __construct() {
 
 		/* Widget settings. */
 		$widget_ops = array(
 			'classname'   => 'aboutme-wg',
-			'description' => esc_html__( 'Add about me information to your widget.', 'vamico' ),
+			'description' => esc_html__( 'Add about me information to your widget.', 'reino' ),
 		);
 
 		/* Widget control settings. */
@@ -31,7 +31,7 @@ class Vamico_AboutMe_Widget extends WP_Widget {
 		);
 
 		/* Create the widget. */
-		parent::__construct( 'aboutme_widgets', sprintf( esc_html__( ' %s: About Me', 'vamico' ), VAMICO_THEME_NAME ), $widget_ops, $control_ops );
+		parent::__construct( 'aboutme_widgets', sprintf( esc_html__( ' %s: About Me', 'reino' ), REINO_THEME_NAME ), $widget_ops, $control_ops );
 	}
 
 	// outputs the content of the widget
@@ -113,27 +113,27 @@ class Vamico_AboutMe_Widget extends WP_Widget {
 		$aboutme_signature_url = strip_tags( $instance['aboutme_signature_url'] );
 		?>
 		<p>
-			<label for="<?php echo esc_attr( $this->get_field_id( 'aboutme_title' ) ); ?>"><?php esc_html_e( 'Title', 'vamico' ); ?></label>
+			<label for="<?php echo esc_attr( $this->get_field_id( 'aboutme_title' ) ); ?>"><?php esc_html_e( 'Title', 'reino' ); ?></label>
 			<input id="<?php echo esc_attr( $this->get_field_id( 'aboutme_title' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'aboutme_title' ) ); ?>" value="<?php echo esc_attr( $title ); ?>" type="text" style="width:100%;" />
 		</p>
 		<p>
-			<label for="<?php echo esc_attr( $this->get_field_id( 'aboutme_image_url' ) ); ?>"><?php esc_html_e( 'Image URL', 'vamico' ); ?></label>
+			<label for="<?php echo esc_attr( $this->get_field_id( 'aboutme_image_url' ) ); ?>"><?php esc_html_e( 'Image URL', 'reino' ); ?></label>
 			<input id="<?php echo esc_attr( $this->get_field_id( 'aboutme_image_url' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'aboutme_image_url' ) ); ?>" value="<?php echo esc_attr( $aboutme_image_url ); ?>" type="text" style="width:100%;" />
 		</p>
 		<p>
-			<label for="<?php echo esc_attr( $this->get_field_id( 'aboutme_page_url' ) ); ?>"><?php esc_html_e( 'Page URL', 'vamico' ); ?></label>
+			<label for="<?php echo esc_attr( $this->get_field_id( 'aboutme_page_url' ) ); ?>"><?php esc_html_e( 'Page URL', 'reino' ); ?></label>
 			<input id="<?php echo esc_attr( $this->get_field_id( 'aboutme_page_url' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'aboutme_page_url' ) ); ?>" value="<?php echo esc_attr( $aboutme_page_url ); ?>" type="text" style="width:100%;" />
 		</p>
 		<p>
-			<label for="<?php echo esc_attr( $this->get_field_id( 'aboutme_subtitle' ) ); ?>"><?php esc_html_e( 'Sub Title', 'vamico' ); ?></label>
+			<label for="<?php echo esc_attr( $this->get_field_id( 'aboutme_subtitle' ) ); ?>"><?php esc_html_e( 'Sub Title', 'reino' ); ?></label>
 			<input id="<?php echo esc_attr( $this->get_field_id( 'aboutme_subtitle' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'aboutme_subtitle' ) ); ?>" value="<?php echo esc_attr( $aboutme_subtitle ); ?>" type="text" style="width:100%;" />
 		</p>
 		<p>
-			<label for="<?php echo esc_attr( $this->get_field_id( 'aboutme_text' ) ); ?>"><?php esc_html_e( 'Biography', 'vamico' ); ?></label>
+			<label for="<?php echo esc_attr( $this->get_field_id( 'aboutme_text' ) ); ?>"><?php esc_html_e( 'Biography', 'reino' ); ?></label>
 			<textarea  rows="8" style="width:100%" id="<?php echo esc_attr( $this->get_field_id( 'aboutme_text' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'aboutme_text' ) ); ?>"><?php echo esc_textarea( $aboutme_text ); ?></textarea>
 		</p>
 		<p>
-			<label for="<?php echo esc_attr( $this->get_field_id( 'aboutme_signature_url' ) ); ?>"><?php esc_html_e( 'Autograph Image URL', 'vamico' ); ?></label>
+			<label for="<?php echo esc_attr( $this->get_field_id( 'aboutme_signature_url' ) ); ?>"><?php esc_html_e( 'Autograph Image URL', 'reino' ); ?></label>
 			<input id="<?php echo esc_attr( $this->get_field_id( 'aboutme_signature_url' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'aboutme_signature_url' ) ); ?>" value="<?php echo esc_attr( $aboutme_signature_url ); ?>" type="text" style="width:100%;" />
 		</p>
 	<?php

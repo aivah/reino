@@ -10,7 +10,7 @@ if ( post_password_required() ) {
 		$comments_number = get_comments_number();
 		if ( 1 === $comments_number ) {
 			/* translators: %s: post title */
-			printf( esc_html_x( 'One thought on &ldquo;%s&rdquo;', 'comments title', 'vamico' ), get_the_title() );
+			printf( esc_html_x( 'One thought on &ldquo;%s&rdquo;', 'comments title', 'reino' ), get_the_title() );
 		} else {
 			echo esc_html(
 				sprintf(
@@ -20,7 +20,7 @@ if ( post_password_required() ) {
 						'%1$s thoughts on &ldquo;%2$s&rdquo;',
 						$comments_number,
 						'comments title',
-						'vamico'
+						'reino'
 					),
 					wp_kses_post( number_format_i18n( $comments_number ) ),
 					get_the_title()
@@ -35,7 +35,7 @@ if ( post_password_required() ) {
 	<ol class="comments-list">
 		<?php
 		wp_list_comments( array(
-			'callback' => 'vamico_custom_comment',
+			'callback' => 'reino_custom_comment',
 		) );
 		?>
 	</ol><!-- .commentlist -->
@@ -44,7 +44,7 @@ if ( post_password_required() ) {
 	<?php
 	// If comments are closed and there are comments, let's leave a little note, shall we?
 	if ( ! comments_open() && get_comments_number() && post_type_supports( get_post_type(), 'comments' ) ) :
-		echo '<p class="no-comments">' . esc_html__( 'Comments are closed.', 'vamico' ) . '</p>';
+		echo '<p class="no-comments">' . esc_html__( 'Comments are closed.', 'reino' ) . '</p>';
 	endif;
 	?>
 </div><!-- #comments .post__comments -->
