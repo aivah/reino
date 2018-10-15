@@ -135,6 +135,26 @@ if ( ! function_exists( 'reino_owl_carousel_enqueue_scripts' ) ) {
 	}
 }
 
+/**
+ * Flex Slider Enqueue Scripts
+ */
+if ( ! function_exists( 'reino_flexslider_enqueue_scripts' ) ) {
+	add_action( 'reino_flexslider_scripts','reino_flexslider_enqueue_scripts' );
+	function reino_flexslider_enqueue_scripts() {
+		$fs_slidespeed 	= get_option( 'storeup_flexslidespeed' ) ? get_option( 'storeup_flexslidespeed' ) : '3000';
+		$fs_slideeffect = get_option( 'storeup_flexslideeffect' ) ? get_option( 'storeup_flexslideeffect' ) : 'fade';
+		$fs_slidednav 	= get_option( 'storeup_flexslidednav' ) ? get_option( 'storeup_flexslidednav' ) : 'true';
+		$flexslider_args = array(
+							'slideeffect' => $fs_slideeffect,
+							'slidespeed'  => $fs_slidespeed,
+							'slidednav'	  => $fs_slidednav,
+						);
+		wp_enqueue_script( 'flexslider', REINO_THEME_JS . '/flexslider.js', array( 'jquery' ), '', true );
+		wp_localize_script( 'flexslider', 'flexslider_args', $flexslider_args );
+		wp_enqueue_style( 'flexslider-style', REINO_THEME_CSS . '/flexslider.css' );
+	}
+}
+
 // Theme functions for common usage
 require_once( get_parent_theme_file_path() . '/theme-functions.php' );
 
@@ -343,6 +363,7 @@ if ( ! class_exists( 'Reino_Theme_Functions' ) ) {
 					$reino_tax_options = array(
 						''             => esc_html__( 'Select Slider', 'reino' ),
 						'owl_slider'   => esc_html__( 'Owl Carousel Slider', 'reino' ),
+						'flex_slider'  => esc_html__( 'Advanced Flexslider', 'reino' ),
 						'static_image' => esc_html__( 'Static Image', 'reino' ),
 						'customslider' => esc_html__( 'Custom Slider', 'reino' ),
 					);

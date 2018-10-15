@@ -51,11 +51,11 @@ if ( 'inside_post' === $reino_featured_location && 'wide' === $reino_featured_im
 					echo '</div>';
 					echo '</div>';
 				} else {
-					echo '<div class="outside_content ' . esc_attr( $reino_featured_styling ) . '" ' . $reino_fs_bg_css . '>';
+					echo '<div class="outside_content ' . esc_attr( $reino_featured_styling ) . '" ' . esc_attr( $reino_fs_bg_css ) . '>';
 					echo '<div class="outside_box">';
-					echo '<h1 ' . $reino_fs_txt_css . '>' . get_the_title( get_the_ID() ) . '</h1>';
+					echo '<h1 ' . esc_attr( $reino_fs_txt_css ) . '>' . get_the_title( get_the_ID() ) . '</h1>';
 					if ( ! empty( $reino_featured_desc ) ) {
-						echo '<p ' . $reino_fs_txt_css . '>' . wp_kses_post( $reino_featured_desc ) . '</p>';
+						echo '<p ' . esc_attr( $reino_fs_txt_css ) . '>' . wp_kses_post( $reino_featured_desc ) . '</p>';
 					}
 					echo '</div>';
 					echo '</div>';
@@ -92,7 +92,7 @@ if ( 'inside_post' === $reino_featured_location && 'wide' === $reino_featured_im
 							<?php
 							wp_link_pages( array(
 								'before' => '<div class="page-link">' . esc_html__( 'Pages:', 'reino' ),
-								'after' => '</div>',
+								'after'  => '</div>',
 							) );
 							?>
 

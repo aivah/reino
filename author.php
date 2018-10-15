@@ -22,9 +22,9 @@ get_header(); ?>
 					?>
 					<?php $reino_post_count = 0; ?>
 					<?php
-					$reino_before       = '';
-					$reino_after        = '';
-					$reino_author_style = get_option( 'reino_author_style' ) ? get_option( 'reino_author_style' ) : '';
+					$reino_before           = '';
+					$reino_after            = '';
+					$reino_author_style     = get_option( 'reino_author_style' ) ? get_option( 'reino_author_style' ) : '';
 					if ( 'author_standard_style' === $reino_author_style ) {
 						$reino_before = '<div class="post__layout"><div class="post__layout-standard">';
 						$reino_after  = '</div></div>';//. post-layout

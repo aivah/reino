@@ -23,7 +23,7 @@ if ( has_post_thumbnail() ) {
 	echo '</div>';//.post__thumbnail
 	echo '</div>';//.col-md-4
 }
-echo '<div class="col-md-' . $columns . '">';
+echo '<div class="col-md-' . esc_attr( $columns ) . '">';
 echo '<div class="list__content">';
 reino_post_header();
 reino_blog_post_entry();

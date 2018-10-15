@@ -93,5 +93,3 @@ if ( is_active_sidebar( 'footer_instagram_widget' ) ) {
 	</a>
 </div>
 <?php wp_footer(); ?>
-</body>
-</html>

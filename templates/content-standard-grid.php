@@ -1,6 +1,6 @@
 <?php
 global $reino_post_count;
-if ( 1 == $reino_post_count ) {
+if ( 1 === $reino_post_count ) {
 	echo '<div class="item-grid col-md-12 grid-first-post">';
 	echo '<article id="post-' . esc_attr( get_the_ID() ) . '" class="' . esc_attr( join( ' ', get_post_class( array( 'post-standard', 'grid-item', 'post-gs-fp' ) ) ) ) . '">';
 	// Post Header
@@ -11,7 +11,7 @@ if ( 1 == $reino_post_count ) {
 	echo '<div class="post__excerpt">';
 	if ( 'post_excerpt' === get_option( 'reino_post_content' ) ) {
 		echo '<div class="post__excerpt">';
-		echo reino_string_limit_words( get_the_excerpt(), 50 );
+		echo esc_attr( reino_string_limit_words( get_the_excerpt(), 50 ) );
 		echo '</div>';//.post__excerpt
 	} elseif ( 'post_full' === get_option( 'reino_post_content' ) ) {
 		echo '<div class="post__content">';
@@ -19,7 +19,7 @@ if ( 1 == $reino_post_count ) {
 		echo '</div>';//.post__content
 	}
 	echo '</div>';//.post__excerpt
-	echo reino_read_more( '', 'btn btn-primary btn-lg' );
+	echo esc_attr( reino_read_more( '', 'btn btn-primary btn-lg' ) );
 	echo '</article>';
 	echo '</div>';
 } else {

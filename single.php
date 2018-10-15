@@ -60,11 +60,11 @@ $reino_post_format = get_post_format();
 					}
 				} else {
 					if ( ! empty( $reino_featured_desc ) ) {
-						echo '<div class="outside_content ' . esc_attr( $reino_featured_styling ) . '" ' . $reino_fs_bg_css . '>';
+						echo '<div class="outside_content ' . esc_attr( $reino_featured_styling ) . '" ' . esc_attr( $reino_fs_bg_css ) . '>';
 						echo '<div class="outside_box">';
-						echo '<h1 ' . $reino_fs_txt_css . '>' . get_the_title( get_the_ID() ) . '</h1>';
+						echo '<h1 ' . esc_attr( $reino_fs_txt_css ) . '>' . get_the_title( get_the_ID() ) . '</h1>';
 						if ( ! empty( $reino_featured_desc ) ) {
-							echo '<p ' . $reino_fs_txt_css . '>' . wp_kses_post( $reino_featured_desc ) . '</p>';
+							echo '<p ' . esc_attr( $reino_fs_txt_css ) . '>' . wp_kses_post( $reino_featured_desc ) . '</p>';
 						}
 						echo '</div>';
 						echo '</div>';
@@ -190,7 +190,7 @@ $reino_post_format = get_post_format();
 				</div><!-- .entry-content-wrapper-->
 			</main><!-- .content-area -->
 			<?php
-			if ( reino_generator( 'reino_sidebar_option', get_the_ID() ) != 'fullwidth' ) {
+			if ( reino_generator( 'reino_sidebar_option', get_the_ID() ) !== 'fullwidth' ) {
 				get_sidebar();
 			}
 			?>

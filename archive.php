@@ -79,7 +79,7 @@ get_header(); ?>
 			</main><!-- .content-area -->
 
 			<?php
-			if ( reino_generator( 'reino_sidebar_option', get_the_ID() ) != 'fullwidth' ) {
+			if ( reino_generator( 'reino_sidebar_option', get_the_ID() ) !== 'fullwidth' ) {
 				get_sidebar();
 			}
 			?>

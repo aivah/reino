@@ -19,7 +19,7 @@ if ( 'on' !== $reino_owlslider_capoverlay ) {
 <div class="featured_slider clearfix" >
 <?php do_action( 'reino_theme_owlslider', get_the_ID() ); ?>
 	<div class="owl-container owl-featured">
-		<div class="owl-carousel
+		<div class="owl-carousel owl-theme
 		<?php
 		echo esc_attr( $reino_owlslider_capoverlay );
 		?>
@@ -73,23 +73,22 @@ if ( 'on' !== $reino_owlslider_capoverlay ) {
 
 				$thumbnail = wp_get_attachment_image_src( get_post_thumbnail_ID(), $reino_slider_img_size );
 
-					echo '<article class="' . esc_attr( join( ' ', get_post_class() ) ) . '">';
-					echo '<div class="owl__post ' . $reino_owlslider_capoverlay . $reino_slider_caption_pos . '">';
-					echo '<img src="' . esc_url( $thumbnail[0] ) . '" alt="' . get_the_title() . '">';
-					echo '<div class="owl__caption">';
-					echo '<div class="owl__large" data-animation-in="slideInUp" data-animation-out="animate-out slideOutDown" >';
-					echo esc_html( reino_post_category() );
-					if ( get_option( 'reino_postmeta' ) !== 'on' ) {
-						reino_the_post_meta( array( 'date', 'author' ), true );
-					}
-
-					echo '<h2 class="owl__title" data-animation-in="slideInDown" data-animation-out="animate-out slideOutUp">';
-					echo '<a href="' . esc_url( get_permalink( get_the_ID() ) ) . '">' . get_the_title() . '</a></h2>';
-					echo '</div>';
-					echo '</div>';
-					echo '</div>';
-					echo '</article>';
+				echo '<article class="' . esc_attr( join( ' ', get_post_class() ) ) . '">';
+				echo '<div class="owl__post ' . $reino_owlslider_capoverlay . $reino_slider_caption_pos . '">';
+				echo '<img src="' . esc_url( $thumbnail[0] ) . '" alt="' . get_the_title() . '">';
+				echo '<div class="owl__caption">';
+				echo '<div class="owl__fullscreen" data-animation-in="slideInUp" data-animation-out="animate-out slideOutDown" >';
+				echo esc_html( reino_post_category() );
+				echo '<h2 class="owl__title" data-animation-in="slideInDown" data-animation-out="animate-out slideOutUp">';
+				echo '<a href="' . esc_url( get_permalink( get_the_ID() ) ) . '">' . get_the_title() . '</a></h2>';
+				if ( 'on' !== get_option( 'reino_postmeta' ) ) {
+					reino_the_post_meta( array( 'date', 'author' ), true );
 				}
+				echo '</div>';
+				echo '</div>';
+				echo '</div>';
+				echo '</article>';
+			}
 			endwhile;
 			wp_reset_postdata();
 			?>

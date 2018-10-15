@@ -391,7 +391,7 @@ if ( ! function_exists( 'reino_body_class' ) ) {
 			}
 		}
 		if ( is_front_page() ) {
-			if ( get_option( 'reino_owl_slider_type' ) === 'large' ) {
+			if ( get_option( 'reino_owl_slider_type' ) === 'fullscreen' ) {
 				$classes[] = 'header-owl-fullscreen';
 			}
 		}
