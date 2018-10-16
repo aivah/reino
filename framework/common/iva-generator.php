@@ -1,80 +1,87 @@
 <?php
+
+// Commonly used functions Class
+
 if ( ! class_exists( 'Reino_Generator_Class' ) ) {
 	class Reino_Generator_Class {
 
-		// P R I M A R Y   M E N U
-		//--------------------------------------------------------
-		function reino_primary_menu() {
+		// Primary Meun Customization
+		public function reino_primary_menu() {
 			if ( has_nav_menu( 'primary-menu' ) ) {
-				wp_nav_menu(array(
-					'container'     => false,
-					'theme_location' => 'primary-menu',
-					'menu_class'    => 'sf-menu menu menubar',
-					'menu_id'       => '',
-					'echo'          => true,
-					'before'        => '',
-					'after'         => '',
-					'link_before'   => '',
-					'link_after'    => '',
-					'depth'         => 0,
-					'walker'        => new Reino_Custom_Menu_Walker(),
-				));
+				wp_nav_menu(
+					array(
+						'container'      => false,
+						'theme_location' => 'primary-menu',
+						'menu_class'     => 'sf-menu menu menubar',
+						'menu_id'        => '',
+						'echo'           => true,
+						'before'         => '',
+						'after'          => '',
+						'link_before'    => '',
+						'link_after'     => '',
+						'depth'          => 0,
+						'walker'         => new Reino_Custom_Menu_Walker(),
+					)
+				);
 			} else {
 				echo '<ul class="iva_menu sf-menu"><li><a href="' . esc_url( home_url( '/' ) ) . 'wp-admin/nav-menus.php">' . esc_html__( 'Primary Menu is not assigned or created.', 'reino' ) . '</a></li></ul>';
 			}
 		}
 		// S E C O N D A R Y   M E N U
 		//--------------------------------------------------------
-		function reino_secondary_menu() {
+		public function reino_secondary_menu() {
 			if ( has_nav_menu( 'secondary-menu' ) ) {
-				wp_nav_menu(array(
-					'container'     => false,
-					'theme_location' => 'secondary-menu',
-					'menu_class'    => 'sec-menu',
-					'menu_id'       => '',
-					'echo'          => true,
-					'before'        => '',
-					'after'         => '',
-					'link_before'   => '',
-					'link_after'    => '',
-					'depth'         => 0,
-					'walker'        => new Reino_Custom_Menu_Walker(),
-				));
+				wp_nav_menu(
+					array(
+						'container'      => false,
+						'theme_location' => 'secondary-menu',
+						'menu_class'     => 'sec-menu',
+						'menu_id'        => '',
+						'echo'           => true,
+						'before'         => '',
+						'after'          => '',
+						'link_before'    => '',
+						'link_after'     => '',
+						'depth'          => 0,
+						'walker'         => new Reino_Custom_Menu_Walker(),
+					)
+				);
 			} else {
 				echo '<ul class="sec-menu sf-menu"><li><a href="' . esc_url( home_url( '/' ) ) . 'wp-admin/nav-menus.php">' . esc_html__( 'Secondary Menu is not assigned or created.', 'reino' ) . '</a></li></ul>';
 			}
 		}
-		function reino_mobile_menu() {
+		public function reino_mobile_menu() {
 			if ( has_nav_menu( 'primary-menu' ) ) {
 				wp_nav_menu(array(
-					'container'     => 'div',
+					'container'       => 'div',
 					'container_class' => 'iva-mobile-menu',
-					'theme_location' => 'primary-menu',
-					'menu_class' => '',
-					'echo'          => true,
-					'before'        => '',
-					'after'         => '',
-					'link_before'   => '',
-					'link_after'    => '',
-					'depth'         => 0,
-					'walker'        => new Reino_Mobile_Custom_Menu_Walker(),
+					'theme_location'  => 'primary-menu',
+					'menu_class'      => '',
+					'echo'            => true,
+					'before'          => '',
+					'after'           => '',
+					'link_before'     => '',
+					'link_after'      => '',
+					'depth'           => 0,
+					'walker'          => new Reino_Mobile_Custom_Menu_Walker(),
 				));
 			}
 		}
 
 		// L O G O   G E N E R A T O R
 		//--------------------------------------------------------
-		function reino_logo( $reino_logoid ) {
+		public function reino_logo( $reino_logoid ) {
 			$reino_logo = get_option( 'reino_logo' );
-			if ( 'logo' == $reino_logo ) {
+			if ( 'logo' === $reino_logo ) {
 				$reino_img_attachment_id = reino_get_attachment_id_from_src( get_option( $reino_logoid ) );
-				$reino_image_attributes  = wp_get_attachment_image_src( $reino_img_attachment_id , 'full' ); // returns an array
+				$reino_image_attributes  = wp_get_attachment_image_src( $reino_img_attachment_id, 'full' ); // returns an array
 				?>
 				<a href="<?php echo esc_url( home_url( '/' ) ); ?>" title="<?php bloginfo( 'name' ); ?>" class="iva-logo-link">
 					<img src="<?php echo esc_url( $reino_image_attributes[0] ); ?>" alt="<?php bloginfo( 'name' ); ?>"  width="<?php echo esc_attr( $reino_image_attributes[1] ); ?>" height="<?php echo esc_attr( $reino_image_attributes[2] ); ?>" />
 				</a>
 				<?php
-			} else { ?>
+			} else {
+				?>
 				<h1 id="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" title="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></h1>
 				<h2 id="site-description"><?php echo bloginfo( 'description' ); ?></h2>
 				<?php
@@ -82,7 +89,7 @@ if ( ! class_exists( 'Reino_Generator_Class' ) ) {
 		}
 		// S I D E B A R   P O S I T I O N S
 		//--------------------------------------------------------
-		function reino_sidebar_option( $postid ) {
+		public function reino_sidebar_option( $postid ) {
 			// Get sidebar class and adds sub class to pagemid block layout
 			$reino_sidebar_layout = get_option( 'reino_defaultlayout' ) ? get_option( 'reino_defaultlayout' ) : 'rightsidebar';
 			$reino_archive_layout = get_option( 'reino_archive_layout' ) ? get_option( 'reino_archive_layout' ) : 'rightsidebar';
@@ -124,7 +131,7 @@ if ( ! class_exists( 'Reino_Generator_Class' ) ) {
 		 * @return - string URL
 		 *
 		 */
-		function reino_post_link_to( $reino_link_type ) {
+		public function reino_post_link_to( $reino_link_type ) {
 
 			global $post;
 
@@ -150,11 +157,20 @@ if ( ! class_exists( 'Reino_Generator_Class' ) ) {
 
 		// A B O U T   A U T H O R
 		//--------------------------------------------------------
-		function reino_about_author() {
+		public function reino_about_author() {
 			$reino_author_style = get_option( 'reino_author_style' ) ? get_option( 'reino_author_style' ) : '';
-			if ( '' !== get_the_author_meta( 'description' ) ) { ?>
+			if ( '' !== get_the_author_meta( 'description' ) ) {
+				?>
 				<div class="post__author <?php echo esc_attr( $reino_author_style ); ?>">
-					<div class="author__avatar"><?php echo get_avatar( get_the_author_meta( 'email' ), $size = '100', $default = '' ); ?></div>
+				<div class="author__avatar">
+				<?php
+				echo get_avatar(
+					get_the_author_meta( 'email' ),
+					$size    = '100',
+					$default = ''
+				);
+				?>
+				</div>
 					<div class="author__description">
 						<div class="author__label"><?php echo esc_html__( 'Posted By', 'reino' ); ?></div>
 						<h4><?php echo the_author_posts_link(); ?></h4>
@@ -188,9 +204,9 @@ if ( ! class_exists( 'Reino_Generator_Class' ) ) {
 		}
 		// Navigation for single posts
 		//--------------------------------------------------------
-		function reino_single_navigation() {
+		public function reino_single_navigation() {
 			$previous_post = get_previous_post();
-			$next_post = get_next_post();
+			$next_post     = get_next_post();
 			if ( is_singular( 'attachment' ) ) {
 				// Parent post navigation.
 				the_post_navigation( array(
@@ -208,7 +224,7 @@ if ( ! class_exists( 'Reino_Generator_Class' ) ) {
 
 		// R E L A T E D   P O S T S
 		//--------------------------------------------------------
-		function reino_related_posts() {
+		public function reino_related_posts() {
 
 			global $post;
 
@@ -243,13 +259,13 @@ if ( ! class_exists( 'Reino_Generator_Class' ) ) {
 				while ( $reino_related_query->have_posts() ) {
 					$reino_related_query->the_post();
 					// Check var $do_not_duplicate array for duplicate IDs
-					if ( !in_array( $post->ID, $do_not_duplicate ) ) {
+					if ( ! in_array( $post->ID, $do_not_duplicate ) ) {
 
 						// Add post ID to var $do_not_duplicate array
 						$do_not_duplicate[] = $post->ID;
 
 						if ( has_post_thumbnail() ) {
-							echo '<article id="post-' . $post->ID . '" class="' . join( ' ', get_post_class( 'post__related-item' ) ) . '">';
+							echo '<article id="post-' . esc_attr( $post->ID ) . '" class="' . join( ' ', get_post_class( 'post__related-item' ) ) . '">';
 							if ( has_post_thumbnail() ) {
 								echo '<div class="post__thumbnail">';
 								echo get_the_post_thumbnail( $post->ID, 'reino-small-square' );
@@ -282,37 +298,37 @@ if ( ! class_exists( 'Reino_Generator_Class' ) ) {
 class Reino_Custom_Menu_Walker extends Walker_Nav_Menu {
 
 	// columns
-	var $columns  = 0;
-	var $max_columns = 0;
+	var $columns      = 0;
+	var $max_columns  = 0;
 	// rows
-	var $rows   = 1;
-	var $arows   = array();
+	var $rows         = 1;
+	var $arows        = array();
 	// mega menu
-	var $reino_megamenu = 0;
+	var $iva_megamenu = 0;
 
 	function start_lvl( &$output, $depth = 0, $args = array() ) {
 
 		$indent = str_repeat( "\t", $depth );
 
-		if ( $depth == 0 && $this->iva_megamenu ) {
-			 $output .= "\n$indent<div class=\"sf-mega\"><div class=\"sf-mega-wrap\">\n";
+		if ( 0 === $depth && $this->iva_megamenu ) {
+			$output .= "\n$indent<div class=\"sf-mega\"><div class=\"sf-mega-wrap\">\n";
 		} else {
 			$output .= "\n$indent<ul>\n";
 		}
 	}
 
 
-	function end_lvl( &$output, $depth = 0, $args = array() ) {
+	public function end_lvl( &$output, $depth = 0, $args = array() ) {
 
 		$indent = str_repeat( "\t", $depth );
 
-		if ( $depth == 0 && $this->iva_megamenu ) {
+		if ( 0 === $depth && $this->iva_megamenu ) {
 			$output .= "$indent</div></div>\n";
 		} else {
 			$output .= "$indent</ul>\n";
 		}
 
-		if ( $depth == 0 ) {
+		if ( 0 === $depth ) {
 
 			if ( $this->iva_megamenu ) {
 				$output = str_replace( '{menu_ul_class}', ' sf-mega-section mmcol-' . $this->max_columns, $output );
@@ -320,72 +336,84 @@ class Reino_Custom_Menu_Walker extends Walker_Nav_Menu {
 					$output = str_replace( '{menu_li_class_' . $row . '}', 'sf-mega-section mmcol-' . $columns, $output );
 				}
 
-				$this->columns = 0;
+				$this->columns     = 0;
 				$this->max_columns = 0;
-				$this->arows = array();
+				$this->arows       = array();
 			} else {
 				$output = str_replace( '{menu_ul_class}', '', $output );
 			}
 		}
 	}
 
-	function start_el( &$output, $object, $depth = 0, $args = array(), $current_object_id = 0 ) {
+	public function start_el( &$output, $object, $depth = 0, $args = array(), $current_object_id = 0 ) {
 
 		global $wp_query;
 
-		$object_output = $column_class = $li_text_block_class = '';
+		$object_output       = '';
+		$column_class        = '';
+		$li_text_block_class = '';
 
 		$classes = empty( $object->classes ) ? array() : (array) $object->classes;
 
 		$class = array();
 
-		if ( $depth == '0' ) {
-			$this->iva_megamenu	= get_post_meta( $object->ID, 'menu-item-iva-megamenu', true );
-			if ( $this->iva_megamenu == 'on' ) {
+		if ( 0 === $depth ) {
+			$this->iva_megamenu = get_post_meta( $object->ID, 'menu-item-iva-megamenu', true );
+			if ( 'on' === $this->iva_megamenu ) {
 				$li_text_block_class = 'iva-megamenu ';
 			}
 		}
 
-		if ( $depth == 1 && $this->iva_megamenu ) {
+		if ( 1 === $depth && $this->iva_megamenu ) {
 
 			$this->columns ++;
 			$this->arows[ $this->rows ] = $this->columns;
 
-			if ( $this->max_columns < $this->columns ) {$this->max_columns = $this->columns;}
+			if ( $this->max_columns < $this->columns ) {
+				$this->max_columns = $this->columns;
+			}
 
 			$attributes  = ! empty( $object->attr_title ) ? ' title="' . esc_attr( $object->attr_title ) . '"' : '';
 			$attributes .= ! empty( $object->target ) ? ' target="' . esc_attr( $object->target ) . '"' : '';
 			$attributes .= ! empty( $object->xfn ) ? ' rel="' . esc_attr( $object->xfn ) . '"' : '';
 			$attributes .= ! empty( $object->url ) ? ' href="' . esc_url( $object->url ) . '"' : '';
 
-			$prepend = $append = $description = '';
+			$prepend     = '';
+			$append      = '';
+			$description = '';
 
-			$description  = ! empty( $object->attr_title ) ? '<span class="menu-info">' . esc_attr( $object->attr_title ) . '</span>' : '';
+			$description = ! empty( $object->attr_title ) ? '<span class="menu-info">' . esc_attr( $object->attr_title ) . '</span>' : '';
 
-			if ( $depth != 0 ) {
-				$description = $append = $prepend = '';
+			if ( 0 !== $depth ) {
+				$description = '';
+				$append      = '';
+				$prepend     = '';
 			}
-			$object_output = $args->before;
+			$object_output  = $args->before;
 			$object_output .= '<a' . $attributes . ' class="col_title">';
 			$object_output .= $args->link_before . $prepend . apply_filters( 'the_title', $object->title, $object->ID ) . $append;
 			$object_output .= $description . $args->link_after;
 			$object_output .= '</a>';
 			$object_output .= $args->after;
-			$column_class = ' {menu_li_class_' . $this->rows . '}';
+			$column_class   = '{menu_li_class_' . $this->rows . '}';
 		} else {
 			$attributes  = ! empty( $object->attr_title ) ? ' title="' . esc_attr( $object->attr_title ) . '"' : '';
 			$attributes .= ! empty( $object->target ) ? ' target="' . esc_attr( $object->target ) . '"' : '';
 			$attributes .= ! empty( $object->xfn ) ? ' rel="' . esc_attr( $object->xfn ) . '"' : '';
 			$attributes .= ! empty( $object->url ) ? ' href="' . esc_attr( $object->url ) . '"' : '';
 
-			$prepend = $append = $description = '';
+			$prepend     = '';
+			$append      = '';
+			$description = '';
 
-			$description  = ! empty( $object->attr_title ) ? '<span class="menu-info">' . esc_attr( $object->attr_title ) . '</span>' : '';
+			$description = ! empty( $object->attr_title ) ? '<span class="menu-info">' . esc_attr( $object->attr_title ) . '</span>' : '';
 
-			if ( $depth != 0 ) {
-				 $description = $append = $prepend = '';
+			if ( 0 !== $depth ) {
+				$description = '';
+				$append      = '';
+				$prepend     = '';
 			}
-			$object_output = $args->before;
+			$object_output  = $args->before;
 			$object_output .= '<a ' . $attributes . '>';
 			$object_output .= $args->link_before . $prepend . apply_filters( 'the_title', $object->title, $object->ID ) . $append;
 			$object_output .= $description . $args->link_after;
@@ -393,21 +421,22 @@ class Reino_Custom_Menu_Walker extends Walker_Nav_Menu {
 			$object_output .= $args->after;
 		}
 
-		$indent = ( $depth ) ? str_repeat( "\t", $depth ) : '';
-		$class_names = $value = '';
+		$indent      = ( $depth ) ? str_repeat( "\t", $depth ) : '';
+		$class_names = '';
+		$value       = '';
 		$class_names = apply_filters( 'nav_menu_css_class', array_filter( $classes ) );
 
 		foreach ( $class_names as $key => $values ) {
-			if ( $key != '0' ) {
+			if ( 0 !== $key ) {
 				$class[] .= $values;
 			}
 		}
 
-		$class[] .= $classes['0'];
-		$class_names = join( ' ',$class );
+		$class[]    .= $classes['0'];
+		$class_names = join( ' ', $class );
 		$class_names = ' class="' . $li_text_block_class . esc_attr( $class_names ) . $column_class . '"';
 
-		if ( $depth == 1 && $this->iva_megamenu ) {
+		if ( 1 === $depth && $this->iva_megamenu ) {
 			$output .= $indent . '<div id="menu-item-' . $object->ID . '"' . $value . $class_names . '>';
 		} else {
 			$output .= $indent . '<li id="menu-item-' . $object->ID . '"' . $value . $class_names . '>';
@@ -415,10 +444,10 @@ class Reino_Custom_Menu_Walker extends Walker_Nav_Menu {
 		$output .= apply_filters( 'walker_nav_menu_start_el', $object_output, $object, $depth, $args );
 	}
 
-	function end_el( &$output, $object, $depth = 0, $args = array() ) {
+	public function end_el( &$output, $object, $depth = 0, $args = array() ) {
 
 		$indent = str_repeat( "\t", $depth );
-		if ( $depth == 1 && $this->iva_megamenu ) {
+		if ( 1 === $depth && $this->iva_megamenu ) {
 			$output .= "$indent</div>\n";
 		} else {
 			$output .= "$indent</li>\n";
@@ -431,52 +460,57 @@ class Reino_Custom_Menu_Walker extends Walker_Nav_Menu {
  * Description Walker Class for Mobile Menu
  */
 class Reino_Mobile_Custom_Menu_Walker extends Walker_Nav_Menu {
-	function start_el( &$output, $object, $depth = 4, $args = array(), $current_object_id = 0 ) {
+	public function start_el( &$output, $object, $depth = 4, $args = array(), $current_object_id = 0 ) {
 
 		global $wp_query;
 
 		$indent = ( $depth ) ? str_repeat( "\t", $depth ) : '';
 
-		$class_names = $value = '';
+		$class_names = '';
+		$value       = '';
 
-		$classes = empty( $object->classes ) ? array() : (array) $object->classes;
-		$class = array();
+		$classes     = empty( $object->classes ) ? array() : (array) $object->classes;
+		$class       = array();
 		$class_names = apply_filters( 'nav_menu_css_class', array_filter( $classes ) );
 
 		foreach ( $class_names as $key => $values ) {
-			if ( $key != '0' ) {
+			if ( 0 !== $key ) {
 				$class[] .= $values;
 			}
 		}
-		$custommneu_class = join( ' ',$class );
-		$class_menu = ' class="' . esc_attr( $custommneu_class ) . '"';
-		$output .= $indent . '<li id="mobile-menu-item-' . $object->ID . '"' . $value . $class_menu . '>';
+		$custommneu_class = join( ' ', $class );
+		$class_menu       = ' class="' . esc_attr( $custommneu_class ) . '"';
+		$output          .= $indent . '<li id="mobile-menu-item-' . $object->ID . '"' . $value . $class_menu . '>';
 
 		$attributes  = ! empty( $object->attr_title ) ? ' title="' . esc_attr( $object->attr_title ) . '"' : '';
 		$attributes .= ! empty( $object->target ) ? ' target="' . esc_attr( $object->target ) . '"' : '';
 		$attributes .= ! empty( $object->xfn ) ? ' rel="' . esc_attr( $object->xfn ) . '"' : '';
 		$attributes .= ! empty( $object->url ) ? ' href="' . esc_attr( $object->url ) . '"' : '';
 
-		$prepend = $append = '';
+		$prepend = '';
+		$append  = '';
 
-		$description  = ! empty( $object->attr_title ) ? '<span class="msubtitle">' . esc_attr( $object->attr_title ) . '</span>' : '';
+		$description = ! empty( $object->attr_title ) ? '<span class="msubtitle">' . esc_attr( $object->attr_title ) . '</span>' : '';
 
-		if ( $depth != 0 ) {
-			 $description = $append = $prepend = '';
+		if ( 0 !== $depth ) {
+			$description = '';
+			$append      = '';
+			$prepend     = '';
 		}
 
-		$object_output = $args->before;
+		$object_output  = $args->before;
 		$object_output .= '<a' . $attributes . '>';
 
-		if ( $classes['0'] != '' ) {
+		if ( '' !== $classes['0'] ) {
 			$object_output .= '<i class="iva_menuicon fa ' . $classes['0'] . ' fa-lg"></i>';
 		}
 
 		$object_output .= $args->link_before . $prepend . apply_filters( 'the_title', $object->title, $object->ID ) . $append;
 		$object_output .= $description . $args->link_after;
 
-		if ( 'primary-menu' == $args->theme_location ) {
-			$submenus = 0 == $depth || (1 == $depth || 2 == $depth ) ? get_posts( array( 'post_type' => 'nav_menu_item', 'numberposts' => 1, 'meta_query' => array( array( 'key' => '_menu_item_menu_item_parent', 'value' => $object->ID, 'fields' => 'ids' ) ) ) ) : false;
+		if ( 'primary-menu' === $args->theme_location ) {
+			$submenus = 0 == $depth || ( 1 == $depth || 2 == $depth ) ? get_posts( array('post_type' => 'nav_menu_item', 'numberposts' => 1, 'meta_query' => array( array( 'key' => '_menu_item_menu_item_parent', 'value' => $object->ID, 'fields' => 'ids')))) : false;
+
 			$object_output .= ! empty( $submenus ) ? ( 0 == $depth ? '<span class="iva-children-indenter"><i class="fa fa-angle-down"></i></span>' : '<span class="iva-children-indenter"><i class="fa fa-angle-down"></i></span>' ) : '';
 		}
 
@@ -499,7 +533,7 @@ function reino_generator( $function ) {
 	global $reino_generator;
 
 	$reino_generator = new Reino_Generator_Class;
-	$reino_args = array_slice( func_get_args(), 1 );
+	$reino_args      = array_slice( func_get_args(), 1 );
 
 	return call_user_func_array( array( &$reino_generator, $function ), $reino_args );
 }
@@ -526,31 +560,44 @@ function reino_custom_comment( $comment, $args, $depth ) {
 			<div id="comment-<?php comment_ID(); ?>" class="comment-body">
 				<header class="comment-meta comment-author vcard">
 					<?php
-						echo get_avatar( $comment, 60 );
-						printf( '<cite class="fn">%1$s %2$s</cite>',
-							get_comment_author_link(),
-							// If current post author is also comment author, make it known visually.
-							( $comment->user_id === $post->post_author ) ? '<span> ' . esc_html__( 'Post author', 'reino' ) . '</span>' : ''
-						);
-						echo '<div class="comment-metadata">';
-						printf( '<a href="%1$s"><time pubdate datetime="%2$s">%3$s</time></a>',
-							esc_url( get_comment_link( $comment->comment_ID ) ),
-							get_comment_time( 'c' ),
-							/* translators: 1: date, 2: time */
-							sprintf( esc_html__( '%1$s at %2$s', 'reino' ), get_comment_date(), get_comment_time() )
-						);
+					echo get_avatar( $comment, 60 );
+					printf(
+						'<cite class="fn">%1$s %2$s</cite>',
+						get_comment_author_link(),
+						// If current post author is also comment author, make it known visually.
+						( $comment->user_id === $post->post_author ) ? '<span> ' . esc_html__( 'Post author', 'reino' ) . '</span>' : ''
+					);
+					echo '<div class="comment-metadata">';
+					printf(
+						'<a href="%1$s"><time pubdate datetime="%2$s">%3$s</time></a>',
+						esc_url( get_comment_link( $comment->comment_ID ) ),
+						get_comment_time( 'c' ),
+						/* translators: 1: date, 2: time */
+						sprintf( esc_html__( '%1$s at %2$s', 'reino' ), get_comment_date(), get_comment_time() )
+					);
 
-						edit_comment_link( esc_html__( 'Edit', 'reino' ), '<span class="edit-link">', '</span>' );
-						echo '</div>';
+					edit_comment_link( esc_html__( 'Edit', 'reino' ), '<span class="edit-link">', '</span>' );
+					echo '</div>';
 					?>
 				</header><!-- .comment-meta -->
 				<div class="comment-content">
-					<?php if ( '0' == $comment->comment_approved ) : ?>
+					<?php if ( 0 === $comment->comment_approved ) : ?>
 					<p class="comment-awaiting-moderation"><?php esc_html_e( 'Your comment is awaiting moderation.', 'reino' ); ?></p>
 					<?php endif; ?>
 					<?php comment_text(); ?>
 					<div class="reply">
-						<?php comment_reply_link( array_merge( $args, array( 'add_below' => 'comment', 'depth' => $depth, 'max_depth' => $args['max_depth'] ) ) ); ?>
+						<?php
+						comment_reply_link(
+							array_merge(
+								$args,
+								array(
+									'add_below' => 'comment',
+									'depth'     => $depth,
+									'max_depth' => $args['max_depth'],
+								)
+							)
+						);
+						?>
 					</div><!-- .reply -->
 				</div><!-- .comment-content -->
 			</div><!-- #comment-## -->

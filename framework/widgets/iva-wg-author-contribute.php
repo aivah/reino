@@ -30,11 +30,11 @@ class Reino_Author_Info_Widget extends WP_Widget {
 
 	}
 
-	function widget( $args, $instance ) {
+	public function widget( $args, $instance ) {
 		extract( $args );
-		$out = '';
+		$out   = '';
 		$title = $instance['title'];
-		$out .= $before_widget;
+		$out  .= $before_widget;
 
 		// Title
 		if ( $title ) {
@@ -43,10 +43,10 @@ class Reino_Author_Info_Widget extends WP_Widget {
 		global $post, $current_user;
 		// USer Profile Info
 		$reino_user        = wp_get_current_user();
-		$reino_user_info    = get_userdata( $reino_user->ID );
-		$reino_user_avatar  = get_avatar( $reino_user->ID, 100 );
-		$reino_user_url     = $reino_user->user_url;
-		$reino_user_desc    = $reino_user->description;
+		$reino_user_info   = get_userdata( $reino_user->ID );
+		$reino_user_avatar = get_avatar( $reino_user->ID, 100 );
+		$reino_user_url    = $reino_user->user_url;
+		$reino_user_desc   = $reino_user->description;
 
 		$out .= '<div class="iva-author-wrapper">';
 		if ( is_user_logged_in() ) {
@@ -55,6 +55,7 @@ class Reino_Author_Info_Widget extends WP_Widget {
 			$out .= '</div>';//.reino-wg__author_thumb
 			$out .= '<h4 class="iva-author-name">' . $reino_user_info->display_name . '</h4>';
 			$out .= '<span class="iva-author-posts-count">';
+			/* translators: %s: search term */
 			$out .= sprintf( esc_html__( 'Number of posts published by user: %d', 'reino' ), count_user_posts( $reino_user->ID ) );
 			$out .= '</span>';//.reino__info
 		}
@@ -66,7 +67,7 @@ class Reino_Author_Info_Widget extends WP_Widget {
 	}
 	//processes widget options to be saved
 
-	function update( $new_instance, $old_instance ) {
+	public function update( $new_instance, $old_instance ) {
 		$instance = $old_instance;
 		/* Strip tags for title and name to remove HTML (important for text inputs). */
 		$instance['title'] = strip_tags( $new_instance['title'] );
@@ -75,13 +76,13 @@ class Reino_Author_Info_Widget extends WP_Widget {
 	}
 
 	// Outputs the options form on admin
-	function form( $instance ) {
+	public function form( $instance ) {
 
 		/* Set up some default widget settings. */
 		$instance = wp_parse_args( (array) $instance, array(
 			'title' => '',
 		) );
-		$title = strip_tags( $instance['title'] );
+		$title    = strip_tags( $instance['title'] );
 
 		echo '<p>';
 		echo '<label for="' . esc_attr( $this->get_field_id( 'title' ) ) . '">' . esc_html__( 'Title:', 'reino' ) . '</label>';

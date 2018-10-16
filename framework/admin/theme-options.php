@@ -33,7 +33,7 @@ if ( ! function_exists( 'reino_theme_options' ) ) {
 			$range_options = array();
 			$range_values  = range( $start, $end, $steps );
 			foreach ( $range_values as $key => $value ) {
-				$range_options[$value] = $value;
+				$range_options[ $value ] = $value;
 			}
 			return $range_options;
 		}
@@ -275,12 +275,12 @@ if ( ! function_exists( 'reino_theme_options' ) ) {
 			'inputsize' => '330',
 		);
 		$reino_options[] = array(
-			'name' => esc_html__( 'Disable Subscribe Button', 'reino' ),
-			'desc' => esc_html__( 'Check this if you wish to disable subscribe button in header default.', 'reino' ),
-			'id'   => 'reino_subscribe_btn_disable',
-			'class'=> 'iva_of_headerstyle headerstyle1',
-			'std'  => '',
-			'type' => 'checkbox',
+			'name'  => esc_html__( 'Disable Subscribe Button', 'reino' ),
+			'desc'  => esc_html__( 'Check this if you wish to disable subscribe button in header default.', 'reino' ),
+			'id'    => 'reino_subscribe_btn_disable',
+			'class' => 'iva_of_headerstyle headerstyle1',
+			'std'   => '',
+			'type'  => 'checkbox',
 		);
 		$reino_options[] = array(
 			'name' => esc_html__( 'Disable Search Icon', 'reino' ),
@@ -659,18 +659,6 @@ if ( ! function_exists( 'reino_theme_options' ) ) {
 				'size' => '26px',
 			),
 		);
-		$reino_options[] = array(
-			'name'    => esc_html__( 'CountDown Font Family', 'reino' ),
-			'desc'    => esc_html__( 'Select a Font for the CountDown Shortcode.', 'reino' ),
-			'id'      => 'reino_countdown_font',
-			'class'   => '',
-			'type'    => 'custom_google_fonts',
-			'options' => $reino_fontface,
-			'preview' => array(
-				'text' => esc_html__( '0123456789 - DAYS - MONTHS - MIN - SECS', 'reino' ),
-				'size' => '36px',
-			),
-		);
 		//---------------------------------------------------------------------------------------------------
 		$reino_options[] = array(
 			'name' => esc_html__( 'Various Font Properties', 'reino' ),
@@ -854,11 +842,11 @@ if ( ! function_exists( 'reino_theme_options' ) ) {
 			'class'   => 'select300 iva_of_sliders owl_slider',
 			'type'    => 'select',
 			'options' => array(
-				'reino-extra-large'      => esc_html__( 'Default', 'reino' ),
-				'reino-large-horizontal' => esc_html__( 'Large Horizontal', 'reino' ),
-				'reino-large-vertical'   => esc_html__( 'Large Vertical', 'reino' ),
-				'reino-large-square'     => esc_html__( 'Large Square', 'reino' ),
-				'reino-medium-horizontal'     => esc_html__( 'Medium Horizontal', 'reino' ),
+				'reino-extra-large'       => esc_html__( 'Default', 'reino' ),
+				'reino-large-horizontal'  => esc_html__( 'Large Horizontal', 'reino' ),
+				'reino-large-vertical'    => esc_html__( 'Large Vertical', 'reino' ),
+				'reino-large-square'      => esc_html__( 'Large Square', 'reino' ),
+				'reino-medium-horizontal' => esc_html__( 'Medium Horizontal', 'reino' ),
 			),
 		);
 		$reino_options[] = array(
@@ -987,9 +975,9 @@ if ( ! function_exists( 'reino_theme_options' ) ) {
 			'std'     => 'is-center',
 			'type'    => 'images',
 			'options' => array(
-				'is-left' => REINO_FRAMEWORK_URI . 'admin/images/columns/sh-left.png',
-				'is-center'  => REINO_FRAMEWORK_URI . 'admin/images/columns/sh-center.png',
-				'is-right'    => REINO_FRAMEWORK_URI . 'admin/images/columns/sh-right.png',
+				'is-left'   => REINO_FRAMEWORK_URI . 'admin/images/columns/sh-left.png',
+				'is-center' => REINO_FRAMEWORK_URI . 'admin/images/columns/sh-center.png',
+				'is-right'  => REINO_FRAMEWORK_URI . 'admin/images/columns/sh-right.png',
 			),
 		);
 
@@ -1087,8 +1075,8 @@ if ( ! function_exists( 'reino_theme_options' ) ) {
 			'class'   => 'select300',
 			'type'    => 'select',
 			'options' => array(
-				''        => esc_html__( 'Default', 'reino' ),
-				'center'  => esc_html__( 'Centered', 'reino' ),
+				''       => esc_html__( 'Default', 'reino' ),
+				'center' => esc_html__( 'Centered', 'reino' ),
 			),
 		);
 		$reino_options[] = array(

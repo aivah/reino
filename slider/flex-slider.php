@@ -7,7 +7,7 @@ $reino_slider_img_size = get_option( 'reino_slider_img_size' )
 
 $reino_slider_post_ids = get_option( 'reino_slider_post_ids' );
 ?>
-<div class="featured_slider">
+<div class="featured_slider clearfix">
 	<div class="sliders">
 <?php do_action( 'reino_flexslider_scripts', get_the_ID() ); ?>
 <?php
@@ -45,7 +45,7 @@ if ( '' !== $reino_slider_cat ) {
 
 $reino_slider = new WP_Query( $reino_slider_query );
 
-echo '<div id="main-slider" class="flexslider">';
+echo '<div class="flex-img flexslider">';
 echo '<ul class="slides">';
 while ( $reino_slider->have_posts() ) :
 	$reino_slider->the_post();
@@ -61,7 +61,7 @@ echo '</ul>';
 echo '</div>';
 ?>
 
-<div id="secondary-slider" class="flexslider">
+<div class="flex-details flexslider">
 	<ul class="slides">
 		<?php
 		while ( $reino_slider->have_posts() ) :

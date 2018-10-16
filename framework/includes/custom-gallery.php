@@ -135,44 +135,42 @@ function reino_post_gallery( $output = '', $atts, $instance ) {
 
 			$columns = $atts['columns'];
 
-			if ( $columns == 5 ) {
+			if ( 5 === $columns ) {
 				$columns = 4;
-			} elseif ( $columns == 7 ) {
+			} elseif ( 7 === $columns ) {
 				$columns = 6;
-			} elseif ( $columns == 8 ) {
+			} elseif ( 8 === $columns ) {
 				$columns = 6;
-			} elseif ( $columns == 9 ) {
+			} elseif ( 9 === $columns ) {
 				$columns = 12;
 			}
 
-			$i = 0;
-			$output = '<div class="gallery-grid">';
+			$i       = 0;
+			$output  = '<div class="gallery-grid">';
 			$output .= '<div class="row">';
 			foreach ( $attachments as $id => $attachment ) {
 				$i++;
 				$attr = ( trim( $attachment->post_excerpt ) ) ? array( 'aria-describedby' => "$selector-$id" ) : '';
-				if ( ! empty( $atts['link'] ) && 'file' == $atts['link'] ) {
+				if ( ! empty( $atts['link'] ) && 'file' === $atts['link'] ) {
 					$image_output = wp_get_attachment_link( $id, $atts['size'], false, false, false, $attr );
-				} elseif ( ! empty( $atts['link'] ) && 'none' == $atts['link'] ) {
+				} elseif ( ! empty( $atts['link'] ) && 'none' === $atts['link'] ) {
 					$image_output = wp_get_attachment_image( $id, $atts['size'], false, $attr );
 				} else {
 					$image_output = wp_get_attachment_link( $id, $atts['size'], true, false, false, $attr );
 				}
-				$output .= '<div class="item col-md-'. (12 / $columns) . '">';
+				$output .= '<div class="item col-md-' . ( 12 / $columns ) . '">';
 				$output .= '<figure>';
 				$output .= $image_output;
 				$output .= '</figure>';
 				$output .= '</div>';
 
-				if ( $i == $columns ) {
+				if ( $i === $columns ) {
 					$output .= '</div><div class="row">';
-					$i = 0;
+					$i       = 0;
 				}
-
 			}
 			$output .= '</div>';
 		}
-
 	}
 	return $output;
 }
@@ -185,15 +183,15 @@ add_action('print_media_templates', function() {
 
 	$gallery_types = apply_filters('print_media_templates_gallery_settings_types',
 		array(
-			'default_val' => esc_html__( 'Default','reino' ),
-			'justified' => esc_html__( 'Justified','reino' ),
-			'grid'      => esc_html__( 'Grid','reino' ),
-			'slider'    => esc_html__( 'Slider','reino' ),
+			'default_val' => esc_html__( 'Default', 'reino' ),
+			'justified'   => esc_html__( 'Justified', 'reino' ),
+			'grid'        => esc_html__( 'Grid', 'reino' ),
+			'slider'      => esc_html__( 'Slider', 'reino' ),
 		)
 	);
 	echo '<div id="tmpl-custom-gallery-type">';
 	echo '<label class="setting">';
-	echo '<span>' . esc_html__( 'Layout Type','reino' ) . '</span>';
+	echo '<span>' . esc_html__( 'Layout Type', 'reino' ) . '</span>';
 	echo '<select data-setting="type">';
 	foreach ( $gallery_types as $key => $value ) {
 		echo '<option value="' . esc_attr( $key ) . '">' . esc_html( $value ) . '</option>';

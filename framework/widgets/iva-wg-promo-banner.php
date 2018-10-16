@@ -18,11 +18,11 @@ add_action( 'widgets_init', 'reino_promo_banner_widget' );
 // Define the Widget as an extension of WP_Widget
 class Reino_Promo_Banner_Widget extends WP_Widget {
 
-	function __construct() {
+	public function __construct() {
 
 		/* Widget settings. */
 		$widget_ops = array(
-			'classname'	 => 'promo__banner-wg',
+			'classname'   => 'promo__banner-wg',
 			'description' => esc_html__( 'A widget that displays a Promotion Banner', 'reino' ),
 		);
 
@@ -32,15 +32,16 @@ class Reino_Promo_Banner_Widget extends WP_Widget {
 		);
 
 		/* Create the widget. */
+		/* translators: %s: search term */
 		parent::__construct( 'promo_banner_widget', sprintf( esc_html__( ' %s: Promo Banner', 'reino' ), REINO_THEME_NAME ), $widget_ops, $control_ops );
 	}
 
 	// outputs the content of the widget
 	public function widget( $args, $instance ) {
 		extract( $args );
-		$title 		= $instance['title'];
-		$link_url 	= $instance['link_url'];
-		$image_url 	= $instance['image_url'];
+		$title      = $instance['title'];
+		$link_url   = $instance['link_url'];
+		$image_url  = $instance['image_url'];
 		$banner_css = '';
 
 		echo wp_kses_post( $before_widget );
@@ -48,7 +49,7 @@ class Reino_Promo_Banner_Widget extends WP_Widget {
 		if ( ! empty( $image_url ) ) {
 			$banner_css = ' style="background-image:url(' . esc_url( $image_url ) . ');height:110px;';
 		}
-		echo '<div class="promo__banner" ' . $banner_css . '">';
+		echo '<div class="promo__banner" ' . esc_attr( $banner_css ) . '">';
 		echo '<a class="promo__banner-link" href="' . esc_url( $link_url ) . '"></a>';
 		echo '<div class="promo__banner-title"><h5 class="promo__banner-heading">' . esc_html( $title ) . '</h5></div>';
 		echo '</div>';
@@ -57,12 +58,12 @@ class Reino_Promo_Banner_Widget extends WP_Widget {
 	}
 
 	//processes widget options to be saved
-	function update( $new_instance, $old_instance ) {
+	public function update( $new_instance, $old_instance ) {
 
 		$instance = $old_instance;
 
 		/* Strip tags for title and name to remove HTML (important for text inputs). */
-		$instance['title'] 	   = strip_tags( $new_instance['title'] );
+		$instance['title']     = strip_tags( $new_instance['title'] );
 		$instance['link_url']  = strip_tags( $new_instance['link_url'] );
 		$instance['image_url'] = strip_tags( $new_instance['image_url'] );
 
@@ -70,7 +71,7 @@ class Reino_Promo_Banner_Widget extends WP_Widget {
 	}
 
 	// outputs the options form on admin
-	function form( $instance ) {
+	public function form( $instance ) {
 
 		$title     = isset( $instance['title'] ) ? esc_attr( $instance['title'] ) : '';
 		$link_url  = isset( $instance['link_url'] ) ? esc_attr( $instance['link_url'] ) : '';

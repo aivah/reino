@@ -18,11 +18,11 @@ add_action( 'widgets_init', 'reino_sociable_widget' );
 // Define the Widget as an extension of WP_Widget
 class Reino_Sociable_Widget extends WP_Widget {
 
-	function __construct() {
+	public function __construct() {
 
 		/* Widget settings. */
 		$widget_ops = array(
-			'classname' => 'socials-wg',
+			'classname'   => 'socials-wg',
 			'description' => esc_html__( 'Sociable widget for sidebar.', 'reino' ),
 		);
 
@@ -32,6 +32,7 @@ class Reino_Sociable_Widget extends WP_Widget {
 		);
 
 		/* Create the widget. */
+		/* translators: %s: search term */
 		parent::__construct( 'sociable_widget', sprintf( esc_html__( ' %s: Sociables', 'reino' ), REINO_THEME_NAME ), $widget_ops, $control_ops );
 	}
 
@@ -51,7 +52,7 @@ class Reino_Sociable_Widget extends WP_Widget {
 	}
 
 	//processes widget options to be saved
-	function update( $new_instance, $old_instance ) {
+	public function update( $new_instance, $old_instance ) {
 
 		$instance = $old_instance;
 
@@ -63,14 +64,14 @@ class Reino_Sociable_Widget extends WP_Widget {
 	}
 
 	// outputs the options form on admin
-	function form( $instance ) {
+	public function form( $instance ) {
 
 		$instance = wp_parse_args( (array) $instance, array(
 			'title' => '',
 			'color' => '',
 		) );
-		$title = strip_tags( $instance['title'] );
-		$color = strip_tags( $instance['color'] );
+		$title    = strip_tags( $instance['title'] );
+		$color    = strip_tags( $instance['color'] );
 		?>
 		<p>
 			<label for="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>"><?php esc_html_e( 'Title:', 'reino' ); ?></label>
@@ -79,8 +80,18 @@ class Reino_Sociable_Widget extends WP_Widget {
 		<p>
 			<label for="<?php echo esc_attr( $this->get_field_id( 'Color' ) ); ?>"><?php esc_html_e( 'Color:', 'reino' ); ?></label>
 			<select id="<?php echo esc_attr( $this->get_field_id( 'color' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'color' ) ); ?>">
-				<option value="black" <?php if ( 'black' === $color ) { echo 'selected="selected"'; } ?>><?php esc_html_e( 'Black','reino' ); ?></option>
-				<option value="white" <?php if ( 'white' === $color ) { echo 'selected="selected"'; } ?>><?php esc_html_e( 'White','reino' ); ?></option>
+				<option value="black"
+				<?php
+				if ( 'black' === $color ) {
+					echo 'selected="selected"'; }
+					?>
+					<?php esc_html_e( 'Black', 'reino' ); ?></option>
+				<option value="white"
+				<?php
+				if ( 'white' === $color ) {
+					echo 'selected="selected"'; }
+					?>
+					><?php esc_html_e( 'White', 'reino' ); ?></option>
 			</select>
 		</p>
 	<?php

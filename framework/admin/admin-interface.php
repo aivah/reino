@@ -64,30 +64,31 @@ function reino_fw_optionsframework_options_page() {
 
 	global $reino_options;
 
-	$reino_theme_data	= wp_get_theme();
+	$reino_theme_data    = wp_get_theme();
 	$reino_theme_version = $reino_theme_data->get( 'Version' );
 	$reino_theme_name    = $reino_theme_data->get( 'Name' );
 
-	$user_id 		= get_current_user_id();
-	$current_user 	= wp_get_current_user();
-	$avatar 		= get_avatar( $user_id, 50 );
-	$howdy  		= sprintf( esc_html__( 'Howdy, %1$s','reino' ), $current_user->display_name );
+	$user_id      = get_current_user_id();
+	$current_user = wp_get_current_user();
+	$avatar       = get_avatar( $user_id, 50 );
+	/* translators: %s: logged in user name */
+	$howdy = sprintf( esc_html__( 'Howdy, %1$s', 'reino' ), $current_user->display_name );
 	?>
 	<div class="iva_container_wrap">
 		<div class="iva_container">
-			<div class="page_load"><?php esc_html_e( 'Loading Theme Options...','reino' ); ?></div>
+			<div class="page_load"><?php esc_html_e( 'Loading Theme Options...', 'reino' ); ?></div>
 
 			<form action="" enctype="multipart/form-data" id="atpform" method='post'>
 
-				<div id="atp-popup-save" class="atp-save-popup"><div class="atp-save-save"><?php esc_html_e( 'Options Updated','reino' ); ?></div></div>
-				<div id="atp-popup-reset" class="atp-save-popup"><div class="atp-save-reset"><?php esc_html_e( 'Options Reset','reino' ); ?></div></div>
+				<div id="atp-popup-save" class="atp-save-popup"><div class="atp-save-save"><?php esc_html_e( 'Options Updated', 'reino' ); ?></div></div>
+				<div id="atp-popup-reset" class="atp-save-popup"><div class="atp-save-reset"><?php esc_html_e( 'Options Reset', 'reino' ); ?></div></div>
 
 				<div class="iva_ofw_header clearfix">
 					<div class="leftpane">
 						<div class="headinfo">
 							<div class="atp_avatar"><?php echo wp_kses_post( $avatar ); ?></div>
 							<h4><?php echo wp_kses_post( $howdy ); ?> </h4>
-							<h5><span><?php esc_html_e( 'Theme Options Panel', 'reino' );?></span></h5>
+							<h5><span><?php esc_html_e( 'Theme Options Panel', 'reino' ); ?></span></h5>
 						</div>
 					</div>
 					<div class="rightpane">
@@ -95,7 +96,7 @@ function reino_fw_optionsframework_options_page() {
 							<h1><?php echo esc_html( $reino_theme_name ); ?></h1>
 						</div>
 						<div class="panelinfo">
-							<div class="themename"><?php esc_html_e( 'Version', 'reino' );?> <span class="details orange"><?php echo esc_html( $reino_theme_version ); ?></span></div>
+							<div class="themename"><?php esc_html_e( 'Version', 'reino' ); ?> <span class="details orange"><?php echo esc_html( $reino_theme_version ); ?></span></div>
 						</div>
 					</div>
 				</div>	<!-- #atp_header -->
@@ -103,7 +104,7 @@ function reino_fw_optionsframework_options_page() {
 
 				// Get all the options based on menu/page selection
 				switch ( $_GET['page'] ) {
-					case 'optionsframework' :
+					case 'optionsframework':
 						$return = reino_fw_optionsframework_machine( $reino_options );
 						break;
 				}
@@ -118,102 +119,105 @@ function reino_fw_optionsframework_options_page() {
 					<div id="content">
 						<div class="options-content">
 							<?php
-							echo wp_kses( $return[0], array(
-							        'a'  => array(
-							         'href' => true,
-							         'data-url' => true,
-							         'data-download' => true,
-							         'data-import' => true,
-							         'data-delete' => true,
-							         'class' => true,
-							         'title' => true,
-							        ),
-							        'img' => array(
-							         'src' => true,
-							         'alt' => true,
-							         'data-id' => true,
-									 'class' => true,
-							        ),
-							        'b'  => array(),
-							        'p' => array(
-							         'class' => true,
-							         'style' => true,
-							        ),
-							        'em' => array(),
-							        'i'  => array(
-							         'class' => true,
-							        ),
-							        'strong' => array(),
-							        'span' => array(),
-							        'small' => array(),
-							        'br'  => array(),
-							        'div' => array(
-							         'id' => true,
-							         'class' => true,
-							        ),
-							        'select' => array(
-							         'class' => true,
-							         'name'  => true,
-							         'id'    => true,
-							         'multiple' => true,
-							        ),
-							        'option'   => array(
-							         'value' => true,
-							         'selected' => true,
-							        ),
-							        'optgroup' => array(
-							         'label' => true,
-							        ),
-							        'button' => array(
-							         'name' => true,
-							         'id' => true,
-							         'class' => true,
-							         'type' => true,
-							         'value' => true,
-							        ),
-							        'li'    => array(),
-							        'ul'    => array(),
-							        'span'    => array(
-							         'class' => true,
-							        ),
-							        'heading'  => array(),
-							        'input'    => array(
+							echo wp_kses(
+								$return[0],
+								array(
+									'a'        => array(
+										'href'          => true,
+										'data-url'      => true,
+										'data-download' => true,
+										'data-import'   => true,
+										'data-delete'   => true,
+										'class'         => true,
+										'title'         => true,
+									),
+								'img'      => array(
+									'src'     => true,
+									'alt'     => true,
+									'data-id' => true,
+									'class'   => true,
+								),
+								'b'        => array(),
+								'p'        => array(
+									'class' => true,
+									'style' => true,
+								),
+								'em'       => array(),
+								'i'        => array(
+									'class' => true,
+								),
+								'strong'   => array(),
+								'span'     => array(),
+								'small'    => array(),
+								'br'       => array(),
+								'div'      => array(
+									'id'    => true,
+									'class' => true,
+								),
+								'select'   => array(
+									'class'    => true,
+									'name'     => true,
+									'id'       => true,
+									'multiple' => true,
+								),
+								'option'   => array(
+									'value'    => true,
+									'selected' => true,
+								),
+								'optgroup' => array(
+									'label' => true,
+								),
+								'button'   => array(
+									'name'  => true,
+									'id'    => true,
+									'class' => true,
+									'type'  => true,
+									'value' => true,
+								),
+								'li'       => array(),
+								'ul'       => array(),
+								'span'     => array(
+									'class' => true,
+								),
+								'heading'  => array(),
+								'input'    => array(
 									'data-index' => true,
-							         'checked' => true,
-							         'type' => true,
-							         'class' => true,
-							         'name' => true,
-							         'id' => true,
-							         'value' => true,
-							         'style' => true,
-							        ),
-							        'label' => array(
-							         'for' => true,
-							        ),
-							        'h1'       => array(
-							         'class' => true,
-							        ),
-							        'h3'       => array(),
-							        'textarea' => array(
-							         'class' => true,
-							         'name' => true,
-							         'id' => true,
-							         'cols' => true,
-							         'rows' => true,
-							        ),
-							        'strong'   => array(),
-							        'table' => array(
-							         'id' => true,
-							         'class' => true,
-							        ),
-							        'tbody' => array(),
-							        'tr' => array(),
-							        'td' => array(),
-							        'th' => array(
-							         'align' => true,
-							         'width' => true,
-							        ),
-							));
+									'checked'    => true,
+									'type'       => true,
+									'class'      => true,
+									'name'       => true,
+									'id'         => true,
+									'value'      => true,
+									'style'      => true,
+								),
+								'label'    => array(
+									'for' => true,
+								),
+								'h1'       => array(
+									'class' => true,
+								),
+								'h3'       => array(),
+								'textarea' => array(
+									'class' => true,
+									'name'  => true,
+									'id'    => true,
+									'cols'  => true,
+									'rows'  => true,
+								),
+								'strong'   => array(),
+								'table'    => array(
+									'id'    => true,
+									'class' => true,
+								),
+								'tbody'    => array(),
+								'tr'       => array(),
+								'td'       => array(),
+								'th'       => array(
+									'align' => true,
+									'width' => true,
+								),
+							)
+						);
 							?>
 						</div>
 					</div>
@@ -228,7 +232,7 @@ function reino_fw_optionsframework_options_page() {
 				</form>
 				<form action="" method="post" style="display:inline" id="atpform-reset">
 					<span class="submit-footer-reset">
-						<input name="reset" type="submit" value="<?php echo esc_html__( 'Reset Options', 'reino' );?>" class="red-button button button-secondary" />
+						<input name="reset" type="submit" value="<?php echo esc_html__( 'Reset Options', 'reino' ); ?>" class="red-button button button-secondary" />
 						<input type="hidden" name="iva_save" value="reset" />
 					</span>
 				</form>
@@ -236,7 +240,8 @@ function reino_fw_optionsframework_options_page() {
 				<?php
 				if ( ! empty( $update_message ) ) {
 					echo wp_kses_post( $update_message );
-				}?>
+				}
+				?>
 				<div class="clear"></div>
 		</div><!-- end atpinterface-->
 </div><!-- end atp_container-->
@@ -249,36 +254,36 @@ function reino_fw_optionsframework_options_page() {
 function reino_admin_print_scripts() {
 
 	$reino_sociable = array(
-		'adn'        	=> esc_html__( 'ADN', 'reino' ),
-		'android'    	=> esc_html__( 'Android', 'reino' ),
-		'behance'   	=> esc_html__( 'Behance', 'reino' ),
-		'delicious'  	=> esc_html__( 'Delicious', 'reino' ),
-		'deviantart' 	=> esc_html__( 'DeviantArt', 'reino' ),
-		'digg'       	=> esc_html__( 'Digg', 'reino' ),
-		'dribbble'   	=> esc_html__( 'Dribbble', 'reino' ),
-		'facebook'  	=> esc_html__( 'Facebook', 'reino' ),
-		'flickr'	 	=> esc_html__( 'Flickr', 'reino' ),
-		'google-plus' 	=> esc_html__( 'Google Plus', 'reino' ),
-		'instagram'  	=> esc_html__( 'Instagram', 'reino' ),
-		'lastfm'     	=> esc_html__( 'Lastfm', 'reino' ),
-		'linkedin'   	=> esc_html__( 'LinkedIn', 'reino' ),
-		'pinterest-p' 	=> esc_html__( 'Pinterest', 'reino' ),
-		'reddit'     	=> esc_html__( 'Reddit', 'reino' ),
-		'skype'      	=> esc_html__( 'Skype', 'reino' ),
-		'soundcloud' 	=> esc_html__( 'SoundCloud', 'reino' ),
-		'stumbleupon' 	=> esc_html__( 'Stumbleupon', 'reino' ),
-		'snapchat' 		=> esc_html__( 'Snapchat', 'reino' ),
-		'twitter'     	=> esc_html__( 'Twitter', 'reino' ),
-		'vimeo-square' 	=> esc_html__( 'Vimeo', 'reino' ),
-		'whatsapp'   	=> esc_html__( 'Whatsapp', 'reino' ),
-		'yahoo'      	=> esc_html__( 'Yahoo', 'reino' ),
-		'yelp'       	=> esc_html__( 'Yelp', 'reino' ),
-		'youtube'    	=> esc_html__( 'Youtube', 'reino' ),
-		'vk'         	=> esc_html__( 'VK', 'reino' ),
-		'paypal'	 	=> esc_html__( 'Paypal', 'reino' ),
-		'rss'	 	=> esc_html__( 'RSS', 'reino' ),
-		'dropbox'    	=> esc_html__( 'Dropbox', 'reino' ),
-		'envelope'	 	=> esc_html__( 'Email', 'reino' ),
+		'adn'          => esc_html__( 'ADN', 'reino' ),
+		'android'      => esc_html__( 'Android', 'reino' ),
+		'behance'      => esc_html__( 'Behance', 'reino' ),
+		'delicious'    => esc_html__( 'Delicious', 'reino' ),
+		'deviantart'   => esc_html__( 'DeviantArt', 'reino' ),
+		'digg'         => esc_html__( 'Digg', 'reino' ),
+		'dribbble'     => esc_html__( 'Dribbble', 'reino' ),
+		'facebook'     => esc_html__( 'Facebook', 'reino' ),
+		'flickr'       => esc_html__( 'Flickr', 'reino' ),
+		'google-plus'  => esc_html__( 'Google Plus', 'reino' ),
+		'instagram'    => esc_html__( 'Instagram', 'reino' ),
+		'lastfm'       => esc_html__( 'Lastfm', 'reino' ),
+		'linkedin'     => esc_html__( 'LinkedIn', 'reino' ),
+		'pinterest-p'  => esc_html__( 'Pinterest', 'reino' ),
+		'reddit'       => esc_html__( 'Reddit', 'reino' ),
+		'skype'        => esc_html__( 'Skype', 'reino' ),
+		'soundcloud'   => esc_html__( 'SoundCloud', 'reino' ),
+		'stumbleupon'  => esc_html__( 'Stumbleupon', 'reino' ),
+		'snapchat'     => esc_html__( 'Snapchat', 'reino' ),
+		'twitter'      => esc_html__( 'Twitter', 'reino' ),
+		'vimeo-square' => esc_html__( 'Vimeo', 'reino' ),
+		'whatsapp'     => esc_html__( 'Whatsapp', 'reino' ),
+		'yahoo'        => esc_html__( 'Yahoo', 'reino' ),
+		'yelp'         => esc_html__( 'Yelp', 'reino' ),
+		'youtube'      => esc_html__( 'Youtube', 'reino' ),
+		'vk'           => esc_html__( 'VK', 'reino' ),
+		'paypal'       => esc_html__( 'Paypal', 'reino' ),
+		'rss'          => esc_html__( 'RSS', 'reino' ),
+		'dropbox'      => esc_html__( 'Dropbox', 'reino' ),
+		'envelope'     => esc_html__( 'Email', 'reino' ),
 	);
 	wp_enqueue_script( 'jquery-ui-core' );
 	wp_enqueue_script( 'reino-ajax-handler', REINO_FRAMEWORK_URI . 'admin/js/reino-ajax-handler.js', array( 'jquery' ) );
@@ -289,8 +294,8 @@ function reino_admin_print_scripts() {
 	wp_localize_script( 'reino-ajax-handler', 'sociables_args', $reino_sociable );
 
 	$querystring_reset = isset( $_REQUEST['reset'] ) ? esc_html( $_REQUEST['reset'] ) : '';
-	$admin_ajax_url = esc_url( admin_url( 'admin-ajax.php' ) );
-	$querystring_page = isset( $_REQUEST['page'] ) ? esc_html( $_REQUEST['page'] ):'';
+	$admin_ajax_url    = esc_url( admin_url( 'admin-ajax.php' ) );
+	$querystring_page  = isset( $_REQUEST['page'] ) ? esc_html( $_REQUEST['page'] ) : '';
 	wp_add_inline_script( 'reino-ajax-handler', "var querystring_reset='$querystring_reset', admin_ajax_url='$admin_ajax_url', querystring_page='$querystring_page'" );
 }
 
@@ -306,17 +311,17 @@ function reino_ajax_callback() {
 	$save_type = $_POST['type'];
 
 	// Save type =  U P L A O D
-	if ( $save_type == 'upload' ) {
+	if ( 'upload' === $save_type ) {
 
-		$clickedID 				= $_POST['data']; // Acts as the name
-		$filename 				= $_FILES[ $clickedID ];
-		$filename['name'] 		= preg_replace( '/[^a-zA-Z0-9._\-]/', '', $filename['name'] );
-		$override['test_form'] 	= false;
-		$override['action'] 	= 'wp_handle_upload';
-		$uploaded_file 			= wp_handle_upload( $filename,$override );
-		$upload_tracking[] 		= $clickedID;
+		$clickedID             = $_POST['data']; // Acts as the name
+		$filename              = $_FILES[ $clickedID ];
+		$filename['name']      = preg_replace( '/[^a-zA-Z0-9._\-]/', '', $filename['name'] );
+		$override['test_form'] = false;
+		$override['action']    = 'wp_handle_upload';
+		$uploaded_file         = wp_handle_upload( $filename, $override );
+		$upload_tracking[]     = $clickedID;
 
-		update_option( $clickedID , $uploaded_file['url'] );
+		update_option( $clickedID, $uploaded_file['url'] );
 
 		if ( ! empty( $uploaded_file['error'] ) ) {
 			echo 'Upload Error: ' . esc_html( $uploaded_file['error'] );
@@ -324,26 +329,26 @@ function reino_ajax_callback() {
 			echo esc_url( $uploaded_file['url'] );
 		} // End if().
 		exit;
-	} elseif ( $save_type == 'options' || $save_type == 'framework' ) { // Save type =  O P T I O N S / F R A M E W O R K
+	} elseif ( 'options' === $save_type || 'framework' === $save_type ) { // Save type =  O P T I O N S / F R A M E W O R K
 
-		$data = $_POST['data'];
+		$data                     = $_POST['data'];
 		$import_process_initiated = false;
 
 		//to identify whether saving/updating the settings, this becomes true when action performed through advance options
 
-		parse_str( $data,$output );
+		parse_str( $data, $output );
 
-		reino_update_option_values( $reino_options,$output );
+		reino_update_option_values( $reino_options, $output );
 
-		if ( $output['reino_theme_option_values'] != '' ) {
+		if ( '' !== $output['reino_theme_option_values'] ) {
 
 			$reino_import_output = unserialize( json_decode( $output['reino_theme_option_values'] ) );
 			if ( $reino_import_output ) {
 
-				update_option( 'reino_theme_option_values',$reino_import_output );
+				update_option( 'reino_theme_option_values', $reino_import_output );
 
 				if ( count( $reino_import_output ) > 1 ) {
-					reino_update_option_values( $reino_options,$reino_import_output );
+					reino_update_option_values( $reino_options, $reino_import_output );
 				}
 			}
 		}
@@ -375,10 +380,10 @@ function reino_update_option_values( $reino_options, $output ) {
 				foreach ( $type as $array ) {
 					// T E X T
 					//---------------------------------
-					if ( $array['type'] == 'text' ) {
-						$std 		= $array['std'];
-						$new_value  = $output[ $id ];
-						if ( $new_value == '' ) {
+					if ( 'text' === $array['type'] ) {
+						$std       = $array['std'];
+						$new_value = $output[ $id ];
+						if ( '' === $new_value ) {
 							$new_value = $std;
 						}
 						$new_value = stripslashes( $new_value );
@@ -386,101 +391,103 @@ function reino_update_option_values( $reino_options, $output ) {
 
 					// S O C I A B L E S
 					//---------------------------------
-					if ( $type == 'custom_socialbook_mark' ) {
+					if ( 'custom_socialbook_mark' === $type ) {
 
-						$std = $array['std'];
+						$std       = $array['std'];
 						$new_value = $output[ $id ];
-						if ( $new_value == '' ) { $new_value = $std; }
+						if ( '' === $new_value ) {
+							$new_value = $std;
+						}
 						$new_value = stripslashes( $new_value );
 					}
 				}
-			} elseif ( $type == 'select' ) {// S E L E C T
+			} elseif ( 'select' === $type ) {// S E L E C T
 				//---------------------------------
-				$new_value = isset( $output[ $option_array['id'] ] ) ? $output[ $option_array['id'] ]:'';
-			} elseif ( $type == 'multiselect' ) {// M U L T I   S E L E C T
+				$new_value = isset( $output[ $option_array['id'] ] ) ? $output[ $option_array['id'] ] : '';
+			} elseif ( 'multiselect' === $type ) {// M U L T I   S E L E C T
 				//---------------------------------
-				$new_value = isset( $output[ $option_array['id'] ] ) ? $output[ $option_array['id'] ]:'';
-			} elseif ( $type == 'checkbox' ) {// C H E C K B O X
+				$new_value = isset( $output[ $option_array['id'] ] ) ? $output[ $option_array['id'] ] : '';
+			} elseif ( 'checkbox' === $type ) {// C H E C K B O X
 				//---------------------------------
-				$new_value = isset( $output[ $option_array['id'] ] ) ? $output[ $option_array['id'] ]:'';
-				$new_value != '' ? 'on':'off';
-			} elseif ( $type == 'multicheck' ) {// M U L T I   C H E C K B O X
+				$new_value = isset( $output[ $option_array['id'] ] ) ? $output[ $option_array['id'] ] : '';
+				'' ? 'on' : 'off' !== $new_value;
+			} elseif ( 'multicheck' === $type ) {// M U L T I   C H E C K B O X
 				//---------------------------------
 				$new_value = array();
-				$new_value = isset( $output[ $option_array['id'] ] ) ? $output[ $option_array['id'] ]:'';
-			} elseif ( $type == 'typography' ) {// T Y P O G R A P H Y
+				$new_value = isset( $output[ $option_array['id'] ] ) ? $output[ $option_array['id'] ] : '';
+			} elseif ( 'typography' === $type ) {// T Y P O G R A P H Y
 				//---------------------------------
-				$typography_array = array();
-				$typography_array['size'] = $output[ $option_array['id'] . '_size' ];
-				$typography_array['lineheight'] = $output[ $option_array['id'] . '_lineheight' ];
-				$typography_array['style'] = $output[ $option_array['id'] . '_style' ];
-				$typography_array['color'] = $output[ $option_array['id'] . '_color' ];
+				$typography_array                = array();
+				$typography_array['size']        = $output[ $option_array['id'] . '_size' ];
+				$typography_array['lineheight']  = $output[ $option_array['id'] . '_lineheight' ];
+				$typography_array['style']       = $output[ $option_array['id'] . '_style' ];
+				$typography_array['color']       = $output[ $option_array['id'] . '_color' ];
 				$typography_array['fontvariant'] = $output[ $option_array['id'] . '_fontvariant' ];
-				$new_value = $typography_array;
-			} elseif ( $type == 'custom_google_fonts' ) {// Font Family
+				$new_value                       = $typography_array;
+			} elseif ( 'custom_google_fonts' === $type ) {// Font Family
 				//---------------------------------
-				$new_value = isset( $output[ $option_array['id'] ] ) ? $output[ $option_array['id'] ]:'';
-			} elseif ( $type == 'background' ) {// B A C K G R O U N D
+				$new_value = isset( $output[ $option_array['id'] ] ) ? $output[ $option_array['id'] ] : '';
+			} elseif ( 'background' === $type ) {// B A C K G R O U N D
 				//---------------------------------
-				$background_array = array();
-				$background_array['image'] = $output[ $option_array['id'] . '_image' ];
-				$background_array['color'] = $output[ $option_array['id'] . '_color' ];
-				$background_array['repeat'] = $output[ $option_array['id'] . '_repeat' ];
-				$background_array['position'] = $output[ $option_array['id'] . '_position' ];
+				$background_array               = array();
+				$background_array['image']      = $output[ $option_array['id'] . '_image' ];
+				$background_array['color']      = $output[ $option_array['id'] . '_color' ];
+				$background_array['repeat']     = $output[ $option_array['id'] . '_repeat' ];
+				$background_array['position']   = $output[ $option_array['id'] . '_position' ];
 				$background_array['attachment'] = $output[ $option_array['id'] . '_attachment' ];
-				$new_value = $background_array;
-			} elseif ( $type == 'teaserselect' ) {// T E A S E R S E L E C T
+				$new_value                      = $background_array;
+			} elseif ( 'teaserselect' === $type ) {// T E A S E R S E L E C T
 				//---------------------------------
-				$teaserselect_array = array();
+				$teaserselect_array            = array();
 				$teaserselect_array['options'] = $output[ $option_array['id'] . '_options' ];
-				$teaserselect_array['custom'] = stripslashes( $output[ $option_array['id'] . '_custom' ] );
-				$new_value = $teaserselect_array;
-			} elseif ( $type == 'customsidebar' ) {// C U S T O M   S I D E B A R
+				$teaserselect_array['custom']  = stripslashes( $output[ $option_array['id'] . '_custom' ] );
+				$new_value                     = $teaserselect_array;
+			} elseif ( 'customsidebar' === $type ) {// C U S T O M   S I D E B A R
 				//---------------------------------
 				if ( isset( $output[ $option_array['id'] ] ) ) {
 					$new_value = array();
 					$new_value = $output[ $option_array['id'] ];
 				}
-			} elseif ( $type == 'sliderselect' ) {// S L I D E R   S E L E C T
+			} elseif ( 'sliderselect' === $type ) {// S L I D E R   S E L E C T
 				//---------------------------------
-				$sliderselect_array = array();
+				$sliderselect_array           = array();
 				$sliderselect_array['slider'] = $output[ $option_array['id'] . '_slider' ];
-				$new_value = $sliderselect_array;
-			} elseif ( $type == 'border' ) {// B O R D E R
+				$new_value                    = $sliderselect_array;
+			} elseif ( 'border' === $type ) {// B O R D E R
 				//---------------------------------
-				$border_array = array();
+				$border_array          = array();
 				$border_array['width'] = $output[ $option_array['id'] . '_width' ];
 				$border_array['style'] = $output[ $option_array['id'] . '_style' ];
 				$border_array['color'] = $output[ $option_array['id'] . '_color' ];
-				$new_value = $border_array;
-			} elseif ( $type == 'mmenu_ancestor' ) {// M E G A  M E N U
+				$new_value             = $border_array;
+			} elseif ( 'mmenu_ancestor' === $type ) {// M E G A  M E N U
 				//---------------------------------
-				$mmenu_ancestor_array = array();
-				$mmenu_ancestor_array['image'] 		= $output[ $option_array['id'] . '_image' ];
-				$mmenu_ancestor_array['pleft'] 		= $output[ $option_array['id'] . '_pleft' ];
-				$mmenu_ancestor_array['pbottom'] 	= $output[ $option_array['id'] . '_pbottom' ];
-				$mmenu_ancestor_array['pright'] 	= $output[ $option_array['id'] . '_pright' ];
-				$mmenu_ancestor_array['position'] 	= $output[ $option_array['id'] . '_position' ];
-				$new_value = $mmenu_ancestor_array;
-			} elseif ( $type == 'add_uislider' ) {// UI Slider
+				$mmenu_ancestor_array             = array();
+				$mmenu_ancestor_array['image']    = $output[ $option_array['id'] . '_image' ];
+				$mmenu_ancestor_array['pleft']    = $output[ $option_array['id'] . '_pleft' ];
+				$mmenu_ancestor_array['pbottom']  = $output[ $option_array['id'] . '_pbottom' ];
+				$mmenu_ancestor_array['pright']   = $output[ $option_array['id'] . '_pright' ];
+				$mmenu_ancestor_array['position'] = $output[ $option_array['id'] . '_position' ];
+				$new_value                        = $mmenu_ancestor_array;
+			} elseif ( 'add_uislider' === $type ) {// UI Slider
 				//---------------------------------
-				$footer_widget_layout_array = array();
+				$footer_widget_layout_array           = array();
 				$footer_widget_layout_array['number'] = $output[ $option_array['id'] . '_number' ];
 				$footer_widget_layout_array['result'] = $output[ $option_array['id'] . '_result' ];
-				$new_value = $footer_widget_layout_array;
+				$new_value                            = $footer_widget_layout_array;
 			} else { // Not Upload
 				//---------------------------------
 				$new_value = isset( $output[ $id ] ) ? $output[ $id ] : '';
 			}
 
 			//stripslashes before saving value into the database
-			if ( $type != 'upload' ) {
+			if ( 'upload' !== $type ) {
 				if ( ! is_array( $new_value ) ) {
 					$new_value = stripslashes( $new_value );
 				}
 			}
 			//update option values
-			update_option( $id,$new_value );
+			update_option( $id, $new_value );
 		} // End if().
 	} // End foreach().
 }
@@ -489,23 +496,25 @@ function reino_update_option_values( $reino_options, $output ) {
  * O P T I O N S F R A M E W O R K   M A C H I N E
  */
 function reino_fw_optionsframework_machine( $reino_options ) {
-	$counter = 0;
-	$menu = $output = '';
-	$menuitems = $s_headings = array();
+	$counter    = 0;
+	$menu       = '';
+	$output     = '';
+	$menuitems  = array();
+	$s_headings = array();
 	foreach ( $reino_options as $key => $value ) {
-		if ( $value['type'] == 'heading' || $value['type'] == 'subnav' ) {
+		if ( 'heading' === $value['type'] || 'subnav' === $value['type'] ) {
 			$s_headings[] = $value;
 		}
 	}
 	$heading_key = 0;
 	foreach ( $s_headings as $key => $value ) {
-		$head = 'atp-option-' . preg_replace( '/[^a-zA-Z0-9\s]/', '', strtolower( trim( str_replace( ' ', '', $value['name'] ) ) ) );
+		$head          = 'atp-option-' . preg_replace( '/[^a-zA-Z0-9\s]/', '', strtolower( trim( str_replace( ' ', '', $value['name'] ) ) ) );
 		$value['head'] = $head;
-		if ( $value['type'] == 'heading' ) {
+		if ( 'heading' === $value['type'] ) {
 			$menuitems[ $head ] = $value;
-			$heading_key = $head;
+			$heading_key        = $head;
 		}
-		if ( $value['type'] == 'subnav' ) {
+		if ( 'subnav' === $value['type'] ) {
 			$menuitems[ $heading_key ]['children'][] = $value;
 		}
 	}
@@ -517,7 +526,7 @@ function reino_fw_optionsframework_machine( $reino_options ) {
 
 		// H E A D I N G
 		//---------------------------------
-		if ( $value['type'] != 'heading' &&  $value['type'] != 'subnav' ) {
+		if ( 'heading' !== $value['type'] && 'subnav' !== $value['type'] ) {
 			$class = '';
 			if ( isset( $value['class'] ) ) {
 				$class = $value['class'];
@@ -538,14 +547,16 @@ function reino_fw_optionsframework_machine( $reino_options ) {
 			case 'subsection':
 					$default = $value['name'];
 					$output .= '<div class="sub-section"><h1 class="sub-title">' . $default . '</h1>' . $explain_value . '</div>';
-					break;
+				break;
 
 			// T E X T
 			//---------------------------------
 			case 'text':
 				$val = $value['std'];
 				$std = get_option( $value['id'] );
-				if ( $std != '' ) { $val = $std; }
+				if ( '' !== $std ) {
+					$val = $std;
+				}
 				$inputsize = isset( $value['inputsize'] ) ? $value['inputsize'] : '10';
 
 				$output .= '<h3>' . $value['name'] . '</h3>' . "\n";
@@ -569,7 +580,7 @@ function reino_fw_optionsframework_machine( $reino_options ) {
 				$output .= '<select class="of-input select " name="' . $value['id'] . '" id="' . $value['id'] . '">';
 				if ( ! empty( $value_options ) ) {
 					foreach ( $value_options as $key => $option ) {
-						$output .= '<option value="' . $key . '" ' . selected( get_option( $value['id'] ),$key, false ) . ' />' . $option . '</option>';
+						$output .= '<option value="' . $key . '" ' . selected( get_option( $value['id'] ), $key, false ) . ' />' . $option . '</option>';
 					}
 				}
 				$output .= '</select>';
@@ -586,9 +597,9 @@ function reino_fw_optionsframework_machine( $reino_options ) {
 				foreach ( $value['options'] as $key => $option ) {
 					$selected = '';
 					if ( get_option( $value['id'] ) ) {
-						if ( @in_array( $key, get_option( $value['id'] ) ) ) { $selected = 'selected=\"selected\"'; }
-					} else {
-						//Empty Value if Unchecked
+						if ( @in_array( $key, get_option( $value['id'] ) ) ) {
+							$selected = 'selected=\"selected\"';
+						}
 					}
 					$output .= '<option value="' . $key . '"  ' . $selected . ' />' . $option . '</option>';
 				}
@@ -600,58 +611,58 @@ function reino_fw_optionsframework_machine( $reino_options ) {
 			//---------------------------------
 			case 'custom_socialbook_mark':
 				global $socialimages_select,$reino_sociable;
-				$output .= '<h3>' . $value['name'] . '</h3>' . "\n";
-				$output .= '<div class="explain">' . $explain_value . '</div><br>';
-				$output .= '<div class="controls" >' . "\n";
-				$output .= '<div id="sys_social_book">';
-				$output .= '<table id="sys_socialbookmark" class="fancy_table">';
-				$output .= '<tr>';
-				$output .= '<th width="100">' . esc_html__( 'Website', 'reino' ) . '</th>';
-				$output .= '<th width="100">' . esc_html__( 'URL', 'reino' ) . '</th>';
-				$output .= '<th width="100">' . esc_html__( 'Name', 'reino' ) . '</th>';
-				$output .= '<th align="center" width="70">' . esc_html__( 'Delete', 'reino' ) . '</th>';
-				$output .= '</tr>';
+				$output        .= '<h3>' . $value['name'] . '</h3>' . "\n";
+				$output        .= '<div class="explain">' . $explain_value . '</div><br>';
+				$output        .= '<div class="controls" >' . "\n";
+				$output        .= '<div id="sys_social_book">';
+				$output        .= '<table id="sys_socialbookmark" class="fancy_table">';
+				$output        .= '<tr>';
+				$output        .= '<th width="100">' . esc_html__( 'Website', 'reino' ) . '</th>';
+				$output        .= '<th width="100">' . esc_html__( 'URL', 'reino' ) . '</th>';
+				$output        .= '<th width="100">' . esc_html__( 'Name', 'reino' ) . '</th>';
+				$output        .= '<th align="center" width="70">' . esc_html__( 'Delete', 'reino' ) . '</th>';
+				$output        .= '</tr>';
 				$reino_sociable = array(
-					'adn'        	=> esc_html__( 'ADN', 'reino' ),
-					'android'    	=> esc_html__( 'Android', 'reino' ),
-					'behance'   	=> esc_html__( 'Behance', 'reino' ),
-					'delicious'  	=> esc_html__( 'Delicious', 'reino' ),
-					'deviantart' 	=> esc_html__( 'DeviantArt', 'reino' ),
-					'digg'       	=> esc_html__( 'Digg', 'reino' ),
-					'dribbble'   	=> esc_html__( 'Dribbble', 'reino' ),
-					'facebook'  	=> esc_html__( 'Facebook', 'reino' ),
-					'flickr'	 	=> esc_html__( 'Flickr', 'reino' ),
-					'google-plus' 	=> esc_html__( 'Google Plus', 'reino' ),
-					'instagram'  	=> esc_html__( 'Instagram', 'reino' ),
-					'lastfm'     	=> esc_html__( 'Lastfm', 'reino' ),
-					'linkedin'   	=> esc_html__( 'LinkedIn', 'reino' ),
-					'pinterest-p' 	=> esc_html__( 'Pinterest', 'reino' ),
-					'reddit'     	=> esc_html__( 'Reddit', 'reino' ),
-					'skype'      	=> esc_html__( 'Skype', 'reino' ),
-					'soundcloud' 	=> esc_html__( 'SoundCloud', 'reino' ),
-					'stumbleupon' 	=> esc_html__( 'Stumbleupon', 'reino' ),
-					'snapchat' 		=> esc_html__( 'Snapchat', 'reino' ),
-					'twitter'     	=> esc_html__( 'Twitter', 'reino' ),
-					'vimeo-square' 	=> esc_html__( 'Vimeo', 'reino' ),
-					'whatsapp'   	=> esc_html__( 'Whatsapp', 'reino' ),
-					'yahoo'      	=> esc_html__( 'Yahoo', 'reino' ),
-					'yelp'       	=> esc_html__( 'Yelp', 'reino' ),
-					'youtube'    	=> esc_html__( 'Youtube', 'reino' ),
-					'vk'         	=> esc_html__( 'VK', 'reino' ),
-					'paypal'	 	=> esc_html__( 'Paypal', 'reino' ),
-					'dropbox'    	=> esc_html__( 'Dropbox', 'reino' ),
-					'envelope'	 	=> esc_html__( 'Email', 'reino' ),
+					'adn'          => esc_html__( 'ADN', 'reino' ),
+					'android'      => esc_html__( 'Android', 'reino' ),
+					'behance'      => esc_html__( 'Behance', 'reino' ),
+					'delicious'    => esc_html__( 'Delicious', 'reino' ),
+					'deviantart'   => esc_html__( 'DeviantArt', 'reino' ),
+					'digg'         => esc_html__( 'Digg', 'reino' ),
+					'dribbble'     => esc_html__( 'Dribbble', 'reino' ),
+					'facebook'     => esc_html__( 'Facebook', 'reino' ),
+					'flickr'       => esc_html__( 'Flickr', 'reino' ),
+					'google-plus'  => esc_html__( 'Google Plus', 'reino' ),
+					'instagram'    => esc_html__( 'Instagram', 'reino' ),
+					'lastfm'       => esc_html__( 'Lastfm', 'reino' ),
+					'linkedin'     => esc_html__( 'LinkedIn', 'reino' ),
+					'pinterest-p'  => esc_html__( 'Pinterest', 'reino' ),
+					'reddit'       => esc_html__( 'Reddit', 'reino' ),
+					'skype'        => esc_html__( 'Skype', 'reino' ),
+					'soundcloud'   => esc_html__( 'SoundCloud', 'reino' ),
+					'stumbleupon'  => esc_html__( 'Stumbleupon', 'reino' ),
+					'snapchat'     => esc_html__( 'Snapchat', 'reino' ),
+					'twitter'      => esc_html__( 'Twitter', 'reino' ),
+					'vimeo-square' => esc_html__( 'Vimeo', 'reino' ),
+					'whatsapp'     => esc_html__( 'Whatsapp', 'reino' ),
+					'yahoo'        => esc_html__( 'Yahoo', 'reino' ),
+					'yelp'         => esc_html__( 'Yelp', 'reino' ),
+					'youtube'      => esc_html__( 'Youtube', 'reino' ),
+					'vk'           => esc_html__( 'VK', 'reino' ),
+					'paypal'       => esc_html__( 'Paypal', 'reino' ),
+					'dropbox'      => esc_html__( 'Dropbox', 'reino' ),
+					'envelope'     => esc_html__( 'Email', 'reino' ),
 				);
-				if ( get_option( 'reino_social_bookmark' ) != '' ) {
+				if ( '' !== get_option( 'reino_social_bookmark' ) ) {
 					$sys_social_items = explode( '#;', get_option( 'reino_social_bookmark' ) );
 					for ( $i = 0;$i < count( $sys_social_items );$i++ ) {
 						$sys_social_item = explode( '#|', $sys_social_items[ $i ] );
-						$output .= '<tr>';
-						$output .= '<td>';
-						$output .= '<select id="sys_social_file_icon" class="sys_social_file_icon" name="sys_social_file_icon"  width="300">';
+						$output         .= '<tr>';
+						$output         .= '<td>';
+						$output         .= '<select id="sys_social_file_icon" class="sys_social_file_icon" name="sys_social_file_icon"  width="300">';
 						foreach ( $reino_sociable as $key => $values ) {
-							$selected = $sys_social_item[1] == $key ? ' selected="selected"' : '';
-							$output .= '<option ' . $selected . ' value="' . $key . '" >' . $values . '</option>';
+							$selected = $sys_social_item[1] === $key ? ' selected="selected"' : '';
+							$output  .= '<option ' . $selected . ' value="' . $key . '" >' . $values . '</option>';
 							$selected = '';
 						}
 						$output .= '</select>';
@@ -672,15 +683,17 @@ function reino_fw_optionsframework_machine( $reino_options ) {
 			// S I D E B A R
 			//---------------------------------
 			case 'customsidebar':
-				$output .= '<h3>' . $value['name'] . '</h3>' . "\n";
-				$output .= '<div class="controls" >' . "\n";
-				$val = $value['std'];
-				$std = get_option( $value['id'] );
+				$output            .= '<h3>' . $value['name'] . '</h3>' . "\n";
+				$output            .= '<div class="controls" >' . "\n";
+				$val                = $value['std'];
+				$std                = get_option( $value['id'] );
 				$custom_sidebar_arr = @get_option( $value['id'] );
-				if ( $std != '' ) { $val = $std; }
+				if ( '' !== $std ) {
+					$val = $std;
+				}
 				$output .= '<div id="custom_widget_sidebar"><table id="custom_widget_table" cellpadding="0" cellspacing="0">';
 				$output .= '<tbody>';
-				if ( $custom_sidebar_arr != '' ) {
+				if ( '' !== $custom_sidebar_arr ) {
 					foreach ( $custom_sidebar_arr as $custom_sidebar_code ) {
 						$output .= '<tr><td><input type="text" name="' . $value['id'] . '[]" value="' . $custom_sidebar_code . '"  size="30" style="width:97%" /></td><td><span class="button red-button iva_custom_siderbar_del">' . esc_html__( 'Delete', 'reino' ) . '</span></td></tr>';
 					}
@@ -693,11 +706,11 @@ function reino_fw_optionsframework_machine( $reino_options ) {
 			// T E X T A R E A
 			//---------------------------------
 			case 'textarea':
-				$cols = '8';
+				$cols     = '8';
 				$ta_value = '';
-				$output .= '<h3>' . $value['name'] . '</h3>' . "\n";
-				$output .= '<div class="explain">' . $explain_value . '</div>';
-				$output .= '<div class="controls" >' . "\n";
+				$output  .= '<h3>' . $value['name'] . '</h3>' . "\n";
+				$output  .= '<div class="explain">' . $explain_value . '</div>';
+				$output  .= '<div class="controls" >' . "\n";
 
 				if ( isset( $value['std'] ) ) {
 					$ta_value = $value['std'];
@@ -711,7 +724,9 @@ function reino_fw_optionsframework_machine( $reino_options ) {
 					}
 				}
 				$std = get_option( $value['id'] );
-				if ( $std != '' ) { $ta_value = stripslashes( $std ); }
+				if ( '' !== $std ) {
+					$ta_value = stripslashes( $std );
+				}
 				$output .= '<textarea class="atp-input" name="' . $value['id'] . '" id="' . $value['id'] . '" cols="' . $cols . '" rows="8">' . esc_textarea( $ta_value ) . '</textarea>';
 				$output .= '</div>';
 				break;
@@ -720,13 +735,17 @@ function reino_fw_optionsframework_machine( $reino_options ) {
 			//---------------------------------
 			case 'radio':
 				$select_value = get_option( $value['id'] );
-				$output .= '<h3>' . $value['name'] . '</h3>' . "\n";
+				$output      .= '<h3>' . $value['name'] . '</h3>' . "\n";
 				foreach ( $value['options'] as $key => $option ) {
 					$checked = '';
-					if ( $select_value != '' ) {
-						if ( $select_value == $key ) { $checked = ' checked'; }
+					if ( '' !== $select_value ) {
+						if ( $select_value === $key ) {
+							$checked = ' checked';
+						}
 					} else {
-						if ( $value['std'] == $key ) { $checked = ' checked'; }
+						if ( $value['std'] === $key ) {
+							$checked = ' checked';
+						}
 					}
 					$output .= '<div class="controls" >' . "\n";
 					$output .= '<input class="atp-input atp-radio" type="radio" name="' . $value['id'] . '" value="' . $key . '" ' . $checked . ' />' . $option . '<br />';
@@ -739,17 +758,17 @@ function reino_fw_optionsframework_machine( $reino_options ) {
 			// CHECKBOX
 			//---------------------------------
 			case 'checkbox':
-				$std = $value['std'];
+				$std       = $value['std'];
 				$saved_std = get_option( $value['id'] );
-				$checked = '';
+				$checked   = '';
 
 				if ( ! empty( $saved_std ) ) {
-					if ( $saved_std == 'on' ) {
+					if ( 'on' === $saved_std ) {
 						$checked = 'checked="checked"';
 					} else {
 						$checked = '';
 					}
-				} elseif ( $std == 'on' ) {
+				} elseif ( 'on' === $std ) {
 					$checked = 'checked="checked"';
 				} else {
 					$checked = '';
@@ -765,15 +784,15 @@ function reino_fw_optionsframework_machine( $reino_options ) {
 			// M U L T I   C H E C K B O X
 			//---------------------------------
 			case 'multicheck':
-				$std = $value['std'];
+				$std     = $value['std'];
 				$output .= '<h3>' . $value['name'] . '</h3>' . "\n";
 				$output .= '<div class="controls" >' . "\n";
 				foreach ( $value['options'] as $key => $option ) {
 					$checked = '';
 					if ( get_option( $value['id'] ) ) {
-						if ( @in_array( $key, get_option( $value['id'] ) ) ) {$checked = 'checked=\"checked\"';}
-					} else {
-						//Empty Value if Unchecked
+						if ( @in_array( $key, get_option( $value['id'] ) ) ) {
+							$checked = 'checked=\"checked\"';
+						}
 					}
 					$output .= '<input type="checkbox" class="checkbox" name="' . $value['id'] . '[]" id="' . $key . '" value="' . $key . '" ' . $checked . ' /> <label for="' . esc_attr( $key ) . '">' . $option . '</label><br>';
 				}
@@ -794,9 +813,11 @@ function reino_fw_optionsframework_machine( $reino_options ) {
 			// C O L O R
 			//---------------------------------
 			case 'color':
-				$val = $value['std'];
-				$stored  = get_option( $value['id'] );
-				if ( $stored != '' ) { $val = $stored; }
+				$val    = $value['std'];
+				$stored = get_option( $value['id'] );
+				if ( '' !== $stored ) {
+					$val = $stored;
+				}
 				$output .= '<h3>' . $value['name'] . '</h3>' . "\n";
 				$output .= '<div class="controls" >' . "\n";
 				$output .= '<input class="color" name="' . $value['id'] . '" id="' . $value['id'] . '" type="text" value="' . $val . '" />';
@@ -808,16 +829,16 @@ function reino_fw_optionsframework_machine( $reino_options ) {
 			// T Y P O G R A P H Y
 			//---------------------------------
 			case 'typography':
-				$default = $value['std'];
+				$default           = $value['std'];
 				$typography_stored = get_option( $value['id'] );
-				$output .= '<h3 class="heading">' . $value['name'] . '</h3>' . "\n";
-				$output .= '<div class="controls" >' . "\n";
+				$output           .= '<h3 class="heading">' . $value['name'] . '</h3>' . "\n";
+				$output           .= '<div class="controls" >' . "\n";
 
 				// C O L O R
 				if ( isset( $default['color'] ) ) {
 					$val = $default['color'];
 				}
-				if ( $typography_stored['color'] != '' ) {
+				if ( '' !== $typography_stored['color'] ) {
 					$val = $typography_stored['color'];
 				}
 				$output .= '<div class="typocolor"><input class="atp-color atp-typography color" name="' . $value['id'] . '_color" id="' . $value['id'] . '_color" type="text" value="' . $val . '" />';
@@ -825,11 +846,13 @@ function reino_fw_optionsframework_machine( $reino_options ) {
 
 				// F O N T   S I Z E
 				$val = $default['size'];
-				if ( $typography_stored['size'] != '' ) { $val = $typography_stored['size']; }
+				if ( '' !== $typography_stored['size'] ) {
+					$val = $typography_stored['size'];
+				}
 				$output .= '<div class="atp-typo-size"><div class="select_wrapper"><select class="select" name="' . $value['id'] . '_size" id="' . $value['id'] . '_size">';
 				$output .= '<option value="">' . esc_html__( 'Font Size', 'reino' ) . '</option>';
 				for ( $i = 9; $i < 71; $i++ ) {
-					if ( $val == $i ) {
+					if ( $i === $val ) {
 						$active = 'selected="selected"';
 					} else {
 						$active = '';
@@ -840,11 +863,13 @@ function reino_fw_optionsframework_machine( $reino_options ) {
 
 				// L I N E   H E I G H T
 				$val = $default['lineheight'];
-				if ( $typography_stored['lineheight'] != '' ) { $val = $typography_stored['lineheight']; }
+				if ( '' !== $typography_stored['lineheight'] ) {
+					$val = $typography_stored['lineheight'];
+				}
 				$output .= '<div class="atp-typo-lineheight"><div class="select_wrapper"><select class="select" name="' . $value['id'] . '_lineheight" id="' . $value['id'] . '_lineheight">';
 				$output .= '<option value="">' . esc_html__( 'Line Height', 'reino' ) . '</option>';
 				for ( $i = 9; $i < 71; $i++ ) {
-					if ( $val == $i ) {
+					if ( $i === $val ) {
 						$active = 'selected="selected"';
 					} else {
 						$active = '';
@@ -855,11 +880,17 @@ function reino_fw_optionsframework_machine( $reino_options ) {
 
 				// F O N T   S T Y L E
 				$val = $default['style'];
-				if ( $typography_stored['style'] != '' ) { $val = $typography_stored['style']; }
+				if ( '' !== $typography_stored['style'] ) {
+					$val = $typography_stored['style'];
+				}
 				$normal = '';
 				$italic = '';
-				if ( $val == 'normal' ) { $normal = 'selected="selected"'; }
-				if ( $val == 'italic' ) { $italic = 'selected="selected"'; }
+				if ( 'normal' === $val ) {
+					$normal = 'selected="selected"';
+				}
+				if ( 'italic' === $val ) {
+					$italic = 'selected="selected"';
+				}
 				$output .= '<div class="atp-typo-style"><div class="select_wrapper"><select class="select" name="' . $value['id'] . '_style" id="' . $value['id'] . '_style">';
 				$output .= '<option value="">' . esc_html__( 'Font-Style', 'reino' ) . '</option>';
 				$output .= '<option value="normal" ' . $normal . '>' . esc_html__( 'Normal', 'reino' ) . '</option>';
@@ -870,27 +901,31 @@ function reino_fw_optionsframework_machine( $reino_options ) {
 				if ( isset( $default['fontvariant'] ) ) {
 					$val = $default['fontvariant'];
 				}
-				if ( $typography_stored['fontvariant'] != '' ) { $val = $typography_stored['fontvariant']; }
+				if ( '' !== $typography_stored['fontvariant'] ) {
+					$val = $typography_stored['fontvariant'];
+				}
 				$array_weight = array(
 					'normal'  => esc_html__( 'Normal', 'reino' ),
-					'bold' 	  => esc_html__( 'Bold', 'reino' ),
+					'bold'    => esc_html__( 'Bold', 'reino' ),
 					'lighter' => esc_html__( 'Lighter', 'reino' ),
-					'100' => '100',
-					'200' => '200',
-					'300' => '300',
-					'400' => '400',
-					'500' => '500',
-					'600' => '600',
-					'700' => '700',
-					'800' => '800',
-					'900' => '900',
-				 );
+					'100'     => '100',
+					'200'     => '200',
+					'300'     => '300',
+					'400'     => '400',
+					'500'     => '500',
+					'600'     => '600',
+					'700'     => '700',
+					'800'     => '800',
+					'900'     => '900',
+				);
 
 				$output .= '<div class="atp-typo-fontvariant"><div class="select_wrapper"><select class="select" name="' . $value['id'] . '_fontvariant" id="' . $value['id'] . '_fontvariant">';
 				$output .= '<option value="">' . esc_html__( 'Font-Variant', 'reino' ) . '</option>';
 				foreach ( $array_weight as $key => $values ) {
 					$fontselected = '';
-					if ( $val == $key ) { $fontselected = 'selected="selected"'; }
+					if ( $val === $key ) {
+						$fontselected = 'selected="selected"';
+					}
 						$output .= '<option value="' . $key . '" ' . $fontselected . '>' . $values . '</option>';
 				}
 				$output .= '</select>';
@@ -908,13 +943,12 @@ function reino_fw_optionsframework_machine( $reino_options ) {
 				$output .= '<div class="select_wrapper ' . $value['class'] . '">';
 				$output .= '<select class="of-input select  google_font_select" name="' . $value['id'] . '" id="' . $value['id'] . '">';
 				foreach ( $value['options'] as $select_key => $option ) {
-					$output .= '<option value="' . $select_key . '" ' . selected( get_option( $value['id'] ),$key, false ) . ' />' . $option . '</option>';
+					$output .= '<option value="' . $select_key . '" ' . selected( get_option( $value['id'] ), $key, false ) . ' />' . $option . '</option>';
 				}
 				$reino_google_fonts = reino_google_fonts();
-				$output .= '<optgroup label="Google Web Fonts">';
-				foreach ( $reino_google_fonts as $key => $googlefont ) {
-					$name = $googlefont['name'];
-					$output .= '<option value="' . $name . '" ' . selected( get_option( $value['id'] ),$name, false ) . ' />' . $name . '</option>';
+				$output            .= '<optgroup label="Google Web Fonts">';
+				foreach ( $reino_google_fonts as $name => $variant ) {
+					$output .= '<option value="' . $name . '" ' . selected( get_option( $value['id'] ), $name, false ) . ' />' . $name . '</option>';
 				}
 				$output .= '</optgroup>';
 				$output .= '</select></div>';
@@ -932,7 +966,7 @@ function reino_fw_optionsframework_machine( $reino_options ) {
 					$g_size = '';
 				}
 				$hide = 'hide';
-				if ( get_option( $value['id'] ) != '' ) {
+				if ( '' !== get_option( $value['id'] ) ) {
 					$hide = '';
 				}
 				$output .= '<p  class="' . $value['id'] . '_ggf_previewer google_font_preview ' . $hide . '" ' . $g_size . '>' . $g_text . '</p>';
@@ -943,22 +977,26 @@ function reino_fw_optionsframework_machine( $reino_options ) {
 			// B A C K G R O U N D
 			//---------------------------------
 			case 'background':
-				$output .= '<h3>' . $value['name'] . '</h3>' . "\n";
-				$output .= '<div class="controls" >' . "\n";
-				$default = $value['std'];
+				$output           .= '<h3>' . $value['name'] . '</h3>' . "\n";
+				$output           .= '<div class="controls" >' . "\n";
+				$default           = $value['std'];
 				$background_stored = get_option( $value['id'] );
 
 				// U P L O A D   I M A G E
-				$val = $default['image'];
+				$val   = $default['image'];
 				$imgid = $value['id'] . '_image';
-				if ( $background_stored['image'] != '' ) { $val = $background_stored['image']; }
+				if ( '' !== $background_stored['image'] ) {
+					$val = $background_stored['image'];
+				}
 				$output .= '<div class="atp-background-upload clearfix">';
-				$output .= reino_fw_optionsframework_mediaupload( $imgid,$val,null );
+				$output .= reino_fw_optionsframework_mediaupload( $imgid, $val, null );
 				$output .= '</div>';
 
 				// C O L O R
 				$val = $default['color'];
-				if ( $background_stored['color'] != '' ) { $val = $background_stored['color']; }
+				if ( '' !== $background_stored['color'] ) {
+					$val = $background_stored['color'];
+				}
 				$output .= '<div class="atp-background-color">';
 				$output .= '<input class="color" name="' . $value['id'] . '_color" id="' . $value['id'] . '_color" type="text" value="' . $val . '" />';
 				$output .= '<div class="wpcolorSelector"><div  id="' . $value['id'] . '_color_picker" ></div></div>';
@@ -966,14 +1004,27 @@ function reino_fw_optionsframework_machine( $reino_options ) {
 
 				// R E P E A T
 				$val = $default['repeat'];
-				if ( isset( $background_stored['repeat'] ) != '' ) { $val = $background_stored['repeat']; }
+				if ( '' !== isset( $background_stored['repeat'] ) ) {
+					$val = $background_stored['repeat'];
+				}
 
-				$repeat = $norepeat = $repeatx = $repeaty = '';
+				$repeat   = '';
+				$norepeat = '';
+				$repeatx  = '';
+				$repeaty  = '';
 
-				if ( $val == 'repeat' ) { $repeat = 'selected="selected"'; }
-				if ( $val == 'no-repeat' ) { $norepeat = 'selected="selected"'; }
-				if ( $val == 'repeat-x' ) { $repeatx = 'selected="selected"'; }
-				if ( $val == 'repeat-y' ) { $repeaty = 'selected="selected"'; }
+				if ( 'repeat' === $val ) {
+					$repeat = 'selected="selected"';
+				}
+				if ( 'no-repeat' === $val ) {
+					$norepeat = 'selected="selected"';
+				}
+				if ( 'repeat-x' === $val ) {
+					$repeatx = 'selected="selected"';
+				}
+				if ( 'repeat-y' === $val ) {
+					$repeaty = 'selected="selected"';
+				}
 
 				$output .= '<div class="atp-background-repeat">';
 				$output .= '<div class="select_wrapper">';
@@ -987,18 +1038,46 @@ function reino_fw_optionsframework_machine( $reino_options ) {
 
 				// P O S I T I O N
 				$val = $default['position'];
-				if ( $background_stored['position'] != '' ) { $val = $background_stored['position']; }
+				if ( '' !== $background_stored['position'] ) {
+					$val = $background_stored['position'];
+				}
 
-				$lefttop = $leftcenter = $leftbottom = $righttop = $rightcenter = $rightbottom = $centertop = $centercenter = $centerbottom = '';
-				if ( $val == 'left top' ) { $lefttop = 'selected="selected"'; }
-				if ( $val == 'left center' ) { $leftcenter = 'selected="selected"'; }
-				if ( $val == 'left bottom' ) { $leftbottom = 'selected="selected"'; }
-				if ( $val == 'right top' ) { $righttop = 'selected="selected"'; }
-				if ( $val == 'right center' ) { $rightcenter = 'selected="selected"'; }
-				if ( $val == 'right bottom' ) { $rightbottom = 'selected="selected"'; }
-				if ( $val == 'center top' ) { $centertop = 'selected="selected"'; }
-				if ( $val == 'center center' ) { $centercenter = 'selected="selected"'; }
-				if ( $val == 'center bottom' ) { $centerbottom = 'selected="selected"'; }
+				$lefttop      = '';
+				$leftcenter   = '';
+				$leftbottom   = '';
+				$righttop     = '';
+				$rightcenter  = '';
+				$rightbottom  = '';
+				$centertop    = '';
+				$centercenter = '';
+				$centerbottom = '';
+				if ( 'left top' === $val ) {
+					$lefttop = 'selected="selected"';
+				}
+				if ( 'left center' === $val ) {
+					$leftcenter = 'selected="selected"';
+				}
+				if ( 'left bottom' === $val ) {
+					$leftbottom = 'selected="selected"';
+				}
+				if ( 'right top' === $val ) {
+					$righttop = 'selected="selected"';
+				}
+				if ( 'right center' === $val ) {
+					$rightcenter = 'selected="selected"';
+				}
+				if ( 'right bottom' === $val ) {
+					$rightbottom = 'selected="selected"';
+				}
+				if ( 'center top' === $val ) {
+					$centertop = 'selected="selected"';
+				}
+				if ( 'center center' === $val ) {
+					$centercenter = 'selected="selected"';
+				}
+				if ( 'center bottom' === $val ) {
+					$centerbottom = 'selected="selected"';
+				}
 
 				$output .= '<div class="atp-background-position">';
 				$output .= '<div class="select_wrapper">';
@@ -1017,16 +1096,17 @@ function reino_fw_optionsframework_machine( $reino_options ) {
 
 				// A T T A C H M E N T
 				$val = $default['attachment'];
-				if ( $background_stored['attachment'] != '' ) {
+				if ( '' !== $background_stored['attachment'] ) {
 					$val = $background_stored['attachment'];
 				}
 
-				$fixed = $scroll = '';
+				$fixed  = '';
+				$scroll = '';
 
-				if ( $val == 'fixed' ) {
+				if ( 'fixed' === $val ) {
 					$fixed = 'selected="selected"';
 				}
-				if ( $val == 'scroll' ) {
+				if ( 'scroll' === $val ) {
 					$scroll = 'selected="selected"';
 				}
 
@@ -1044,28 +1124,29 @@ function reino_fw_optionsframework_machine( $reino_options ) {
 			// I M A G E S
 			//---------------------------------
 			case 'images':
-				$i = 0;
-				$output .= '<h3>' . $value['name'] . '</h3>' . "\n";
-				$output .= '<div class="controls" >' . "\n";
+				$i            = 0;
+				$output      .= '<h3>' . $value['name'] . '</h3>' . "\n";
+				$output      .= '<div class="controls" >' . "\n";
 				$select_value = get_option( $value['id'] );
 				foreach ( $value['options'] as $key => $option ) {
 					$i++;
-					$checked = $selected = '';
+					$checked  = '';
+					$selected = '';
 
-					if ( $select_value != '' ) {
-						if ( $select_value == $key ) {
-							$checked = ' checked';
+					if ( '' !== $select_value ) {
+						if ( $select_value === $key ) {
+							$checked  = ' checked';
 							$selected = 'iva-radio-option-selected';
 						}
 					} else {
-						if ( $value['std'] == $key ) {
-							$checked = ' checked';
+						if ( $value['std'] === $key ) {
+							$checked  = ' checked';
 							$selected = 'iva-radio-option-selected';
-						} elseif ( $i == 1  && ! isset( $select_value ) ) {
-							$checked = ' checked';
+						} elseif ( 1 === $i && ! isset( $select_value ) ) {
+							$checked  = ' checked';
 							$selected = 'iva-radio-option-selected';
-						} elseif ( $i == 1  && $value['std'] == '' ) {
-							$checked = ' checked';
+						} elseif ( 1 === $i && '' === $value['std'] ) {
+							$checked  = ' checked';
 							$selected = 'iva-radio-option-selected';
 						} else {
 							$checked = '';
@@ -1087,8 +1168,8 @@ function reino_fw_optionsframework_machine( $reino_options ) {
 					$output .= '</div>' . "\n";
 				}
 				$jquery_click_hook = str_replace( ' ', '', strtolower( $value['name'] ) );
-				$jquery_click_hook = "atp-option-" . trim( preg_replace( '/ +/', '', preg_replace( '/[^A-Za-z0-9 ]/', '', urldecode( html_entity_decode( strip_tags( $jquery_click_hook ) ) ) ) ) );
-				$output .= '<div class="group" id="' . $jquery_click_hook . '">' . "\n";
+				$jquery_click_hook = 'atp-option-' . trim( preg_replace( '/ +/', '', preg_replace( '/[^A-Za-z0-9 ]/', '', urldecode( html_entity_decode( strip_tags( $jquery_click_hook ) ) ) ) ) );
+				$output           .= '<div class="group" id="' . $jquery_click_hook . '">' . "\n";
 				break;
 			//S U B  N A V I G A T I O N
 			//---------------------------------
@@ -1097,8 +1178,8 @@ function reino_fw_optionsframework_machine( $reino_options ) {
 					$output .= '</div>' . "\n";
 				}
 				$jquery_click_hook = str_replace( ' ', '', strtolower( $value['name'] ) );
-				$jquery_click_hook = "atp-option-" . trim( preg_replace( '/ +/', '', preg_replace( '/[^A-Za-z0-9 ]/', '', urldecode( html_entity_decode( strip_tags( $jquery_click_hook ) ) ) ) ) );
-				$output .= '<div class="group" id="' . $jquery_click_hook . '">' . "\n";
+				$jquery_click_hook = 'atp-option-' . trim( preg_replace( '/ +/', '', preg_replace( '/[^A-Za-z0-9 ]/', '', urldecode( html_entity_decode( strip_tags( $jquery_click_hook ) ) ) ) ) );
+				$output           .= '<div class="group" id="' . $jquery_click_hook . '">' . "\n";
 				break;
 			//E X P O R T  B A C K U P O P T I O N S
 			//---------------------------------
@@ -1109,7 +1190,7 @@ function reino_fw_optionsframework_machine( $reino_options ) {
 				$output .= '<div class="iva_export_ob_msg"></div>';
 
 				// Export Backup options
-				$output .= '<span class="iva_style_wrap"><a href="#" class="export-data-btn button button-hero blue-button" data-url= ' . admin_url( 'admin.php?page=optionsframework' ) . '>' . esc_html__( 'Export Options','reino' ) . '</a></span>';
+				$output .= '<span class="iva_style_wrap"><a href="#" class="export-data-btn button button-hero blue-button" data-url= ' . admin_url( 'admin.php?page=optionsframework' ) . '>' . esc_html__( 'Export Options', 'reino' ) . '</a></span>';
 				$output .= '<div class="clearfix"></div>';
 				$output .= '</div>';//.controls
 				$output .= '<div class="explain">' . $explain_value . '</div>';
@@ -1117,19 +1198,19 @@ function reino_fw_optionsframework_machine( $reino_options ) {
 			//I M P O R T  B A C K U P O P T I O N S
 			//---------------------------------
 			case 'import_backupoptions':
-				$output .= '<form class="export_form" method="post" enctype="multipart/form-data">';
-				$output .= '<h3>' . $value['name'] . '</h3>' . "\n";
-				$output .= '<div class="controls" >' . "\n";
-				$output .= '<div class="iva_import_ob_msg"></div>';
-				$output .= '<div class="clearfix"></div>';
+				$output                  .= '<form class="export_form" method="post" enctype="multipart/form-data">';
+				$output                  .= '<h3>' . $value['name'] . '</h3>' . "\n";
+				$output                  .= '<div class="controls" >' . "\n";
+				$output                  .= '<div class="iva_import_ob_msg"></div>';
+				$output                  .= '<div class="clearfix"></div>';
 				$theme_options_txt_files  = array();
 				$theme_options_backup_dir = list_files( REINO_FRAMEWORK_DIR . '/admin/options-importer/export_options' );
 				foreach ( $theme_options_backup_dir as $file ) {
-				    if ( ! is_dir( REINO_FRAMEWORK_DIR . '/admin/options-importer/export_options' . $file ) ) {
+					if ( ! is_dir( REINO_FRAMEWORK_DIR . '/admin/options-importer/export_options' . $file ) ) {
 						if ( stristr( $file, '.txt' ) !== false ) {
 							$theme_options_txt_files[ $file ] = $file;
 						}
-				    }
+					}
 				}
 				ksort( $theme_options_txt_files );
 				if ( ! empty( $theme_options_txt_files ) ) {
@@ -1137,30 +1218,30 @@ function reino_fw_optionsframework_machine( $reino_options ) {
 					foreach ( $theme_options_txt_files as $ob_txt_name => $ob_txt_value ) {
 						$ob_file_info = pathinfo( $ob_txt_value );
 						$ob_file_name = $ob_file_info['basename'];
-						$output .= '<div class="export_wrap">';
-						$output .= '<div class="export_ob_wrap"><div class="export_ob_title">' . $i . ' . ' . $ob_file_name . '</div></div>';
-						$output .= '<div class="export_ob_btn">';
-						$output .= '<span><a class="ob_import button green-button" data-url= ' . admin_url( 'admin.php?page=optionsframework' ) . ' data-import="' . $ob_file_name . '">' . esc_html__( 'Import','reino' ) . '</a></span>';
-						$output .= '<span><a class="ob_delete button red-button" data-url= ' . admin_url( 'admin.php?page=optionsframework' ) . ' data-delete="' . $ob_file_name . '" >' . esc_html__( 'Delete','reino' ) . '</a></span>';
-						$output .= '</div>';//.export_ob_btn
-						$output .= '</div>';//.export_wrap
+						$output      .= '<div class="export_wrap">';
+						$output      .= '<div class="export_ob_wrap"><div class="export_ob_title">' . $i . ' . ' . $ob_file_name . '</div></div>';
+						$output      .= '<div class="export_ob_btn">';
+						$output      .= '<span><a class="ob_import button green-button" data-url= ' . admin_url( 'admin.php?page=optionsframework' ) . ' data-import="' . $ob_file_name . '">' . esc_html__( 'Import', 'reino' ) . '</a></span>';
+						$output      .= '<span><a class="ob_delete button red-button" data-url= ' . admin_url( 'admin.php?page=optionsframework' ) . ' data-delete="' . $ob_file_name . '" >' . esc_html__( 'Delete', 'reino' ) . '</a></span>';
+						$output      .= '</div>';//.export_ob_btn
+						$output      .= '</div>';//.export_wrap
 						$i++;
 					}
 				}
 				$output .= '<div class="clearfix"></div>';
 
 				$reino_ob_txtarea_cols = '8';
-				$output .= '<div class="import-options-bkp">';
-				$output .= '<p>' . wp_kses( __( 'Input your sample options data exported in a text file to restore. Copy the content from the text file then place in below textarea and hit <strong>Import File</strong> button', 'reino' ),
+				$output               .= '<div class="import-options-bkp">';
+				$output               .= '<p>' . wp_kses( __( 'Input your sample options data exported in a text file to restore. Copy the content from the text file then place in below textarea and hit <strong>Import File</strong> button', 'reino' ),
 					array(
 						'strong' => array(),
 					)
 				) . '</p>';
-				$output .= '<textarea class="atp-input import_ob_input" id="import_ob_input" cols="' . $reino_ob_txtarea_cols . '" rows="8" data-url= ' . admin_url( 'admin.php?page=optionsframework' ) . '></textarea>';
-				$output .= '<span><a class="import_options_btn button green-button button-hero" data-url= ' . admin_url( 'admin.php?page=optionsframework' ) . '>' . esc_html__( 'Import File', 'reino' ) . '</a></span>';
-				$output .= '</div>';
-				$output .= '</div>';//.controls
-				$output .= '<div class="explain">' . $explain_value . '</div>';
+				$output               .= '<textarea class="atp-input import_ob_input" id="import_ob_input" cols="' . $reino_ob_txtarea_cols . '" rows="8" data-url= ' . admin_url( 'admin.php?page=optionsframework' ) . '></textarea>';
+				$output               .= '<span><a class="import_options_btn button green-button button-hero" data-url= ' . admin_url( 'admin.php?page=optionsframework' ) . '>' . esc_html__( 'Import File', 'reino' ) . '</a></span>';
+				$output               .= '</div>';
+				$output               .= '</div>';//.controls
+				$output               .= '<div class="explain">' . $explain_value . '</div>';
 				break;
 
 			// Mega menu case
@@ -1168,30 +1249,41 @@ function reino_fw_optionsframework_machine( $reino_options ) {
 				$output .= '<h3>' . $value['name'] . '</h3>' . "\n";
 				$output .= '<div class="controls" >' . "\n";
 
-				$mm_img_val = $mm_position = '';
-				$mm_pright = $mm_pbottom = $mm_pleft = '0';
+				$mm_img_val  = '';
+				$mm_position = '';
+				$mm_pright   = '';
+				$mm_pbottom  = '';
+				$mm_pleft    = '0';
 
 				$mm_img_id = $value['id'] . '_image';
 
 				$mmenu_stored = get_option( $value['id'] );
-				if ( $mmenu_stored != '' ) {
-					$mm_img_val	= $mmenu_stored['image'];
-					$mm_pright = $mmenu_stored['pright'];
-					$mm_pbottom = $mmenu_stored['pbottom'];
-					$mm_pleft = $mmenu_stored['pleft'];
+				if ( '' !== $mmenu_stored ) {
+					$mm_img_va   = $mmenu_stored['image'];
+					$mm_pright   = $mmenu_stored['pright'];
+					$mm_pbottom  = $mmenu_stored['pbottom'];
+					$mm_pleft    = $mmenu_stored['pleft'];
 					$mm_position = $mmenu_stored['position'];
 				}
 
 				$output .= '<div class="mm_upload atp-background-upload clearfix">';
-				$output .= reino_fw_optionsframework_mediaupload( $mm_img_id,$mm_img_val,null );
+				$output .= reino_fw_optionsframework_mediaupload( $mm_img_id, $mm_img_val, null );
 				$output .= '</div>';
 
-				$position_lb = $position_rb = $position_cb = '';
+				$position_lb = '';
+				$position_rb = '';
+				$position_cb = '';
 
 				// Adds selected attribute for the option value
-				if ( $mm_position == 'left bottom' ) { $position_lb = 'selected="selected"' ; }
-				if ( $mm_position == 'right bottom' ) { $position_rb = 'selected="selected"' ; }
-				if ( $mm_position == 'center bottom' ) { $position_cb = 'selected="selected"' ; }
+				if ( 'left bottom' === $mm_position ) {
+					$position_lb = 'selected="selected"';
+				}
+				if ( 'right bottom' === $mm_position ) {
+					$position_rb = 'selected="selected"';
+				}
+				if ( 'center bottom' === $mm_position ) {
+					$position_cb = 'selected="selected"';
+				}
 
 				$output .= '<div class="mm_desc">' . esc_html__( 'Background position', 'reino' ) . '</div>';
 				$output .= '<div class="select_wrapper select200">';
@@ -1221,32 +1313,33 @@ function reino_fw_optionsframework_machine( $reino_options ) {
 				$output .= '<div class="explain">' . $explain_value . '</div>';
 				break;
 
-				case 'add_uislider':
-					$number = $result = '';
-					$footer_widget_layout = get_option( $value['id'] );
-					if ( ! empty( $footer_widget_layout ) ) {
-						$number = $footer_widget_layout['number'];
-						$result = $footer_widget_layout['result'];
-					}
-			        $output .= '<h3>' . $value['name'] . '</h3>' . "\n";
-			        $output .= '<div class="controls" >' . "\n";
-					$output .= '<div class="select_wrapper select300">';
-					$output .= '<select class="of-input select" name="' . $value['id'] . '_number" id="' . $value['id'] . '_number">';
-					for ( $i = 1; $i <= 6; $i++ ) {
-						$output .= '<option value="' . $i . '" ' . selected( $number, $i, false ) . ' />' . $i .'</option>';
-					}
-					$output .= '</select>';
-					$output .= '</div>';
-					$output .= '<div class="clear"></div>';
-					// Slider
-					$output .= '<div id="reino_ui_slider" class="cus-col-slider"></div>';
-					$output .= '<input type="hidden" class="slider_result" value="' . $result . '" name="' . $value['id'] . '_result" id="' . $value['id'] . '_result"  />';
-					$output .= '<input type="hidden" class="slider_result_db_values" value="' . $result . '">';
-					$output .= '<input type="hidden" class="slider_result_db_cols" value="' . $number . '">';
-					$output .= '</div>';//.controls
-					$output .= '<div class="explain">' . $explain_value . '</div>';
-					break;
-			}
+			case 'add_uislider':
+				$number               = '';
+				$result               = '';
+				$footer_widget_layout = get_option( $value['id'] );
+				if ( ! empty( $footer_widget_layout ) ) {
+					$number = $footer_widget_layout['number'];
+					$result = $footer_widget_layout['result'];
+				}
+				$output .= '<h3>' . $value['name'] . '</h3>' . "\n";
+				$output .= '<div class="controls" >' . "\n";
+				$output .= '<div class="select_wrapper select300">';
+				$output .= '<select class="of-input select" name="' . $value['id'] . '_number" id="' . $value['id'] . '_number">';
+				for ( $i = 1; $i <= 6; $i++ ) {
+					$output .= '<option value="' . $i . '" ' . selected( $number, $i, false ) . ' />' . $i . '</option>';
+				}
+				$output .= '</select>';
+				$output .= '</div>';
+				$output .= '<div class="clear"></div>';
+				// Slider
+				$output .= '<div id="reino_ui_slider" class="cus-col-slider"></div>';
+				$output .= '<input type="hidden" class="slider_result" value="' . $result . '" name="' . $value['id'] . '_result" id="' . $value['id'] . '_result"  />';
+				$output .= '<input type="hidden" class="slider_result_db_values" value="' . $result . '">';
+				$output .= '<input type="hidden" class="slider_result_db_cols" value="' . $number . '">';
+				$output .= '</div>';//.controls
+				$output .= '<div class="explain">' . $explain_value . '</div>';
+				break;
+		}
 
 		//------------------------------------
 		//	E N D   S W I T C H   C A S E
@@ -1255,14 +1348,14 @@ function reino_fw_optionsframework_machine( $reino_options ) {
 		// if TYPE is an array, formatted into smaller inputs... ie smaller values
 		if ( is_array( $value['type'] ) ) {
 			foreach ( $value['type'] as $array ) {
-				$id = $array['id'];
-				$std = $array['std'];
+				$id        = $array['id'];
+				$std       = $array['std'];
 				$saved_std = get_option( $id );
-				if ( $saved_std != $std ) {
+				if ( $saved_std !== $std ) {
 					$std = $saved_std;
 				}
 				$meta = $array['meta'];
-				if ( $array['type'] == 'text' ) { // Only text at this point
+				if ( 'text' === $array['type'] ) { // Only text at this point
 					$output .= '<input class="input-text-small atp-input" name="' . $id . '" id="' . $id . '" type="text" value="' . $std . '" />';
 					$output .= '<span class="meta-two">' . $meta . '</span>';
 				}
@@ -1270,8 +1363,8 @@ function reino_fw_optionsframework_machine( $reino_options ) {
 		}
 
 		// Option Value not equals to Headings and checkbox
-		if ( $value['type'] != 'heading' && $value['type'] != 'subnav' ) {
-			if ( $value['type'] != 'checkbox' ) {
+		if ( 'heading' !== $value['type'] && 'subnav' !== $value['type'] ) {
+			if ( 'checkbox' !== $value['type'] ) {
 				$output .= '';
 			}
 			$output .= '</div>' . "\n";
@@ -1283,13 +1376,13 @@ function reino_fw_optionsframework_machine( $reino_options ) {
 		$menu = '';
 
 		foreach ( $menuitems as $key => $value ) {
-			if ( isset( $v['icon'] ) && ( $v['icon'] != '' ) ) { }
+			// if ( '' !== isset( $v['icon'] ) && ( $v['icon'] ) ) {}
 
 			if ( isset( $value['children'] ) && ( count( $value['children'] ) > 0 ) ) {
-				$class = 'parent';
+				$class       = 'parent';
 				$hasdropdown = 'class="dropmenu"';
 			} else {
-				$class = 'parent no-child';
+				$class       = 'parent no-child';
 				$hasdropdown = '';
 			}
 
@@ -1333,34 +1426,40 @@ if ( ! function_exists( 'reino_fw_optionsframework_mediaupload' ) ) {
 		/* new code*/
 		$option_name = get_option( $_id );
 
-		$output = $id = $class = $int = $name = '';
+		$output = '';
+		$id     = '';
+		$class  = '';
+		$int    = '';
+		$name   = '';
 
 		$value = get_option( $_id );
-		$id = strip_tags( strtolower( $_id ) );
+		$id    = strip_tags( strtolower( $_id ) );
 		// If a value is passed and we don't have a stored value, use the value that's passed through.
-		if ( $_value != '' && $value == '' ) {
+		if ( '' !== $_value && '' === $value ) {
 			$value = $_value;
 		}
-		if ( $_name != '' ) {
+		if ( '' !== $_name ) {
 			$name = $option_name . '[' . $id . '][' . $_name . ']';
 		} else {
 			$name = $option_name . '[' . $id . ']';
 		}
 
-		if ( $value ) { $class = ' has-file'; }
+		if ( $value ) {
+			$class = 'has-file';
+		}
 
 		$output .= '<input id="' . $id . '" class="upload' . $class . '" type="text" name="' . $id . '" value="' . $value . '" />' . "\n";
 		$output .= '<input id="upload_' . $id . '" class="upload_button button-primary button-large" type="button" value="' . esc_html__( 'Upload', 'reino' ) . '" rel="' . $int . '" />' . "\n";
 
-		if ( $_desc != '' ) {
+		if ( '' !== $_desc ) {
 			$output .= '<span class="of_metabox_desc">' . $_desc . '</span>' . "\n";
 		}
 
 		$output .= '<div class="clear"></div><div class="iva-screenshot" id="' . $id . '_image">' . "\n";
 
-		if ( $value != '' ) {
+		if ( '' !== $value ) {
 			$remove = '<a href="javascript:(void);" class="custom_clear_image_button button button-primary">x</a>';
-			$image = preg_match( '/(^.*\.jpg|jpeg|png|gif*)/i', $value );
+			$image  = preg_match( '/(^.*\.jpg|jpeg|png|gif*)/i', $value );
 
 			if ( $image ) {
 				$image_attributes = wp_get_attachment_image_src( reino_get_attachment_id_from_src( $value ) );
@@ -1392,7 +1491,7 @@ if ( ! function_exists( 'reino_fw_optionsframework_mediaupload' ) ) {
 				$output .= '';
 
 				// Standard generic output if it's not an image.
-				$title = esc_html__( 'View File', 'reino' );
+				$title   = esc_html__( 'View File', 'reino' );
 				$output .= '<div class="no_image"><span class="file_link"></span>' . $remove . '</div>';
 			}
 		}

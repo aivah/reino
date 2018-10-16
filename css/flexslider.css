@@ -1,47 +1,57 @@
+
 .flex-viewport {
 	height: 650px!important;
 }
 .sliders {
 	position: relative;
 	width: 100%;
-	max-width: 1180px;
+	width: 1200px;
 	margin: 0 auto;
     height: 650px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
-#main-slider {
+.flex-img {
 	margin: 0;
 	border-radius: 3px;
 	overflow: hidden;
 	height: inherit;
+
 }
-#main-slider .slides img { width: 100%; }
-#main-slider { border: unset; }
-#secondary-slider {
-	position: absolute;
-	top: 0;
-	right: 0;
-	width: 50%;
-	height: inherit;
+.flex-details {
 	display: inline;
 	overflow: hidden;
 	padding: 40px;
 	border: unset;
 	background-color: rgba(0, 0, 0, 0.5);
+	position: absolute;
+	top: 0;
+	right: 0;
+	width: 50%;
+	height: inherit;
 	box-sizing: border-box;
 	z-index: 99;
 }
+.flex-img .slides img {
+	width: 100%;
+}
+.flex-img {
+	border: unset;
+}
 
-#secondary-slider .slides a.flex-head {
+.flex-details .slides a.flex-head {
 	height: 200px;
 	display: block;
 }
 .flexslider .slides {
-    margin: 0;
-    padding: 0;
 	height: inherit;
 }
-#secondary-slider .slides { width: 90%; }
-#secondary-slider .slides h2 {
+.flex-details .slides {
+	width: 90%;
+}
+.flex-details .slides p {
 	font-size: 50px;
 	color: #fff;
 	animation: netflix_style 3.5s;
@@ -51,19 +61,24 @@
 }
 @keyframes netflix_sstyle {
 	0% {
+		text-shadow: 2px 3px #000, 3px 4.5px #000, 4px 6px #000, 5px 7.5px #000, 6px 9px #000, 7px 10.5px #000, 8px 12px #000, 9px 13.5px #000, 10px 15px #000, 11px 16.5px #000, 12px 18px #000, 13px 19.5px #000, 14px 21px #000, 15px 22.5px #000, 16px 24px #000, 17px 25.5px #000, 18px 27px #000, 19px 28.5px #000, 20px 30px #000, 21px 31.5px #000;
 		color: #f3f3f3;
 		transform: scale(1, 1);
 	}
 	10% {
+
 		color: #f3f3f3;
 		transform: scale(1.05, 1.05);
 	}
 	15% {
 		color: #f3f3f3;
+		text-shadow: 2px 3px #000, 3px 4.5px #000, 4px 6px #000, 5px 7.5px #000, 6px 9px #000, 7px 10.5px #000, 8px 12px #000, 9px 13.5px #000, 10px 15px #000, 11px 16.5px #000, 12px 18px #000, 13px 19.5px #000, 14px 21px #000, 15px 22.5px #000, 16px 24px #000, 17px 25.5px #000, 18px 27px #000, 19px 28.5px #000, 20px 30px #000, 21px 31.5px #000;
 	}
 	20% {
 		color: #e90418;
+		text-shadow: none;
 		transform: scale(1.1, 1.1);
+
 	}
 	75% {
 		opacity: 1;
@@ -72,59 +87,19 @@
 		opacity: 1;
 		color: #e90418;
 		transform: scale(1, 1);
+
 	}
 	100% {
 		opacity: 1;
 	}
 }
-#main-slider .slides li {
+.flex-img .slides li {
 	position: relative;
-	height: inherit;
 }
-.post__meta {
+.flex-details .post__meta {
 	display: flex;
 	padding: 20px;
 }
-.meta-date a,
-.meta-author,
-.post-comments {
-	color: #fff;
-	font-size: 14px;
-	margin-right: 20px;
-}
-
-a {
-	text-decoration: none;
-	color: #fff;
-}
-.post-categories {
-	display: flex;
-	margin-bottom: 40px;
-}
-.post-categories li {
-	padding: 0 10px;
-	height: 25px;
-	background: blue;
-	margin-right: 8px;
-	transform: skew(-20deg);
-	text-align: center;
-	list-style: none;
-}
-.post-categories li a {
-	color: #000;
-	font-size: 12px;
-	padding: 7px;
-	display: block;
-	transform: skew(20deg);
-}
-.post-categories li.post-design { background: #4F8699; }
-.post-categories li.post-fashion { background: #1BB0CE; }
-.post-categories li.post-life { background: #3E4147; }
-.post-categories li.post-tech { background: #5A2E2E; }
-.post-categories li.post-design a,
-.post-categories li.post-life a,
-.post-categories li.post-fashion a,
-.post-categories li.post-tech a { color: #fff; }
 .slider-controls {
 	position: absolute;
 	top: 0;
@@ -168,12 +143,12 @@ a {
 	opacity: 1;
 }
 
-#main-slider .flex-direction-nav .flex-prev,
-#main-slider .flex-direction-nav .flex-next {
+.flex-img .flex-direction-nav .flex-prev,
+.flex-img .flex-direction-nav .flex-next {
 	display: none;
 }
 
-#secondary-slider .flex-direction-nav .flex-prev {
+.flex-details .flex-direction-nav .flex-prev {
 	position: absolute;
 	top: 20px !important;
 	right: 50px !important;
@@ -184,7 +159,7 @@ a {
 	text-align: center;
 	padding: 20px 0;
 }
-#secondary-slider .flex-direction-nav .flex-next{
+.flex-details .flex-direction-nav .flex-next{
 	position: absolute;
 	top: 20px !important;
 	right: 0;

@@ -35,12 +35,12 @@ if ( ! class_exists( 'Class_CT_Meta_Fields' ) ) {
 				<p><?php esc_html_e( 'Select the category background-color which displays in background of the Category Text.', 'reino' ); ?></p>
 			</div>
 			<div class="form-field term-group">
-				<label for="category_image_id"><?php _e( 'Category Image', 'reino' ); ?></label>
+				<label for="category_image_id"><?php esc_attr( 'Category Image', 'reino' ); ?></label>
 				<input type="hidden" id="category_image_id" name="category_image_id" class="custom_media_url" value="">
 				<div id="category-image-wrapper"></div>
 				<p>
-					<input type="button" class="button button-secondary ct_tax_media_button" id="ct_tax_media_button" name="ct_tax_media_button" value="<?php _e( 'Add Image', 'reino' ); ?>" />
-					<input type="button" class="button button-secondary ct_tax_media_remove" id="ct_tax_media_remove" name="ct_tax_media_remove" value="<?php _e( 'Remove Image', 'reino' ); ?>" />
+					<input type="button" class="button button-secondary ct_tax_media_button" id="ct_tax_media_button" name="ct_tax_media_button" value="<?php esc_attr( 'Add Image', 'reino' ); ?>" />
+					<input type="button" class="button button-secondary ct_tax_media_remove" id="ct_tax_media_remove" name="ct_tax_media_remove" value="<?php esc_attr( 'Remove Image', 'reino' ); ?>" />
 				</p>
 				<p class="description"><?php esc_html_e( 'Select the category image which will be used in various places.', 'reino' ); ?></p>
 			</div>
@@ -88,15 +88,15 @@ if ( ! class_exists( 'Class_CT_Meta_Fields' ) ) {
 				</th>
 				<td>
 					<?php $image_id = get_term_meta( $term->term_id, 'category_image_id', true ); ?>
-					<input type="hidden" id="category_image_id" name="category_image_id" value="<?php echo $image_id; ?>">
+					<input type="hidden" id="category_image_id" name="category_image_id" value="<?php echo esc_attr( $image_id ); ?>">
 					<div id="category-image-wrapper">
 						<?php if ( $image_id ) { ?>
 							<?php echo wp_get_attachment_image( $image_id, 'thumbnail' ); ?>
 						<?php } ?>
 					</div>
 					<p>
-						<input type="button" class="button button-secondary ct_tax_media_button" id="ct_tax_media_button" name="ct_tax_media_button" value="<?php _e( 'Add Image', 'hero-theme' ); ?>" />
-						<input type="button" class="button button-secondary ct_tax_media_remove" id="ct_tax_media_remove" name="ct_tax_media_remove" value="<?php _e( 'Remove Image', 'hero-theme' ); ?>" />
+						<input type="button" class="button button-secondary ct_tax_media_button" id="ct_tax_media_button" name="ct_tax_media_button" value="<?php esc_attr( 'Add Image', 'hero-theme' ); ?>" />
+						<input type="button" class="button button-secondary ct_tax_media_remove" id="ct_tax_media_remove" name="ct_tax_media_remove" value="<?php esc_attr( 'Remove Image', 'hero-theme' ); ?>" />
 					</p>
 					<p class="description"><?php esc_html_e( 'Select the category image which will be used in various places.', 'reino' ); ?></p>
 				</td>
@@ -181,4 +181,3 @@ if ( ! class_exists( 'Class_CT_Meta_Fields' ) ) {
 	$class_ct_meta_fields = new Class_CT_Meta_Fields();
 	$class_ct_meta_fields->init();
 }
-

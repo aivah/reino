@@ -1,6 +1,6 @@
 <?php
 class Reino_Post_Like {
-	function __construct() {
+	public function __construct() {
 		// Enqueues the scripts.
 		add_action( 'wp_enqueue_scripts', array( &$this, 'reino_enqueue_scripts' ) );
 		// Handle the request
@@ -14,10 +14,10 @@ class Reino_Post_Like {
 	 * enqueues the scripts.
 	 * @uses wp_enqueue_script()
 	 */
-	function reino_enqueue_scripts() {
+	public function reino_enqueue_scripts() {
 		// In javascript, object properties are accessed as ajax_object.ajax_url
 		wp_localize_script( 'reino-customjs', 'ivaLove', array(
-			'ajaxurl' => admin_url( 'admin-ajax.php' ),
+			'ajaxurl'    => admin_url( 'admin-ajax.php' ),
 			'youLikedit' => esc_html__( 'You already liked it!', 'reino' ),
 		));
 	}
@@ -26,7 +26,7 @@ class Reino_Post_Like {
 	 * Handle request then generate response using WP_Ajax_Response
 	 *
 	 */
-	function reino_ajax_like( $post_id ) {
+	public function reino_ajax_like( $post_id ) {
 
 		$likes_id = sanitize_text_field( $_POST['loves_id'] );
 		// Update
@@ -44,7 +44,7 @@ class Reino_Post_Like {
 	/**
 	 * function reino_like_post()
 	 */
-	function reino_like_post( $post_id, $action = 'get' ) {
+	public function reino_like_post( $post_id, $action = 'get' ) {
 		if ( ! is_numeric( $post_id ) ) {
 			return;
 		}
@@ -80,15 +80,15 @@ class Reino_Post_Like {
 	/**
 	 * function reino_add_like()
 	 */
-	function reino_add_like() {
+	public function reino_add_like() {
 		global $post;
 
 		$output = $this->reino_like_post( $post->ID );
-		$class = 'iva-love';
-		$title = esc_html__( 'Like this','reino' );
+		$class  = 'iva-love';
+		$title  = esc_html__( 'Like this', 'reino' );
 		if ( isset( $_COOKIE[ 'iva_love_' . $post->ID ] ) ) {
 			$class = 'iva-love loved';
-			$title = esc_html__( 'You already like this!','reino' );
+			$title = esc_html__( 'You already like this!', 'reino' );
 		}
 
 		return '<a href="#" class="' . $class . '" id="iva-love-' . $post->ID . '" title="' . $title . '">' . $output . ' <i class="fa fa-heart"></i></a>';
@@ -103,7 +103,7 @@ $reino_post_like = new Reino_Post_Like();
  */
 function reino_post_like( $reino_like = '' ) {
 	global $reino_post_like;
-	if ( $reino_like == 'iva_like' ) {
+	if ( 'iva_like' === $reino_like ) {
 		return $reino_post_like->reino_add_like();
 	} else {
 		echo wp_kses_post( $reino_post_like->reino_add_like() );

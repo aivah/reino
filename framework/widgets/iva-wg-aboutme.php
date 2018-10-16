@@ -17,7 +17,7 @@ add_action( 'widgets_init', 'reino_aboutme_widget' );
 // Define the Widget as an extension of WP_Widget
 class Reino_AboutMe_Widget extends WP_Widget {
 
-	function __construct() {
+	public function __construct() {
 
 		/* Widget settings. */
 		$widget_ops = array(
@@ -31,20 +31,22 @@ class Reino_AboutMe_Widget extends WP_Widget {
 		);
 
 		/* Create the widget. */
+		/* translators: %s: search term */
 		parent::__construct( 'aboutme_widgets', sprintf( esc_html__( ' %s: About Me', 'reino' ), REINO_THEME_NAME ), $widget_ops, $control_ops );
 	}
 
 	// outputs the content of the widget
-	function widget( $args, $instance ) {
+	public function widget( $args, $instance ) {
 		extract( $args );
 
-		$before_url = $after_url = '';
+		$before_url = '';
+		$after_url  = '';
 
-		$title               = $instance['aboutme_title'];
-		$aboutme_image_url   = $instance['aboutme_image_url'];
-		$aboutme_page_url    = $instance['aboutme_page_url'];
-		$aboutme_subtitle    = $instance['aboutme_subtitle'];
-		$aboutme_text        = $instance['aboutme_text'];
+		$title                 = $instance['aboutme_title'];
+		$aboutme_image_url     = $instance['aboutme_image_url'];
+		$aboutme_page_url      = $instance['aboutme_page_url'];
+		$aboutme_subtitle      = $instance['aboutme_subtitle'];
+		$aboutme_text          = $instance['aboutme_text'];
 		$aboutme_signature_url = $instance['aboutme_signature_url'];
 
 		echo wp_kses_post( $before_widget );
@@ -57,10 +59,10 @@ class Reino_AboutMe_Widget extends WP_Widget {
 
 		if ( $aboutme_page_url ) {
 			$before_url = '<a href="' . esc_url( $aboutme_page_url ) . '">';
-			$after_url = '</a>';
+			$after_url  = '</a>';
 		}
 		if ( $aboutme_image_url ) {
-			echo '<div class="aboutme__img">' . $before_url . '<img src="' . esc_url( $aboutme_image_url ) . '" alt="' . esc_attr( $title ) . '" />' . $after_url . '</div>';
+			echo '<div class="aboutme__img">' . esc_attr( $before_url ) . '<img src="' . esc_url( $aboutme_image_url ) . '" alt="' . esc_attr( $title ) . '" />' . esc_attr( $after_url ) . '</div>';
 		}
 		echo '<div class="aboutme__details">';
 		if ( $aboutme_subtitle ) {
@@ -78,30 +80,30 @@ class Reino_AboutMe_Widget extends WP_Widget {
 	}
 
 	//processes widget options to be saved
-	function update( $new_instance, $old_instance ) {
+	public function update( $new_instance, $old_instance ) {
 
 		$instance = $old_instance;
 
 		/* Strip tags for title and name to remove HTML (important for text inputs). */
-		$instance['aboutme_title']      = strip_tags( $new_instance['aboutme_title'] );
-		$instance['aboutme_image_url']  = strip_tags( $new_instance['aboutme_image_url'] );
-		$instance['aboutme_page_url']   = strip_tags( $new_instance['aboutme_page_url'] );
-		$instance['aboutme_subtitle']   = strip_tags( $new_instance['aboutme_subtitle'] );
-		$instance['aboutme_text']       = strip_tags( $new_instance['aboutme_text'] );
+		$instance['aboutme_title']         = strip_tags( $new_instance['aboutme_title'] );
+		$instance['aboutme_image_url']     = strip_tags( $new_instance['aboutme_image_url'] );
+		$instance['aboutme_page_url']      = strip_tags( $new_instance['aboutme_page_url'] );
+		$instance['aboutme_subtitle']      = strip_tags( $new_instance['aboutme_subtitle'] );
+		$instance['aboutme_text']          = strip_tags( $new_instance['aboutme_text'] );
 		$instance['aboutme_signature_url'] = strip_tags( $new_instance['aboutme_signature_url'] );
 
 		return $instance;
 	}
 
 	// outputs the options form on admin
-	function form( $instance ) {
+	public function form( $instance ) {
 		/* Set up some default widget settings. */
 		$instance = wp_parse_args( (array) $instance, array(
-			'aboutme_title' => '',
-			'aboutme_image_url' => '',
-			'aboutme_page_url' => '',
-			'aboutme_subtitle' => '',
-			'aboutme_text' => '',
+			'aboutme_title'         => '',
+			'aboutme_image_url'     => '',
+			'aboutme_page_url'      => '',
+			'aboutme_subtitle'      => '',
+			'aboutme_text'          => '',
 			'aboutme_signature_url' => '',
 		));
 

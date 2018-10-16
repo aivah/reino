@@ -19,7 +19,7 @@
 /**
  * Include the TGM_Plugin_Activation class.
  */
-require  get_parent_theme_file_path() . '/framework/includes/class-tgm-plugin-activation.php';
+require( get_parent_theme_file_path() . '/framework/includes/class-tgm-plugin-activation.php' );
 add_action( 'tgmpa_register', 'reino_theme_register_required_plugins' );
 /**
  * Register the required plugins for this theme.
@@ -41,22 +41,22 @@ function reino_theme_register_required_plugins() {
 	 */
 	$plugins = array(
 		array(
-			'name'					=> esc_html__( 'One Click Demo Import', 'reino' ),
-			'slug'					=> 'one-click-demo-import',
-			'required'				=> false,
+			'name'     => esc_html__( 'One Click Demo Import', 'reino' ),
+			'slug'     => 'one-click-demo-import',
+			'required' => false,
 		),
 		array(
-			'name'					=> esc_html__( 'WP Instagram Widget', 'reino' ),
-			'slug'					=> 'wp-instagram-widget',
-			'required'				=> false,
+			'name'     => esc_html__( 'WP Instagram Widget', 'reino' ),
+			'slug'     => 'wp-instagram-widget',
+			'required' => false,
 		),
 		array(
-			'name'					=> esc_html__( 'Reino Socials', 'reino' ),
-			'slug'					=> 'reino-socials',
-			'required'				=> false,
-			'source'	   		 	=> get_parent_theme_file_path() . '/framework/includes/plugins/reino-socials.zip',
-			'required'	 		 	=> false,
-			'version'	 		 	=> '1.0',
+			'name'     => esc_html__( 'Reino Socials', 'reino' ),
+			'slug'     => 'reino-socials',
+			'required' => false,
+			'source'   => get_parent_theme_file_path() . '/framework/includes/plugins/reino-socials.zip',
+			'required' => false,
+			'version'  => '1.0',
 		),
 	);
 	/*
