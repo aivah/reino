@@ -26,7 +26,7 @@ class Reino_Author_Info_Widget extends WP_Widget {
 		);
 
 		/* translators: %s: Theme Name */
-		parent::__construct( 'reino_author_info', sprintf( esc_html__( ' %s: Author Info', 'reino' ), REINO_THEME_NAME ), $widget_ops, $control_ops );
+		parent::__construct( 'reino_author_info', sprintf( esc_html__( ' %s Author Info', 'reino' ), REINO_THEME_NAME ), $widget_ops, $control_ops );
 
 	}
 

@@ -32,7 +32,7 @@ class Reino_AboutMe_Widget extends WP_Widget {
 
 		/* Create the widget. */
 		/* translators: %s: search term */
-		parent::__construct( 'aboutme_widgets', sprintf( esc_html__( ' %s: About Me', 'reino' ), REINO_THEME_NAME ), $widget_ops, $control_ops );
+		parent::__construct( 'aboutme_widgets', sprintf( esc_html__( ' %s About Me', 'reino' ), REINO_THEME_NAME ), $widget_ops, $control_ops );
 	}
 
 	// outputs the content of the widget
@@ -57,12 +57,10 @@ class Reino_AboutMe_Widget extends WP_Widget {
 
 		echo '<div class="aboutme__widget">';
 
-		if ( $aboutme_page_url ) {
-			$before_url = '<a href="' . esc_url( $aboutme_page_url ) . '">';
-			$after_url  = '</a>';
-		}
 		if ( $aboutme_image_url ) {
-			echo '<div class="aboutme__img">' . esc_attr( $before_url ) . '<img src="' . esc_url( $aboutme_image_url ) . '" alt="' . esc_attr( $title ) . '" />' . esc_attr( $after_url ) . '</div>';
+			echo '<div class="aboutme__img"><a href="' . esc_url( $aboutme_page_url ) . '">';
+			echo '<img src="' . esc_url( $aboutme_image_url ) . '" alt="' . esc_attr( $title ) . '" />';
+			echo '</a></div>';
 		}
 		echo '<div class="aboutme__details">';
 		if ( $aboutme_subtitle ) {

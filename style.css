@@ -869,15 +869,30 @@ blockquote.alignright p {
 .post-categories {
 	list-style: none;
 	margin: 0;
-	font-size: 14px;
+	font-size: 12px;
 	line-height: 1.6;
-	text-transform: capitalize;
+	text-transform: uppercase;
+    letter-spacing: 1px;
     margin-bottom: 10px;
 }
 
-.post-categories li a { color: #b9cbd6; }
-.post-categories li a:hover { opacity: 0.7; }
-
+.post-categories li a {
+    position: relative;
+    padding: 2px 8px;
+    color: rgba(0,0,0,0.5);
+}
+.post-categories li a:hover { color: #222222; }
+.post-categories li a:before {
+    background: rgba(0,0,0,0.07);
+    content: '';
+    position: absolute;
+    bottom: 3px;
+    left: 0;
+    width: 70%;
+    height: 8px;
+    transform: skew(-15deg);
+    z-index: -1;
+}
 .post__header .post-categories li,
 .post-categories li { display: inline-block; margin-bottom: 0; }
 
@@ -894,10 +909,6 @@ blockquote.alignright p {
 .post__video iframe { margin-bottom: 0; }
 
 .outside_content .post__thumbnail {margin-bottom: 0; }
-.post__thumbnail {
-    position: relative;
-    text-align: center;
-}
 
 .post__thumbmedia {
     margin-bottom: 20px;
@@ -915,7 +926,14 @@ blockquote.alignright p {
     height: auto;
     border: none;
     object-fit: cover;
+    box-shadow: 0px 0px rgba(0, 0, 0, 0.07);
+    transition: all 200ms linear;
 }
+.post__thumbnail:hover img {
+    transform: translate(-4px,-4px);
+    box-shadow: 8px 8px rgba(0, 0, 0, 0.07);
+}
+
 .post__content,
 .post__excerpt { margin-bottom: 20px; }
 
@@ -952,9 +970,6 @@ blockquote.alignright p {
 .post__thumbnail {
     position: relative;
 	display: block;
-	overflow: hidden;
-	background-size: cover;
-	background-position: center center;
 	-webkit-transition: all 0.35s ease-in-out;
 	-o-transition: all 0.35s ease-in-out;
 	transition: all 0.35s ease-in-out;
@@ -2613,8 +2628,14 @@ body:not(.fullwidth) .entry-content-wrapper { padding:60px 0 40px 0; }
     margin-bottom: 20px;
 }
 .aboutme__widget .aboutme__img img {
-    border-radius: 20px;
+    outline: 1px solid rgba(255,255,255,0.4);
+    outline-offset: -10px;
+    transition: all 200ms linear;
 }
+.aboutme__widget .aboutme__img img:hover {
+    outline-offset: 0px;
+}
+
 .aboutme__widget p { margin-bottom: 1.3em; }
 .aboutme__details {
 	position: relative;
@@ -3584,10 +3605,31 @@ line breaks are adjacent */
 }
 .widget li {margin-bottom: 0;}
 .widget-title {
-	font-size: 18px;
-	font-weight: 700;
-	margin-bottom: 30px;
+    position: relative;
+    font-size: 14px;
+    font-weight: 400;
+    margin-bottom: 30px;
+    padding-bottom: 10px;
     color: inherit;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border-bottom: 1px solid #ebeff3;
+}
+
+/* Widget Title BAr  */
+.widget-title:after {
+    content: '';
+    position: absolute;
+    width: 26px;
+    height: 3px;
+    bottom: -2px;
+    left: 0;
+    background-color: #4172f9;
+}
+
+.is-center.widget .widget-title:after {
+    left: 50%;
+    transform: translate(-50%);
 }
 
 .widget_recent_comments li,
@@ -3608,24 +3650,19 @@ line breaks are adjacent */
 .widget>*:last-child { margin-bottom: 0 }
 
 /* Reino Latest Posts */
-.recent__post {	margin-bottom:16px; }
-.recent__post:last-child { margin-bottom:0; }
-.recent__post-img { margin-bottom:16px; }
-.recent__post-content { text-align:center; }
-.recent__post-content p {margin-bottom:0;}
-.recent__post-content .recent__post-title { margin-bottom:4px; line-height: 1.2; font-size: 16px; font-weight: 700; letter-spacing: -0.04em; }
-.recent__post-content .date,
-.recent__post-content p { font-size:11px; color:#929292; display:block; }
-.recent__post-content .date { text-transform: uppercase; font-weight: 600; }
+.wg-post {	margin-bottom:16px; }
+.wg-post:last-child { margin-bottom:0; }
+.wg-post-img { margin-bottom:16px; }
+.wg-post-content { text-align:center; }
+.wg-post-content p {margin-bottom:0;}
+.wg-post-content .wg-post-title { margin-bottom:4px; line-height: 1.3; font-size: 18px; }
+.wg-post-content .date,
+.wg-post-content p { font-size:13px; display:block; margin-top: 5px; opacity: 0.5; }
+.wg-post-content .date { text-transform: uppercase;  }
 
-/* Reino Most Views */
-.most-views-wg .meta-views {
-	font-size: 11px;
-	text-transform: uppercase;
-}
 
 /* Reino Latest Posts in List Style */
-.recent__post.list {
+.wg-post.list {
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -3636,15 +3673,35 @@ line breaks are adjacent */
         -ms-flex-pack: justify;
             justify-content: space-between;
 }
-.recent__post.list:last-child  { margin-bottom:0; }
-.recent__post.list .recent__post-img {
+.wg-post.list:last-child  { margin-bottom:0; }
+.wg-post.list .wg-post-img {
     margin-bottom: 0;
     -ms-flex-preferred-size: 30%;
         flex-basis: 30%;
 	margin-right: 15px;
 }
-.recent__post.list .recent__post-content {
+.wg-post.list .wg-post-content {
 	text-align: left;
     flex-basis: 70%;
 }
-.recent__post-title { margin-top: 0; }
+.wg-post-title { margin-top: 0; }
+
+
+/* Reino Popular Posts */
+.popular-posts-wg .meta-views {
+    font-size: 11px;
+    text-transform: uppercase;
+}
+
+.popular-posts-wg .post__meta {
+    background: rgba(0,0,0,1);
+    padding: 1px 10px;
+    border-radius: 30px;
+    position: absolute;
+    z-index: 2;
+    bottom: 5px;
+    right: 5px;
+    color: #ffffff;
+    font-size: 12px;
+    color: rgba(255,255,255,0.8);
+}

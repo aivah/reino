@@ -8,18 +8,18 @@
  *
  */
 // Register Widget
-function reino_recent_post_widget() {
-	register_widget( 'Reino_Recent_Post_Widget' );
+function reino_recent_posts_widget() {
+	register_widget( 'Reino_Recent_Posts_Widget' );
 }
-add_action( 'widgets_init', 'reino_recent_post_widget' );
+add_action( 'widgets_init', 'reino_recent_posts_widget' );
 
-class Reino_Recent_Post_Widget extends WP_Widget {
+class Reino_Recent_Posts_Widget extends WP_Widget {
 
 	public function __construct() {
 		/* Widget settings. */
 		$widget_ops = array(
 			'classname'   => 'recent-posts-wg',
-			'description' => esc_html__( 'Most Recent Posts.', 'reino' ),
+			'description' => esc_html__( 'Your site’s most recent posts.', 'reino' ),
 		);
 
 		/* Widget control settings. */
@@ -28,14 +28,14 @@ class Reino_Recent_Post_Widget extends WP_Widget {
 		);
 
 		/* Create the widget. */
-		/* translators: %s: search term */
-		parent::__construct( 'recentpost_entries', sprintf( esc_html__( ' %s: Latest Posts', 'reino' ), REINO_THEME_NAME ), $widget_ops, $control_ops );
+		/* translators: %s: Theme Name */
+		parent::__construct( 'recentpost_entries', sprintf( esc_html__( ' %s Most Recent Posts', 'reino' ), REINO_THEME_NAME ), $widget_ops, $control_ops );
 	}
 
 	public function widget( $args, $instance ) {
 		extract( $args );
 
-		$title = ( ! empty( $instance['title'] ) ) ? $instance['title'] : esc_html__( 'Latest Posts', 'reino' );
+		$title = ( ! empty( $instance['title'] ) ) ? $instance['title'] : esc_html__( 'Recent Posts', 'reino' );
 
 		if ( empty( $instance['number'] ) || ! $number = absint( $instance['number'] ) ) {
 			$number = 5;
@@ -46,15 +46,19 @@ class Reino_Recent_Post_Widget extends WP_Widget {
 		$show_date               = isset( $instance['show_date'] ) ? $instance['show_date'] : false;
 		$imagedisable            = isset( $instance['recentpost_imagedisable'] ) ? $instance['recentpost_imagedisable'] : false;
 		$list_style              = isset( $instance['list_style'] ) ? $instance['list_style'] : false;
-		$reino_recent_post_query = new WP_Query( apply_filters( 'widget_posts_args', array(
-			'posts_per_page'      => $number,
-			'no_found_rows'       => true,
-			'post_status'         => 'publish',
-			'ignore_sticky_posts' => true,
-		) ) );
+		$reino_recent_post_query = new WP_Query(
+			apply_filters(
+				'widget_posts_args',
+				array(
+					'posts_per_page'      => $number,
+					'no_found_rows'       => true,
+					'post_status'         => 'publish',
+					'ignore_sticky_posts' => true,
+				)
+			)
+		);
 
 		//$before_widget = apply_filters('widget_display_callback', 'my_widget_display_callback', 10, 3 );
-
 
 		if ( $reino_recent_post_query->have_posts() ) :
 
@@ -66,20 +70,20 @@ class Reino_Recent_Post_Widget extends WP_Widget {
 
 			while ( $reino_recent_post_query->have_posts() ) :
 				$reino_recent_post_query->the_post();
-				echo '<div class="recent__post' . ( 'true' === $list_style ? ' list' : '' ) . '">';
-				if ( 'true' !== $imagedisable ) {
+				echo '<div class="wg-post' . ( true === $list_style ? ' list' : '' ) . '">';
+				if ( true !== $imagedisable ) {
 					if ( has_post_thumbnail() ) {
-						echo '<div class="recent__post-img post__thumbnail">';
+						echo '<div class="wg-post-img post__thumbnail">';
 						echo get_the_post_thumbnail( get_the_ID(), 'reino-medium-square' );
 						echo '<a class="hover__link" href="' . esc_url( get_permalink( get_the_ID() ) ) . '"></a>';
 						echo '</div>';
 					}
 				}
 
-				echo '<div class="recent__post-content">';
-				echo '<h4 class="recent__post-title"><a href="' . esc_url( get_permalink( get_the_ID() ) ) . '">' . get_the_title() . '</a></h4>';
+				echo '<div class="wg-post-content">';
+				echo '<h4 class="wg-post-title"><a href="' . esc_url( get_permalink( get_the_ID() ) ) . '">' . get_the_title() . '</a></h4>';
 
-				if ( 'true' === $show_date ) {
+				if ( true === $show_date ) {
 					echo '<span class="date">' . get_the_date() . '</span>';
 				} else {
 					echo '<p>' . esc_html( wp_html_excerpt( get_the_content(), $description_length ) ) . '</p>';

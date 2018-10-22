@@ -49,6 +49,23 @@ if ( ! function_exists( 'reino_post_meta_author' ) ) {
 	}
 }
 /**
+ * function reino_post_meta_author
+ * Post Author Meta
+ */
+if ( ! function_exists( 'reino_post_meta_avatar' ) ) {
+	function reino_post_meta_avatar( $tag = 'span', $size = '30' ) {
+		if ( get_option( 'reino_hide_author_name' ) !== 'on' ) {
+			echo '<' . esc_attr( $tag ) . ' class="meta-author-avatar">';
+			echo get_avatar(
+				get_the_author_meta( 'email' ),
+				$size    = '30',
+				$default = ''
+			);
+			echo '</' . esc_attr( $tag ) . '>'; //.meta-author
+		}
+	}
+}
+/**
  * function reino_post_meta_likes
  * Post Likes Meta
  */
@@ -150,7 +167,7 @@ if ( ! function_exists( 'reino_post_category' ) ) {
 			echo '<ul class="post-categories">';
 			foreach ( $categories as $category ) {
 				$color = get_term_meta( $category->term_id, 'category_bg_color', true );
-				$color = ( ! empty( $color ) ) ? 'style="color:#' . $color . ';"' : '';
+				$color = ( ! empty( $color ) ) ? 'style="background-color:#' . $color . ';"' : '';
 				echo '<li><a ' . wp_kses_post( $color ) . ' href="' . esc_url( get_category_link( $category->term_id ) ) . '">' . esc_html( $category->name ) . '</a>';
 			}
 			echo '</ul>';
@@ -493,28 +510,25 @@ if ( ! function_exists( 'reino_gallery_add_rel_attribute' ) ) {
 if ( ! function_exists( 'reino_sociables' ) ) {
 	function reino_sociables( $color ) {
 		$out = '';
+		$iconcolor = '';
+
 		if ( get_option( 'reino_social_bookmark' ) != '' ) {
 			$reino_social_bookmark_icons = explode( '#;', get_option( 'reino_social_bookmark' ) );
 			$reino_socialbookmark_icons  = count( $reino_social_bookmark_icons );
 
-			$out = '<ul class="at__social">';
+			if ( 'black' === $color ) {
+				$iconcolor = 'dark-socials';
+			} else {
+				$iconcolor = 'light-socials';
+			}
+			$out = '<ul class="at__social ' . $iconcolor . '">';
 			for ( $i = 0; $i < $reino_socialbookmark_icons; $i++ ) {
 				$reino_social_icon = explode( '#|', $reino_social_bookmark_icons[ $i ] );
 				if ( '' == $reino_social_icon[1] ) {
 					$reino_social_icon[1] = '#';
 				}
-				if ( 'black' === $color ) {
-					$icon_color = '_bio';
-				} else {
-					$icon_color = '';
-				}
-				if ( 'black' === $color ) {
-					$out .= '<li class="' . $reino_social_icon[1] . '"><a class="at__social-link" href="' . esc_url( $reino_social_icon[2] ) . '" target="_blank">';
-					$out .= '<i class="fa fa-' . $reino_social_icon[1] . ' fa-fw" title="' . $reino_social_icon[0] . '"></i></a></li>';
-				} else {
-					$out .= '<li class="' . $reino_social_icon[1] . '"><a class="at__social-link" href="' . esc_url( $reino_social_icon[2] ) . '" target="_blank">';
-					$out .= '<i class="fa fa-' . $reino_social_icon[1] . ' fa-fw white" title="' . $reino_social_icon[0] . '"></i></a></li>';
-				}
+				$out .= '<li class="' . $reino_social_icon[1] . '"><a class="at__social-link" href="' . esc_url( $reino_social_icon[2] ) . '" target="_blank">';
+				$out .= '<i class="fa fa-' . $reino_social_icon[1] . ' fa-fw" title="' . $reino_social_icon[0] . '"></i></a></li>';
 			} // End for().
 			$out .= '</ul>';
 		}
@@ -601,7 +615,7 @@ if ( ! function_exists( 'reino_post_header' ) ) {
 			echo '<ul class="post-categories">';
 			foreach ( $categories as $category ) {
 				$color = get_term_meta( $category->term_id, 'category_bg_color', true );
-				$color = ( ! empty( $color ) ) ? 'style="color:#' . $color . ';"' : '';
+				$color = ( ! empty( $color ) ) ? 'style="background-color:#' . $color . ';"' : '';
 				echo '<li><a ' . wp_kses_post( $color ) . ' href="' . esc_url( get_category_link( $category->term_id ) ) . '">' . esc_html( $category->name ) . '</a>';
 			}
 			echo '</ul>';

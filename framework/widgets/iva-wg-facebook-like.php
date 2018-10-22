@@ -33,7 +33,7 @@ class Reino_Facebook_Like_Widget extends WP_Widget {
 
 		/* Create the widget. */
 		/* translators: %s: search term */
-		parent::__construct( 'facebook_like_widget', sprintf( esc_html__( ' %s: Facebook Like Box', 'reino' ), REINO_THEME_NAME ), $widget_ops, $control_ops );
+		parent::__construct( 'facebook_like_widget', sprintf( esc_html__( ' %s Facebook Like Box', 'reino' ), REINO_THEME_NAME ), $widget_ops, $control_ops );
 	}
 
 	// outputs the content of the widget

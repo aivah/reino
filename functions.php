@@ -265,14 +265,13 @@ if ( ! class_exists( 'Reino_Theme_Functions' ) ) {
 		 */
 		function reino_theme_custom_widgets() {
 			require_once( REINO_THEME_WIDGETS . '/register-widget.php' );
-			require_once( REINO_THEME_WIDGETS . '/iva-wg-sociable.php' );
-			require_once( REINO_THEME_WIDGETS . '/iva-wg-recentpost.php' );
 			require_once( REINO_THEME_WIDGETS . '/iva-wg-aboutme.php' );
+			require_once( REINO_THEME_WIDGETS . '/iva-wg-recent-posts.php' );
+			require_once( REINO_THEME_WIDGETS . '/iva-wg-popular-posts.php' );
+			require_once( REINO_THEME_WIDGETS . '/iva-wg-sociable.php' );
 			require_once( REINO_THEME_WIDGETS . '/iva-wg-facebook-like.php' );
 			require_once( REINO_THEME_WIDGETS . '/iva-wg-promo-banner.php' );
-			require_once( REINO_THEME_WIDGETS . '/iva-wg-custom-ads.php' );
 			require_once( REINO_THEME_WIDGETS . '/iva-wg-author-contribute.php' );
-			require_once( REINO_THEME_WIDGETS . '/iva-wg-most-views.php' );
 		}
 
 		/** load meta generator templates
@@ -364,6 +363,7 @@ if ( ! class_exists( 'Reino_Theme_Functions' ) ) {
 						''             => esc_html__( 'Select Slider', 'reino' ),
 						'owl_slider'   => esc_html__( 'Owl Carousel Slider', 'reino' ),
 						'flex_slider'  => esc_html__( 'Advanced Flexslider', 'reino' ),
+						'flex_slider2'  => esc_html__( 'Advanced Flexslider 2', 'reino' ),
 						'static_image' => esc_html__( 'Static Image', 'reino' ),
 						'customslider' => esc_html__( 'Custom Slider', 'reino' ),
 					);

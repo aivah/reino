@@ -23,7 +23,7 @@ class Reino_Sociable_Widget extends WP_Widget {
 		/* Widget settings. */
 		$widget_ops = array(
 			'classname'   => 'socials-wg',
-			'description' => esc_html__( 'Sociable widget for sidebar.', 'reino' ),
+			'description' => esc_html__( 'Displays Sociables from theme options panel.', 'reino' ),
 		);
 
 		/* Widget control settings. */
@@ -32,8 +32,8 @@ class Reino_Sociable_Widget extends WP_Widget {
 		);
 
 		/* Create the widget. */
-		/* translators: %s: search term */
-		parent::__construct( 'sociable_widget', sprintf( esc_html__( ' %s: Sociables', 'reino' ), REINO_THEME_NAME ), $widget_ops, $control_ops );
+		/* translators: %s: Theme Name */
+		parent::__construct( 'sociable_widget', sprintf( esc_html__( ' %s Sociables', 'reino' ), REINO_THEME_NAME ), $widget_ops, $control_ops );
 	}
 
 	// outputs the content of the widget
@@ -83,15 +83,19 @@ class Reino_Sociable_Widget extends WP_Widget {
 				<option value="black"
 				<?php
 				if ( 'black' === $color ) {
-					echo 'selected="selected"'; }
-					?>
-					<?php esc_html_e( 'Black', 'reino' ); ?></option>
+					echo 'selected="selected"';
+				}
+				?>
+				>
+				<?php esc_html_e( 'Black', 'reino' ); ?></option>
 				<option value="white"
 				<?php
 				if ( 'white' === $color ) {
-					echo 'selected="selected"'; }
-					?>
-					><?php esc_html_e( 'White', 'reino' ); ?></option>
+					echo 'selected="selected"';
+				}
+				?>
+				>
+				<?php esc_html_e( 'White', 'reino' ); ?></option>
 			</select>
 		</p>
 	<?php

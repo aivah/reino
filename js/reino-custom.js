@@ -352,6 +352,7 @@
 	jQuery('.flex-details').flexslider({
 		slideshow: false,
 		direction: "vertical",
+        controlNav: false,
 		reverse: true,
 		startAt: 0,
 		slideToStart: 0,
@@ -458,6 +459,66 @@
 		},
 	});
 
+
+    $('.flex-meta').flexslider({
+    		animationLoop: true,
+    		slideshow: false,
+    		direction: "vertical",
+    		reverse: true,
+            controlNav: false,
+            directionNav: false,
+    		startAt: 0,
+    		slideToStart: 0,
+    		start: function(slider) {
+    			$('a.slide_thumb').click(function() {
+    				$('.active').removeClass('active');
+    				$(this).addClass('active');
+    				$('.flexslider').show();
+    				var slideTo = $(this).attr("rel"); //Grab rel value from link;
+    				var slideToInt = parseInt(slideTo); //Make sure that this value is an integer;
+    				if (slider.currentSlide != slideToInt); {
+    					slider.flexAnimate(slideToInt); //move the slider to the correct slide (Unless the slider is also already showing the slide we want);
+    				}
+    			});
+    			$('.flex-prev').click(function(e) {
+    				e.preventDefault();
+    				$('.active').removeClass('active');
+    				$('.flexslider').show();
+    				var c = slider.currentSlide;
+    				if(c!=0) {
+    					c--;
+    					slider.flexAnimate(c);
+    					$('.slide_thumb[rel='+c+']').addClass('active');
+    				} else {
+    					slider.flexAnimate(3);
+    					$('.slide_thumb[rel=3]').addClass('active');
+    				}
+    			})
+    			$('.flex-next').click(function(e) {
+    				e.preventDefault();
+    				$('.active').removeClass('active');
+    				$('.flexslider').show();
+    				var c = slider.currentSlide;
+    				if(c!=3) {
+    					c++;
+    					slider.flexAnimate(c);
+    					$('.slide_thumb[rel='+c+']').addClass('active');
+    				} else {
+    					slider.flexAnimate(0);
+    					$('.slide_thumb[rel=0]').addClass('active');
+    				}
+    			})
+    			},
+    			before: function(slider){
+    				$('.flex-author.flex-active-slide').addClass("animated slideInUp");
+    				$('.flex-author.flex-active-slide').attr('style','display: block !important');
+    				$('.flex-author').hide();
+    			},
+    			after: function(slider){
+    				$('.flex-author.flex-active-slide').addClass("animated slideInUp");
+    				$('.flex-author.flex-active-slide').attr('style','display: block !important');
+    			},
+    		});
 
 		//  Ajax Search Autocomplete
 		$('#search_input').on('input', function() {

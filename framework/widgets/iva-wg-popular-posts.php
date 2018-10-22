@@ -8,18 +8,18 @@
  *
  */
 // Register Widget
-function reino_post_views_widget() {
-	register_widget( 'Reino_Most_Views_Widget' );
+function reino_popular_posts_widget() {
+	register_widget( 'Reino_Popular_Posts_Widget' );
 }
-add_action( 'widgets_init', 'reino_post_views_widget' );
+add_action( 'widgets_init', 'reino_popular_posts_widget' );
 
-class Reino_Most_Views_Widget extends WP_Widget {
+class Reino_Popular_Posts_Widget extends WP_Widget {
 
 	public function __construct() {
 		/* Widget settings. */
 		$widget_ops = array(
-			'classname'   => 'most-views-wg',
-			'description' => esc_html__( 'Display most viewed posts.', 'reino' ),
+			'classname'   => 'popular-posts-wg',
+			'description' => esc_html__( 'Your site’s most popular posts.', 'reino' ),
 		);
 
 		/* Widget control settings. */
@@ -28,13 +28,13 @@ class Reino_Most_Views_Widget extends WP_Widget {
 		);
 
 		/* Create the widget. */
-		/* translators: %s: search term */
-		parent::__construct( 'post_views', sprintf( esc_html__( ' %s: Most Viewd Posts', 'reino' ), REINO_THEME_NAME ), $widget_ops, $control_ops );
+		/* translators: %s: Theme Name */
+		parent::__construct( 'post_views', sprintf( esc_html__( '%s Popular Posts', 'reino' ), REINO_THEME_NAME ), $widget_ops, $control_ops );
 	}
 
 	public function widget( $args, $instance ) {
 		extract( $args );
-		$title = ( ! empty( $instance['title'] ) ) ? $instance['title'] : esc_html__( 'Most Viewd Posts', 'reino' );
+		$title = ( ! empty( $instance['title'] ) ) ? $instance['title'] : esc_html__( 'Popular Posts', 'reino' );
 
 		if ( empty( $instance['number'] ) || ! $number = absint( $instance['number'] ) ) {
 			$number = 5;
@@ -69,28 +69,31 @@ class Reino_Most_Views_Widget extends WP_Widget {
 			while ( $reino_most_viewed_query->have_posts() ) :
 				$reino_most_viewed_query->the_post();
 				$reino_view_count = absint( get_post_meta( get_the_ID(), 'reino_post_views', true ) );
+
+				if ( function_exists( 'reino_postviews_round_number' ) ) {
+					$count = reino_postviews_round_number( $reino_view_count );
+				}
+
 				if ( 0 !== $reino_view_count ) {
-					echo '<div class="recent__post ' . ( 'true' === $list_style ? ' list' : '' ) . '">';
-					if ( 'true' !== $imagedisable ) {
+					echo '<div class="wg-post ' . ( true === $list_style ? ' list' : '' ) . '">';
+					if ( true !== $imagedisable ) {
 						if ( has_post_thumbnail() ) {
-							echo '<div class="recent__post-img post__thumbnail">';
+							echo '<div class="wg-post-img post__thumbnail">';
 							echo get_the_post_thumbnail( get_the_ID(), 'reino-medium-square' );
 							echo '<a class="hover__link" href="' . esc_url( get_permalink( get_the_ID() ) ) . '"></a>';
+							echo '<span class="post__meta">' . esc_html( $count ) . ' ' . esc_html__( 'Views', 'reino' ) . '</span>';
 							echo '</div>';
 						}
 					}
-					echo '<div class="recent__post-content">';
-					echo '<h4 class="recent__post-title"><a href="' . esc_url( get_permalink( get_the_ID() ) ) . '">' . get_the_title() . '</a></h4>';
-
-					if ( function_exists( 'reino_postviews_round_number' ) ) {
-						$count = reino_postviews_round_number( $reino_view_count );
+					echo '<div class="wg-post-content">';
+					echo '<h4 class="wg-post-title"><a href="' . esc_url( get_permalink( get_the_ID() ) ) . '">' . get_the_title() . '</a></h4>';
+					if ( true === $imagedisable ) {
+						echo '<span class="post__meta">' . esc_html( $count ) . ' ' . esc_html__( 'Views', 'reino' ) . '</span>';
 					}
-					echo '<span class="post__meta">' . esc_html( $count ) . ' ' . esc_html__( 'Views', 'reino' ) . '</span>';
 					echo '</div></div>';
 				}
 			endwhile;
 			echo wp_kses_post( $after_widget );
-			// Reset the global $the_post as this query will have stomped on it
 			wp_reset_postdata();
 
 		endif;

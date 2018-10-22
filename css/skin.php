@@ -322,12 +322,13 @@ function reino_skin_generator() {
 	);
 	$custom_css .= reino_gen_css_prop(
 		array(
+			'.btn',
+			'button',
 			'.post__meta',
 			'.post__header .post-categories',
 			'.post-categories',
 			'.instagram-pics .insta-meta',
-			'.btn',
-			'button',
+			'.wg-post-content .date',
 		), array(
 			'font-family' => $reino_postmeta_font,
 		)

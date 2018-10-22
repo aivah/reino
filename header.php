@@ -98,6 +98,9 @@ if ( 'on' === $reino_page_layout ) {
 				case 'flex_slider':
 					get_template_part( 'slider/flex', 'slider' );
 					break;
+				case 'flex_slider2':
+					get_template_part( 'slider/flex', 'slider2' );
+					break;
 				case 'customslider':
 					get_template_part( 'slider/custom', 'slider' );
 					break;
