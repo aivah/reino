@@ -270,7 +270,6 @@ if ( ! class_exists( 'Reino_Theme_Functions' ) ) {
 			require_once( REINO_THEME_WIDGETS . '/iva-wg-popular-posts.php' );
 			require_once( REINO_THEME_WIDGETS . '/iva-wg-sociable.php' );
 			require_once( REINO_THEME_WIDGETS . '/iva-wg-facebook-like.php' );
-			require_once( REINO_THEME_WIDGETS . '/iva-wg-promo-banner.php' );
 			require_once( REINO_THEME_WIDGETS . '/iva-wg-author-contribute.php' );
 		}
 
@@ -296,7 +295,6 @@ if ( ! class_exists( 'Reino_Theme_Functions' ) ) {
 		 */
 		function reino_theme_extras() {
 			require_once( REINO_THEME_DIR . '/css/skin.php' );
-			require_once( REINO_FRAMEWORK_DIR . 'includes/mega-menu.php' );
 			require_once( REINO_FRAMEWORK_DIR . 'common/iva-generator.php' );
 			require_once( REINO_FRAMEWORK_DIR . 'includes/class-activation.php' );
 			require_once( REINO_FRAMEWORK_DIR . 'includes/custom-gallery.php' );

@@ -911,7 +911,7 @@ if ( ! function_exists( 'reino_theme_options' ) ) {
 		);
 		$reino_options[] = array(
 			'name'      => esc_html__( 'Slider Width', 'reino' ),
-			'desc'      => esc_html__( 'Enter the custom width of the slider, recommended width: 1200px for a wide slider and 1100px for center slider.', 'reino' ),
+			'desc'      => esc_html__( 'Enter the custom width of the slider, recommended width: 1200px for a fullwidth slider and 1100px for center slider.', 'reino' ),
 			'id'        => 'reino_owlslider_width',
 			'std'       => '',
 			'class'     => 'iva_of_sliders owl_slider_type owl_slider boxed',
@@ -1035,7 +1035,7 @@ if ( ! function_exists( 'reino_theme_options' ) ) {
 			'name'  => esc_html__( 'Slider Background Color', 'reino' ),
 			'desc'  => esc_html__( 'This will apply Color to the slider Area.', 'reino' ),
 			'id'    => 'reino_slider_bg_color',
-			'class' => 'reino_slider_bg_color wide',
+			'class' => 'reino_slider_bg_color fullwidth',
 			'std'   => '',
 			'type'  => 'color',
 		);

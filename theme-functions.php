@@ -57,7 +57,7 @@ if ( ! function_exists( 'reino_post_meta_avatar' ) ) {
 		if ( get_option( 'reino_hide_author_name' ) !== 'on' ) {
 			echo '<' . esc_attr( $tag ) . ' class="meta-author-avatar">';
 			echo get_avatar(
-				get_the_author_meta( 'email' ),
+				get_the_author_meta( 'user_email' ),
 				$size    = '30',
 				$default = ''
 			);
@@ -217,6 +217,8 @@ if ( ! function_exists( 'reino_get_multi_tax_list' ) ) {
 if ( ! function_exists( 'reino_featured_image' ) ) {
 	function reino_featured_image( $post_id ) {
 
+		global $post;
+
 		$reino_featured_img_type = '';
 		$reino_img_src           = '';
 		$reino_featured_img      = '';
@@ -284,9 +286,17 @@ if ( ! function_exists( 'reino_featured_image' ) ) {
 			}
 		}
 		if ( is_singular( 'post' ) ) {
+
+			echo '<div class="post__header-avatar">' . get_avatar(
+				get_the_author_meta( 'email' ),
+				$size    = '50',
+				$default = ''
+			);
 			if ( get_option( 'reino_postmeta' ) !== 'on' ) {
-				reino_the_post_meta( array( 'date', 'readtime', 'views', 'likes' ), false );
+				reino_the_post_meta( array( 'author', 'date', 'readtime', 'views', 'likes' ), false );
 			}
+			echo '</div>';
+
 		}
 		echo '</div>'; //.owl__caption
 		echo '</section>'; //.
@@ -512,7 +522,7 @@ if ( ! function_exists( 'reino_sociables' ) ) {
 		$out = '';
 		$iconcolor = '';
 
-		if ( get_option( 'reino_social_bookmark' ) != '' ) {
+		if ( '' !== get_option( 'reino_social_bookmark' ) ) {
 			$reino_social_bookmark_icons = explode( '#;', get_option( 'reino_social_bookmark' ) );
 			$reino_socialbookmark_icons  = count( $reino_social_bookmark_icons );
 
@@ -521,7 +531,7 @@ if ( ! function_exists( 'reino_sociables' ) ) {
 			} else {
 				$iconcolor = 'light-socials';
 			}
-			$out = '<ul class="at__social ' . $iconcolor . '">';
+			$out .= '<ul class="at__social ' . $iconcolor . '">';
 			for ( $i = 0; $i < $reino_socialbookmark_icons; $i++ ) {
 				$reino_social_icon = explode( '#|', $reino_social_bookmark_icons[ $i ] );
 				if ( '' == $reino_social_icon[1] ) {

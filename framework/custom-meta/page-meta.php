@@ -35,12 +35,12 @@ $this->meta_box[]     = array(
 			'desc'    => esc_html__( 'Select the style you wish to display in page-header area or inside the content.', 'reino' ),
 			'id'      => 'reino_featured_img_type',
 			'std'     => '',
-			'class'   => 'select300 inside_post reino_featured_img_type wide',
+			'class'   => 'select300 inside_post reino_featured_img_type fullwidth',
 			'type'    => 'select',
 			'options' => array(
 				'default'  => esc_html__( 'Default', 'reino' ),
 				'standard' => esc_html__( 'Standard', 'reino' ),
-				'wide'     => esc_html__( 'Wide', 'reino' ),
+				'fullwidth'     => esc_html__( 'Fullwidth', 'reino' ),
 			),
 		),
 		/**

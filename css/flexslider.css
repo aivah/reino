@@ -48,9 +48,7 @@
 .flex-details .flex-title a { color: #ffffff; }
 
 .flex-img .slides li { position: relative; }
-.flex-details .post__meta,
-.flex-details .post-categories a,
-.flex-details .post__meta a { color: #ffffff; }
+
 .flex-details .post-categories a:hover { color: #cccccc; }
 .flex-details .post__meta a:hover { color: #cccccc; }
 .flex-details .post__meta a:hover { color: #cccccc; }

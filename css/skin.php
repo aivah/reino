@@ -225,7 +225,7 @@ function reino_skin_generator() {
 	}
 
 	if ( ! empty( $reino_slider_bg_color ) ) {
-		$custom_css .= reino_gen_css_prop( array( '.page-header-wide .page-header' ),
+		$custom_css .= reino_gen_css_prop( array( '.page-header-fullwidth .page-header' ),
 			array(
 				'background-color' => $reino_slider_bg_color,
 			)
@@ -329,6 +329,10 @@ function reino_skin_generator() {
 			'.post-categories',
 			'.instagram-pics .insta-meta',
 			'.wg-post-content .date',
+			'.sidebar .widget a',
+			'.footer-wrap .widget a',
+			'.post-navigation .nav-next',
+			'.post-navigation .nav-previous',
 		), array(
 			'font-family' => $reino_postmeta_font,
 		)

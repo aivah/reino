@@ -915,11 +915,11 @@ if ( ! function_exists( 'reino_google_fonts' ) ) {
 
 				$option_types = $option['type'];
 
-				if ( 'custom_google_fonts' == $option_types ) {
-
+				if ( 'custom_google_fonts' === $option_types ) {
 					foreach ( $reino_google_fonts as $name => $variant ) {
 						$reino_googlefont = get_option( $option['id'] );
-						if ( $reino_googlefont === $key && ! in_array( $name, $fonts ) ) {
+						// var_dump($reino_googlefont);
+						if ( $reino_googlefont === $name && ! in_array( $name, $fonts ) ) {
 							$fonts[] = str_replace( ' ', '+', $name ) . $variant;
 						}
 					}

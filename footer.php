@@ -64,13 +64,26 @@ if ( is_active_sidebar( 'footer_instagram_widget' ) ) {
 						dynamic_sidebar( 'footer_rightcopyright' );
 					endif;
 					if ( is_active_sidebar( 'footer-branches' ) ) {
-						echo '<a class="at-footer-branches">' . esc_html__( 'More Branches', 'reino' ) . '</a>';
+						echo '<a class="at-footer-branches">' . esc_html__( 'Toggle', 'reino' ) . '</a>';
 					}
 					?>
 				</div><!-- .copyright-right -->
 			</div><!-- .copyright -->
 		</div><!-- .inner -->
 	</div><!-- .copyright-wrap -->
+
+	<?php if ( is_active_sidebar( 'footer-branches' ) ) { ?>
+	<div class="footer-branches">
+		<div class="inner">
+			<?php
+			if ( is_active_sidebar( 'footer-branches' ) ) :
+				dynamic_sidebar( 'footer-branches' );
+			endif;
+			?>
+		</div>
+	</div>
+	<?php } ?>
+
 <?php } ?>
 </div><!-- .wrapper -->
 </div><!-- #layout -->

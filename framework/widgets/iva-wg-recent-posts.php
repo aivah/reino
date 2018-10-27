@@ -58,8 +58,6 @@ class Reino_Recent_Posts_Widget extends WP_Widget {
 			)
 		);
 
-		//$before_widget = apply_filters('widget_display_callback', 'my_widget_display_callback', 10, 3 );
-
 		if ( $reino_recent_post_query->have_posts() ) :
 
 			echo wp_kses_post( $before_widget );

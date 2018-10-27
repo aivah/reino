@@ -34,9 +34,14 @@ if ( 'default' === $reino_featured_img_val ) {
 	$reino_featured_img_type = $reino_featured_img_val;
 }
 
-if ( 'inside_post' === $reino_featured_img_pos && 'fullwidth' === $reino_featured_img_type ) {
-	echo wp_kses_post( reino_featured_image( get_the_ID() ) );
-}
+if ( have_posts() ) :
+	while ( have_posts() ) :
+		the_post();
+		if ( 'inside_post' === $reino_featured_img_pos && 'fullwidth' === $reino_featured_img_type ) {
+			echo wp_kses_post( reino_featured_image( get_the_ID() ) );
+		}
+	endwhile;
+endif;
 
 $reino_post_format = get_post_format();
 ?>

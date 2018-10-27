@@ -35,7 +35,7 @@ if ( 'default' === $reino_featured_img_val ) {
 	$reino_featured_img_type = $reino_featured_img_val;
 }
 
-if ( 'inside_post' === $reino_featured_location && 'wide' === $reino_featured_img_type ) {
+if ( 'inside_post' === $reino_featured_location && 'fullwidth' === $reino_featured_img_type ) {
 	echo wp_kses_post( reino_featured_content( get_the_ID() ) );
 }
 ?>
