@@ -141,7 +141,7 @@ and (max-width: 767px) {
 	.rightsidebar .sidebar { float: none; width: 100%; }
 	.footer-area-middle .cols { width:100%; }
 	.related__posts-title { text-align: center; }
-	.post__related { padding-top: 0; }
+	.related__post { padding-top: 0; }
 	.post__comments-list .children { padding-left: 0; }
 	.null-instagram-feed .instagram-pics { margin: 0 !important;}
 	.owl-carousel.owl-boxed .owl-item img,
@@ -195,7 +195,7 @@ and (max-width: 480px) {
 
 	.footer-area-middle .cols { width:100%; }
 	.related__posts-title { text-align: center; }
-	.post__related { padding-top: 0; }
+	.related__post { padding-top: 0; }
 	.post__comments-list .children { padding-left: 0; }
 	.copyright-left, .copyright-right {
 		flex: unset;
@@ -252,7 +252,7 @@ and (max-width : 320px) {
 
 	.footer-area-middle .cols { width:100%; }
 	.related__posts-title { text-align: center; }
-	.post__related { padding-top: 0; }
+	.related__post { padding-top: 0; }
 	.post__comments-list .children { padding-left: 0; }
 
 }

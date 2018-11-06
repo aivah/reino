@@ -49,7 +49,7 @@ get_header(); ?>
 					$reino_after  = '</div>';//. post-layout
 				}
 				if ( ( 'post_grid_style' === $reino_blog_style ) || ( 'post_standard_grid_style' === $reino_blog_style ) ) {
-					$reino_before = '<div class="post__layout post-masonry-grid row"><div class="grid-sizer"></div>';
+					$reino_before = '<div class="post__layout post-masonry-grid row">' . reino_grid_sizer();
 					$reino_after  = '</div>';//. post-layout
 				}
 				echo wp_kses_post( $reino_before );

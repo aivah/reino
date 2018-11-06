@@ -162,40 +162,42 @@ if ( ! class_exists( 'Reino_Generator_Class' ) ) {
 			if ( '' !== get_the_author_meta( 'description' ) ) {
 				?>
 				<div class="post__author <?php echo esc_attr( $reino_author_style ); ?>">
-				<div class="author__avatar">
-				<?php
-				echo get_avatar(
-					get_the_author_meta( 'email' ),
-					$size    = '100',
-					$default = ''
-				);
-				?>
-				</div>
-					<div class="author__description">
-						<div class="author__label"><?php echo esc_html__( 'Posted By', 'reino' ); ?></div>
-						<h4><?php echo the_author_posts_link(); ?></h4>
-						<?php
-						echo '<ul class="at__social">';
-						if ( get_the_author_meta( 'facebook' ) ) :
-							echo '<li><a target="_blank" class="author__social" href="http://facebook.com/' . esc_url( get_the_author_meta( 'facebook' ) ) . '"><i class="fa fa-facebook"></i></a></li>';
-						endif;
-						if ( get_the_author_meta( 'twitter' ) ) :
-							echo '<li><a target="_blank" class="author__social" href="http://twitter.com/' . esc_url( get_the_author_meta( 'twitter' ) ) . '"><i class="fa fa-twitter"></i></a></li>';
-						endif;
-						if ( get_the_author_meta( 'instagram' ) ) :
-							echo '<li><a target="_blank" class="author__social" href="http://instagram.com/' . esc_url( get_the_author_meta( 'instagram' ) ) . '"><i class="fa fa-instagram"></i></a></li>';
-						endif;
-						if ( get_the_author_meta( 'google' ) ) :
-							echo '<li><a target="_blank" class="author__social" href="http://plus.google.com/' . esc_url( get_the_author_meta( 'google' ) ) . '?rel=author"><i class="fa fa-google-plus"></i></a></li>';
-						endif;
-						if ( get_the_author_meta( 'pinterest' ) ) :
-							echo '<li><a target="_blank" class="author__social" href="http://pinterest.com/' . esc_url( get_the_author_meta( 'pinterest' ) ) . '"><i class="fa fa-pinterest"></i></a></li>';
-						endif;
-						if ( get_the_author_meta( 'tumblr' ) ) :
-							echo '<li><a target="_blank" class="author__social" href="http://' . esc_url( get_the_author_meta( 'tumblr' ) ) . '.tumblr.com/"><i class="fa fa-tumblr"></i></a></li>';
-						endif;
-						echo '</ul>';
-						?>
+				<div class="post__author-meta">
+					<?php
+					echo get_avatar(
+						get_the_author_meta( 'email' ),
+						$size    = '100',
+						$default = ''
+					);
+					?>
+					<div class="author__label"><?php echo esc_html__( 'Posted By', 'reino' ); ?></div>
+					<h4><?php echo the_author_posts_link(); ?></h4>
+					<?php
+					$protocol = ( is_ssl() ) ? 'https://' : 'http://';
+
+					echo '<ul class="at__social is-rounded">';
+					if ( get_the_author_meta( 'facebook' ) ) :
+						echo '<li class="facebook"><a target="_blank" href="' . $protocol . 'facebook.com/' . esc_url( get_the_author_meta( 'facebook' ) ) . '"><i class="fa fa-fw fa-facebook"></i></a></li>';
+					endif;
+					if ( get_the_author_meta( 'twitter' ) ) :
+						echo '<li class="twitter"><a target="_blank" href="' . $protocol . 'twitter.com/' . esc_url( get_the_author_meta( 'twitter' ) ) . '"><i class="fa fa-fw fa-twitter"></i></a></li>';
+					endif;
+					if ( get_the_author_meta( 'instagram' ) ) :
+						echo '<li class="instagram"><a target="_blank" href="' . $protocol . 'instagram.com/' . esc_url( get_the_author_meta( 'instagram' ) ) . '"><i class="fa fa-fw fa-instagram"></i></a></li>';
+					endif;
+					if ( get_the_author_meta( 'google' ) ) :
+						echo '<li class="google-plus"><a target="_blank" href="' . $protocol . 'plus.google.com/' . esc_url( get_the_author_meta( 'google' ) ) . '?rel=author"><i class="fa fa-fw fa-google-plus"></i></a></li>';
+					endif;
+					if ( get_the_author_meta( 'pinterest' ) ) :
+						echo '<li class="pinterest-p"><a target="_blank" href="' . $protocol . 'pinterest.com/' . esc_url( get_the_author_meta( 'pinterest' ) ) . '"><i class="fa fa-fw fa-pinterest-p"></i></a></li>';
+					endif;
+					if ( get_the_author_meta( 'tumblr' ) ) :
+						echo '<li class="tumblr"><a target="_blank" href="' . $protocol . esc_url( get_the_author_meta( 'tumblr' ) ) . '.tumblr.com/"><i class="fa fa-fw fa-tumblr"></i></a></li>';
+					endif;
+					echo '</ul>';
+					?>
+					</div>
+					<div class="post__author-desc">
 						<p><?php echo wp_kses_post( get_the_author_meta( 'description' ) ); ?></p>
 					</div>
 				</div>
@@ -228,11 +230,9 @@ if ( ! class_exists( 'Reino_Generator_Class' ) ) {
 
 			global $post;
 
-			do_action( 'reino_theme_owlslider', $post->ID );
-
 			$reino_related_limit = get_option( 'reino_related_limit' )
-									? get_option( 'reino_related_limit' )
-									: 3;
+								? get_option( 'reino_related_limit' )
+								: 3;
 
 			$exclude_post = $post->ID;
 			// Array to store post IDs that will be used to stop duplicates
@@ -240,22 +240,40 @@ if ( ! class_exists( 'Reino_Generator_Class' ) ) {
 			$do_not_duplicate = array();
 
 			// Get all the categories for the current post
-			$post_categories = wp_get_post_categories( $post->ID );
+			$tags = wp_get_post_tags( $post->ID );
+			// If the post has tags, run the related post tag query
+			if ( $tags ) {
+				$tag_ids = array();
+				foreach ( $tags as $individual_tag ) {
+					$tag_ids[] = $individual_tag->term_id;
+				}
+				// Build our tag related custom query arguments
+				$reino_post_args = array(
+					'tag__in'        => $tag_ids, // Select posts with related tags
+					'posts_per_page' => 4, // Number of related posts to display
+					'post__not_in'   => array( $post->ID ), // Ensure that the current post is not displayed
+					'orderby'        => 'rand', // Randomize the results
+				);
+			} else {
+				// If the post does not have tags, run the standard related posts query
+				// Get all the categories for the current post
+				$post_categories = wp_get_post_categories( $post->ID );
 
-			$reino_post_args = array(
-				'category__in'   => $post_categories,
-				'post_type'      => array( 'post' ),
-				'posts_per_page' => 12,
-				'post_status'    => 'publish',
-				// Don't show the current post
-				'post__not_in'   => array( $exclude_post ),
-			);
+				$reino_post_args = array(
+					'category__in'   => $post_categories,
+					'post_type'      => array( 'post' ),
+					'posts_per_page' => 12,
+					'post_status'    => 'publish',
+					// Don't show the current post
+					'post__not_in'   => array( $exclude_post ),
+				);
+			}
 
 			$reino_related_query = new WP_Query( $reino_post_args );
 
 			if ( $reino_related_query->have_posts() ) {
 				echo '<h3 class="related__posts-title">' . esc_html__( 'You might also like', 'reino' ) . '</h3>';
-				echo '<div class="owl-carousel post__related" id="owl-carousel-related">';
+				echo '<div class="related__post">';
 				while ( $reino_related_query->have_posts() ) {
 					$reino_related_query->the_post();
 					// Check var $do_not_duplicate array for duplicate IDs
@@ -264,26 +282,24 @@ if ( ! class_exists( 'Reino_Generator_Class' ) ) {
 						// Add post ID to var $do_not_duplicate array
 						$do_not_duplicate[] = $post->ID;
 
+						echo '<article id="post-' . esc_attr( $post->ID ) . '" class="' . join( ' ', get_post_class() ) . '">';
+						echo '<div class="related__post-item">';
 						if ( has_post_thumbnail() ) {
-							echo '<article id="post-' . esc_attr( $post->ID ) . '" class="' . join( ' ', get_post_class( 'post__related-item' ) ) . '">';
-							if ( has_post_thumbnail() ) {
-								echo '<div class="post__thumbnail">';
-								echo get_the_post_thumbnail( $post->ID, 'reino-small-square' );
-								echo '<div class="post__thumbnail-meta">';
-								reino_the_post_meta( array( 'readtime', 'views' ), true );
-								echo '</div>';//.post__thumbnail-meta
-								echo '<a class="hover__link" href="' . esc_url( get_permalink( $post->ID ) ) . '"></a>';
-								echo '</div>';//.post__thumbnail
-							}
-							echo '<h2 class="entry-title"><a href="' . esc_url( get_permalink( $post->ID ) ) . '">' . get_the_title() . '</a></h2>';
-							if ( get_option( 'reino_postmeta' ) !== 'on' ) {
-								reino_the_post_meta( array( 'date' ) );
-							}
-							echo '</article>';
+							echo '<div class="related__post-thumb post__thumbnail">';
+							echo get_the_post_thumbnail( $post->ID, 'reino-small-square' );
+							echo '</div>';//.post__thumbnail
 						}
+						echo '<div class="related__post-details">';
+						echo '<h2 class="entry-title"><a href="' . esc_url( get_permalink( $post->ID ) ) . '">' . get_the_title() . '</a></h2>';
+						if ( get_option( 'reino_postmeta' ) !== 'on' ) {
+							reino_the_post_meta( array( 'date', 'readtime', 'views' ), false );
+						}
+						echo '</div>';
+						echo '</div>';
+						echo '</article>';
 					}
 				}
-				echo '</div>'; //.post__related
+				echo '</div>'; //.related__post
 			}
 			wp_reset_postdata();
 		}

@@ -5,13 +5,25 @@
  */
 if ( ! function_exists( 'reino_post_meta_date' ) ) {
 	function reino_post_meta_date( $tag = 'span', $icon = false ) {
-		if ( get_option( 'reino_hide_date' ) !== 'on' ) {
+
+		$category_hide_date = get_term_meta( get_queried_object_id(), 'category_hide_date', true );
+
+		if ( is_archive() ) {
+			if ( 'yes' !== $category_hide_date ) {
+				echo '<' . esc_attr( $tag ) . ' class="meta-date">';
+				echo '<time class="meta-time" datetime="' . get_the_date( 'c' ) . '">';
+				echo '<a href="' . esc_url( get_permalink() ) . '">' . get_the_date() . '</a>';
+				echo '</time>';
+				echo '</' . esc_attr( $tag ) . '>';
+			}
+		} elseif ( 'on' !== get_option( 'reino_hide_date' ) ) {
 			echo '<' . esc_attr( $tag ) . ' class="meta-date">';
 			echo '<time class="meta-time" datetime="' . get_the_date( 'c' ) . '">';
 			echo '<a href="' . esc_url( get_permalink() ) . '">' . get_the_date() . '</a>';
 			echo '</time>';
 			echo '</' . esc_attr( $tag ) . '>';
 		}
+
 	}
 }
 /**
@@ -72,7 +84,13 @@ if ( ! function_exists( 'reino_post_meta_avatar' ) ) {
 if ( ! function_exists( 'reino_post_meta_likes' ) ) {
 	function reino_post_meta_likes( $tag = 'span', $icon = false ) {
 		if ( get_option( 'reino_hide_likes' ) !== 'on' ) {
-			echo '<' . esc_attr( $tag ) . ' class="meta-likes">' . wp_kses_post( reino_post_like( 'iva_like' ) ) . '</' . esc_attr( $tag ) . '>';
+
+			if ( false === $icon ) {
+				echo '<' . esc_attr( $tag ) . ' class="meta-likes">' . wp_kses_post( reino_post_like( 'iva_like' ) ) . '</' . esc_attr( $tag ) . '>';
+			}
+			if ( true === $icon ) {
+				echo '<' . esc_attr( $tag ) . ' class="meta-likes">' . wp_kses_post( reino_post_like( 'iva_like' ) ) . '</' . esc_attr( $tag ) . '>';
+			}
 		}
 	}
 }
@@ -87,10 +105,10 @@ if ( ! function_exists( 'reino_post_meta_views' ) ) {
 			if ( function_exists( 'reino_postviews_round_number' ) ) {
 				$count = reino_postviews_round_number( $reino_post_count );
 			}
-			if ( true === $icon ) {
+			if ( false === $icon ) {
 				echo '<' . esc_attr( $tag ) . ' class="meta-views"><i class="fa fa-eye fa-fw" aria-hidden="true"></i> ' . esc_html( $count ) . '</' . esc_attr( $tag ) . '>';
 			}
-			if ( false === $icon ) {
+			if ( true === $icon ) {
 				/* translators: %s: views count */
 				$views_count = sprintf( _nx( '%s view', '%s views', $count, '', 'reino' ), $count );
 				echo '<' . esc_attr( $tag ) . ' class="meta-views">' . esc_html( $views_count ) . '</' . esc_attr( $tag ) . '>';
@@ -286,7 +304,7 @@ if ( ! function_exists( 'reino_featured_image' ) ) {
 			}
 		}
 		if ( is_singular( 'post' ) ) {
-
+			echo '<div class="post__header-meta">';
 			echo '<div class="post__header-avatar">' . get_avatar(
 				get_the_author_meta( 'email' ),
 				$size    = '50',
@@ -296,7 +314,7 @@ if ( ! function_exists( 'reino_featured_image' ) ) {
 				reino_the_post_meta( array( 'author', 'date', 'readtime', 'views', 'likes' ), false );
 			}
 			echo '</div>';
-
+			echo '</div>';
 		}
 		echo '</div>'; //.owl__caption
 		echo '</section>'; //.
@@ -308,16 +326,30 @@ if ( ! function_exists( 'reino_featured_image' ) ) {
  */
 if ( ! function_exists( 'reino_read_more' ) ) {
 	function reino_read_more( $url = '', $class = '' ) {
+
+		$categories = get_the_category( get_the_ID() );
+		foreach ( $categories as $category ) {
+			$category_hide_readmore = get_term_meta( $category->term_id, 'category_hide_readmore', true );
+		}
+
 		if ( '' === $url ) {
 			$url = get_the_permalink();
 		}
 		if ( '' === $class ) {
 			$class = 'link_more';
 		}
-		if ( 'on' !== get_option( 'reino_post_read_more' ) ) {
-			echo '<div class="post__more">';
-			echo '<a href="' . esc_url( $url ) . '" class="btn btn-primary ' . esc_attr( $class ) . '"><span>' . esc_html__( 'Continue Reading ', 'reino' ) . '</span></a>';
-			echo '</div>';
+		if ( is_archive() ) {
+			if ( 'yes' !== $category_hide_readmore ) {
+				echo '<div class="post__more category">';
+				echo '<a href="' . esc_url( $url ) . '" class="btn btn-primary ' . esc_attr( $class ) . '"><span>' . esc_html__( 'Continue Reading ', 'reino' ) . '</span></a>';
+				echo '</div>';
+			}
+		} else {
+			if ( 'on' !== get_option( 'reino_post_read_more' ) ) {
+				echo '<div class="post__more">';
+				echo '<a href="' . esc_url( $url ) . '" class="btn btn-primary ' . esc_attr( $class ) . '"><span>' . esc_html__( 'Continue Reading ', 'reino' ) . '</span></a>';
+				echo '</div>';
+			}
 		}
 	}
 }
@@ -537,7 +569,7 @@ if ( ! function_exists( 'reino_sociables' ) ) {
 				if ( '' == $reino_social_icon[1] ) {
 					$reino_social_icon[1] = '#';
 				}
-				$out .= '<li class="' . $reino_social_icon[1] . '"><a class="at__social-link" href="' . esc_url( $reino_social_icon[2] ) . '" target="_blank">';
+				$out .= '<li class="' . $reino_social_icon[1] . '"><a href="' . esc_url( $reino_social_icon[2] ) . '" target="_blank">';
 				$out .= '<i class="fa fa-' . $reino_social_icon[1] . ' fa-fw" title="' . $reino_social_icon[0] . '"></i></a></li>';
 			} // End for().
 			$out .= '</ul>';
@@ -638,7 +670,7 @@ if ( ! function_exists( 'reino_post_header' ) ) {
 			$default = ''
 		) . '</div>';
 		if ( get_option( 'reino_postmeta' ) !== 'on' ) {
-			reino_the_post_meta( array( 'date', 'author', 'likes', 'comments' ), true );
+			reino_the_post_meta( array( 'date', 'author', 'likes', 'comments' ), false );
 		}
 		echo '</div>';
 		echo '</div>'; //.post__header
@@ -862,4 +894,54 @@ function reino_post_ajax_search() {
 		echo '</ul>';
 	}
 	die();
+}
+
+if ( ! function_exists( 'reino_grid_sizer' ) ) {
+	function reino_grid_sizer( $value = '50%' ) {
+
+		$grid_columns = array(
+			'col-md-6' => '50%',
+			'col-md-4' => '33.33%',
+			'col-md-3' => '25%',
+		);
+
+		$reino_category_cols = get_term_meta( get_queried_object_id(), 'category_columns', true );
+		$reino_post_cols     = get_option( 'reino_post_cols' );
+
+		if ( is_archive() ) {
+			foreach ( $grid_columns as $key => $value ) {
+				if ( $reino_category_cols === $key ) {
+					$grid = 'style="width: ' . $value . '"';
+				}
+			}
+		} else {
+			foreach ( $grid_columns as $key => $value ) {
+				if ( $reino_post_cols === $key ) {
+					$grid = 'style="width: ' . $value . '"';
+				}
+			}
+		}
+
+		$gridoutput = '<div class="grid-sizer" ' . $grid . '></div>';
+
+		return $gridoutput;
+
+	}
+}
+
+if ( ! function_exists( 'reino_col_sizer' ) ) {
+	function reino_col_sizer( $cols = 'col-md-6' ) {
+
+		$reino_category_cols = get_term_meta( get_queried_object_id(), 'category_columns', true );
+		$reino_regular_cols  = get_option( 'reino_post_cols' );
+
+		if ( is_archive() ) {
+			$cols = $reino_category_cols ? $reino_category_cols : 'col-md-6';
+		} else {
+			$cols = $reino_regular_cols ? $reino_regular_cols : 'col-md-6';
+		}
+
+		return $cols;
+
+	}
 }

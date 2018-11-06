@@ -80,7 +80,6 @@ class Reino_Popular_Posts_Widget extends WP_Widget {
 						if ( has_post_thumbnail() ) {
 							echo '<div class="wg-post-img post__thumbnail">';
 							echo get_the_post_thumbnail( get_the_ID(), 'reino-medium-square' );
-							echo '<a class="hover__link" href="' . esc_url( get_permalink( get_the_ID() ) ) . '"></a>';
 							echo '<span class="post__meta">' . esc_html( $count ) . ' ' . esc_html__( 'Views', 'reino' ) . '</span>';
 							echo '</div>';
 						}

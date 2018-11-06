@@ -102,12 +102,6 @@ if ( ! function_exists( 'reino_owl_carousel_enqueue_scripts' ) ) {
 		$owl_post_gallery_speed  = get_option( 'reino_post_gallery_owl_speed' )
 								? get_option( 'reino_post_gallery_owl_speed' )
 								: '3000';
-		$owl_related_speed       = get_option( 'reino_related_owl_speed' )
-								? get_option( 'reino_related_owl_speed' )
-								: '3000';
-		$owl_related_items_limit = get_option( 'reino_related_owl_itemslimit' )
-								? get_option( 'reino_related_owl_itemslimit' )
-								: '4';
 		$owl_navigation          = get_option( 'reino_related_owl_nav' )
 								? get_option( 'reino_related_owl_nav' )
 								: 'true';
@@ -119,8 +113,6 @@ if ( ! function_exists( 'reino_owl_carousel_enqueue_scripts' ) ) {
 		$owl_margin  = get_option( 'reino_owlslide_margin' ) ? get_option( 'reino_owlslide_margin' ) : '20';
 
 		$owlcarousel_args = array(
-			'relateditems' => $owl_related_items_limit,
-			'relatedspeed' => $owl_related_speed,
 			'galleryspeed' => $owl_post_gallery_speed,
 			'navigation'   => $owl_navigation,
 			'autoplay'     => $owl_autoplay,

@@ -35,7 +35,7 @@ get_header(); ?>
 						$reino_after  = '</div></div>';//. post-layout
 					}
 					if ( 'archive_grid_style' === $reino_archive_style ) {
-						$reino_before = '<div class="post__layout post-masonry-grid row"><div class="grid-sizer"></div>';
+						$reino_before = '<div class="post__layout post-masonry-grid row">' . reino_grid_sizer();
 						$reino_after  = '</div>';//. post-layout
 					}
 					if ( 'archive_list_style' === $reino_archive_style ) {

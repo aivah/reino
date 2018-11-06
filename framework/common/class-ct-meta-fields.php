@@ -12,10 +12,10 @@ if ( ! class_exists( 'Class_CT_Meta_Fields' ) ) {
 		* @since 1.0.0
 		*/
 		public function init() {
-			add_action( 'category_add_form_fields', array( $this, 'add_category_image' ), 10, 2 );
-			add_action( 'created_category', array( $this, 'save_category_image' ), 10, 2 );
-			add_action( 'category_edit_form_fields', array( $this, 'update_category_image' ), 10, 2 );
-			add_action( 'edited_category', array( $this, 'updated_category_image' ), 10, 2 );
+			add_action( 'category_add_form_fields', array( $this, 'add_category_fields' ), 10, 2 );
+			add_action( 'created_category', array( $this, 'save_category_fields' ), 10, 2 );
+			add_action( 'category_edit_form_fields', array( $this, 'edit_category_fields' ), 10, 2 );
+			add_action( 'edited_category', array( $this, 'updated_category_fields' ), 10, 2 );
 			add_action( 'admin_enqueue_scripts', array( $this, 'load_media' ) );
 			add_action( 'admin_footer', array( $this, 'add_script' ) );
 		}
@@ -28,7 +28,7 @@ if ( ! class_exists( 'Class_CT_Meta_Fields' ) ) {
 		* Add a form field in the new category page
 		* @since 1.0.0
 		*/
-		public function add_category_image( $taxonomy ) { ?>
+		public function add_category_fields( $taxonomy ) { ?>
 			<div class="form-field term-colorpicker-wrap">
 				<label for="term-colorpicker"><?php esc_html_e( 'Category Color', 'reino' ); ?></label>
 				<input name="category_bg_color" value="" class="colorpicker" id="term-colorpicker" />
@@ -44,6 +44,34 @@ if ( ! class_exists( 'Class_CT_Meta_Fields' ) ) {
 				</p>
 				<p class="description"><?php esc_html_e( 'Select the category image which will be used in various places.', 'reino' ); ?></p>
 			</div>
+			<div class="form-field term-group">
+				<label for="category_columns"><?php esc_html_e( 'Category Columns', 'reino' ); ?></label>
+				<?php
+				$category_columns = array(
+					'col-md-6' => esc_html__( '2 Columns', 'reino' ),
+					'col-md-4' => esc_html__( '3 Columns', 'reino' ),
+					'col-md-3' => esc_html__( '4 Columns', 'reino' ),
+				);
+				?>
+				<select>
+					<?php
+					foreach ( $category_columns as $key => $value ) {
+						echo '<option value=' . esc_attr( $key ) . '>' . $value . '</option>';
+					}
+					?>
+				</select>
+				<p><?php esc_html_e( 'Select the number of columns to display posts in this category archive.', 'reino' ); ?></p>
+			</div>
+			<div class="form-field term-group">
+				<label for="category_hide_readmore"><?php esc_html_e( 'Hide Readmore', 'reino' ); ?>
+				<input type="checkbox" id="category_hide_readmore" name="category_hide_readmore" value="yes" />
+				<p class="description"><?php esc_html_e( 'Check this if you wish to disable readmore button in category archive.', 'reino' ); ?></p>
+				</label>
+				<label for="category_hide_date"><?php esc_html_e( 'Hide Date', 'reino' ); ?>
+				<input type="checkbox" id="category_hide_date" name="category_hide_date" value="yes" />
+				<p class="description"><?php esc_html_e( 'Check this if you wish to hide date in category archive.', 'reino' ); ?></p>
+				</label>
+			</div>
 		<?php
 		}
 
@@ -51,7 +79,7 @@ if ( ! class_exists( 'Class_CT_Meta_Fields' ) ) {
 		* Save the form field
 		* @since 1.0.0
 		*/
-		public function save_category_image( $term_id, $tt_id ) {
+		public function save_category_fields( $term_id, $tt_id ) {
 
 			// Save term color if possible
 			if ( isset( $_POST['category_bg_color'] ) && ! empty( $_POST['category_bg_color'] ) ) {
@@ -64,16 +92,31 @@ if ( ! class_exists( 'Class_CT_Meta_Fields' ) ) {
 				$image = $_POST['category_image_id'];
 				add_term_meta( $term_id, 'category_image_id', $image, true );
 			}
+			if ( isset( $_POST['category_hide_readmore'] ) ) {
+				update_term_meta( $term_id, 'category_hide_readmore', 'yes' );
+			} else {
+				update_term_meta( $term_id, 'category_hide_readmore', '' );
+			}
+			if ( isset( $_POST['category_columns'] ) && '' !== $_POST['category_columns'] ) {
+				$selected = $_POST['category_columns'];
+				update_term_meta( $term_id, 'category_columns', $selected, true );
+			}
+			if ( isset( $_POST['category_hide_date'] ) && '' !== $_POST['category_hide_date'] ) {
+				update_term_meta( $term_id, 'category_hide_date', $selected, true );
+			}
 		}
 
 		/*
 		* Edit the form field
 		* @since 1.0.0
 		*/
-		public function update_category_image( $term, $taxonomy ) {
+		public function edit_category_fields( $term, $taxonomy ) {
 
 			$color = get_term_meta( $term->term_id, 'category_bg_color', true );
 			$color = ( ! empty( $color ) ) ? "#{$color}" : '';
+
+			$category_hide_readmore = get_term_meta( $term->term_id, 'category_hide_readmore', true );
+			$category_hide_date     = get_term_meta( $term->term_id, 'category_hide_date', true );
 			?>
 			<tr class="form-field term-colorpicker-wrap">
 				<th scope="row"><label for="term-colorpicker"><?php esc_html_e( 'Category Color', 'reino' ); ?></label></th>
@@ -101,6 +144,39 @@ if ( ! class_exists( 'Class_CT_Meta_Fields' ) ) {
 					<p class="description"><?php esc_html_e( 'Select the category image which will be used in various places.', 'reino' ); ?></p>
 				</td>
 			</tr>
+			<tr class="form-field term-group-wrap">
+				<th scope="row"><label><?php esc_html_e( 'Category Columns', 'reino' ); ?></label></th>
+				<td>
+				<select id="category_columns" name="category_columns"/>
+					<?php
+					$category_columns = array(
+						'col-md-6' => esc_html__( '2 Columns', 'reino' ),
+						'col-md-4' => esc_html__( '3 Columns', 'reino' ),
+						'col-md-3' => esc_html__( '4 Columns', 'reino' ),
+					);
+					foreach ( $category_columns as $key => $value ) {
+						$selected_col = get_term_meta( $term->term_id, 'category_columns', true );
+						$selected     = ( $key == $selected_col ) ? ' selected="selected"' : '';
+
+						echo '<option value="' . esc_attr( $key ) . '" ' . $selected . '>' . $value . '</option>';
+					}
+					?>
+				</select>
+				</td>
+			</tr>
+			<tr class="form-field term-group-wrap">
+				<th scope="row"><label for="category_hide_readmore"><?php esc_html_e( 'Hide Readmore', 'reino' ); ?></label></th>
+				<td>
+					<label for="category_hide_readmore">
+						<input type="checkbox" id="category_hide_readmore" name="category_hide_readmore" value="yes" <?php echo ( $category_hide_readmore ) ? checked( $category_hide_readmore, 'yes' ) : ''; ?>/>
+						<?php esc_html_e( 'Check this if you wish to disable readmore button in category archive', 'reino' ); ?>
+					</label><br>
+					<label for="category_hide_date">
+						<input type="checkbox" id="category_hide_date" name="category_hide_date" value="yes" <?php echo ( $category_hide_date ) ? checked( $category_hide_date, 'yes' ) : ''; ?>/>
+						<?php esc_html_e( 'Check this if you wish to hide the date in category archive', 'reino' ); ?>
+					</label>
+				</td>
+			</tr>
 		<?php
 		}
 
@@ -108,7 +184,7 @@ if ( ! class_exists( 'Class_CT_Meta_Fields' ) ) {
 		* Update the form field value
 		* @since 1.0.0
 		*/
-		public function updated_category_image( $term_id, $tt_id ) {
+		public function updated_category_fields( $term_id, $tt_id ) {
 
 			// Save bgcolor term color if possible
 			if ( isset( $_POST['category_bg_color'] ) && ! empty( $_POST['category_bg_color'] ) ) {
@@ -123,6 +199,24 @@ if ( ! class_exists( 'Class_CT_Meta_Fields' ) ) {
 				update_term_meta( $term_id, 'category_image_id', $image );
 			} else {
 				update_term_meta( $term_id, 'category_image_id', '' );
+			}
+
+			if ( isset( $_POST['category_columns'] ) ) {
+				$selected = $_POST['category_columns'];
+				update_term_meta( $term_id, 'category_columns', $selected );
+			} else {
+				update_term_meta( $term_id, 'category_columns', '' );
+			}
+
+			if ( isset( $_POST['category_hide_readmore'] ) ) {
+				update_term_meta( $term_id, 'category_hide_readmore', 'yes' );
+			} else {
+				update_term_meta( $term_id, 'category_hide_readmore', '' );
+			}
+			if ( isset( $_POST['category_hide_date'] ) ) {
+				update_term_meta( $term_id, 'category_hide_date', 'yes' );
+			} else {
+				update_term_meta( $term_id, 'category_hide_date', '' );
 			}
 		}
 

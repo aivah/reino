@@ -2,7 +2,7 @@
 
 $reino_join_postclass = join( ' ', get_post_class( 'grid-item' ) );
 
-echo '<div class="col-md-6 item-grid">';
+echo '<div class="' . esc_attr( reino_col_sizer() ) . ' item-grid">';
 echo '<article id="post-' . esc_attr( get_the_ID() ) . '" class="' . esc_attr( $reino_join_postclass ) . '">';
 // Post thumbnail
 if ( has_post_thumbnail() ) {

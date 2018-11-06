@@ -1068,6 +1068,19 @@ if ( ! function_exists( 'reino_theme_options' ) ) {
 			),
 		);
 		$reino_options[] = array(
+			'name'    => esc_html__( 'Post Columns Styles', 'reino' ),
+			'desc'    => esc_html__( 'Select the columns you wish to choose for frontpage posts', 'reino' ),
+			'id'      => 'reino_post_cols',
+			'std'     => '',
+			'class'   => 'select300',
+			'type'    => 'select',
+			'options' => array(
+				'col-md-6' => esc_html__( '2 Columns', 'reino' ),
+				'col-md-3' => esc_html__( '3 Columns', 'reino' ),
+				'col-md-4' => esc_html__( '4 Columns', 'reino' ),
+			),
+		);
+		$reino_options[] = array(
 			'name'    => esc_html__( 'Author Styles', 'reino' ),
 			'desc'    => esc_html__( 'Select the style you wish to display for the author archive page', 'reino' ),
 			'id'      => 'reino_author_style',
@@ -1198,33 +1211,6 @@ if ( ! function_exists( 'reino_theme_options' ) ) {
 			'std'       => '',
 			'type'      => 'text',
 			'inputsize' => '',
-		);
-		$reino_options[] = array(
-			'name'    => esc_html__( 'Slides Speed', 'reino' ),
-			'desc'    => esc_html__( 'Select the slide speed you want to set where 1000 = 1 sec', 'reino' ),
-			'id'      => 'reino_related_owl_speed',
-			'std'     => '3000',
-			'class'   => 'select300',
-			'type'    => 'select',
-			'options' => reino_range( 1000, 10000, 1000 ),
-		);
-		$reino_options[] = array(
-			'name'    => esc_html__( 'Carousel Slides Per View', 'reino' ),
-			'desc'    => esc_html__( 'Enter number of slides to display at the same time in related posts carousel slider', 'reino' ),
-			'id'      => 'reino_related_owl_itemslimit',
-			'std'     => '',
-			'class'   => 'select300',
-			'type'    => 'select',
-			'options' => reino_range( 2, 6 ),
-		);
-		$reino_options[] = array(
-			'name'    => esc_html__( 'Slides Speed', 'reino' ),
-			'desc'    => esc_html__( 'Select the slide speed you want to set in post gallery format where 1000 = 1 sec', 'reino' ),
-			'id'      => 'reino_post_gallery_owl_speed',
-			'std'     => '3000',
-			'class'   => 'select300',
-			'type'    => 'select',
-			'options' => reino_range( 1000, 10000, 1000 ),
 		);
 		$reino_options[] = array(
 			'name' => esc_html__( 'Post Pagination', 'reino' ),
