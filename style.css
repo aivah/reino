@@ -3725,11 +3725,16 @@ line breaks are adjacent */
 .wg-post {	margin-bottom:16px; }
 .wg-post:last-child { margin-bottom:0; }
 .wg-post-img { margin-bottom:16px; }
+
 .wg-post-content .wg-post-title { margin-bottom:4px; line-height: 1.3; font-size: 18px; }
 .wg-post-content .date,
-.wg-post-content p { font-size:13px; display:block; margin-bottom: 0; margin-top: 5px; opacity: 0.5; }
-
-
+.wg-post-content p {
+    font-size:13px;
+    display:block;
+    margin-top: 5px;
+    margin-bottom:0;
+    opacity: 0.5;
+}
 
 /* Reino Latest Posts in List Style */
 .wg-post.list {
@@ -3765,9 +3770,19 @@ line breaks are adjacent */
 
 .popular-posts-wg .post__meta {
     position: relative;
+    right: 0;
     padding: 1px 10px;
     font-size: 12px;
+    background: rgba(0,0,0,1);
+    color: #ffffff;
+    color: rgba(255,255,255,0.8);
     z-index: 2;
+}
+
+.popular-posts-wg .post__thumbnail .post__meta {
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
 }
 
 /* Fancy Heading */
