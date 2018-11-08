@@ -834,7 +834,7 @@ blockquote.alignright p {
 	line-height: 115%;
 }
 .single .post__header .entry-title {
-    font-size: 50px;
+    font-size: 60px;
 }
 .post__header-meta img { border-radius: 50px; }
 
@@ -1034,21 +1034,18 @@ blockquote.alignright p {
 
 .post-navigation .nav-links {
     position: relative;
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -ms-flex-wrap: wrap;
-        flex-wrap: wrap;
     padding: 20px 0;
 }
-.post-navigation .nav-next { padding-left: 30px; }
-.post-navigation .nav-previous { padding-right: 30px; }
-.post-navigation .nav-next,
-.post-navigation .nav-previous {
-    -ms-flex-preferred-size: 50%;
-        flex-basis: 50%;
-}
 
+.post-navigation .nav-links:after {
+    content: '';
+    display: block;
+    height: auto;
+    clear: both;
+    position: relative;
+}
+.post-navigation .nav-next { padding-left: 30px; width: 50%; float: right;}
+.post-navigation .nav-previous { padding-right: 30px; width: 50%; float: left;}
 
 .post-navigation .meta-nav {
 	display: block;
@@ -3728,11 +3725,9 @@ line breaks are adjacent */
 .wg-post {	margin-bottom:16px; }
 .wg-post:last-child { margin-bottom:0; }
 .wg-post-img { margin-bottom:16px; }
-.wg-post-content { text-align:center; }
-.wg-post-content p {margin-bottom:0;}
 .wg-post-content .wg-post-title { margin-bottom:4px; line-height: 1.3; font-size: 18px; }
 .wg-post-content .date,
-.wg-post-content p { font-size:13px; display:block; margin-top: 5px; opacity: 0.5; }
+.wg-post-content p { font-size:13px; display:block; margin-bottom: 0; margin-top: 5px; opacity: 0.5; }
 
 
 
@@ -3769,14 +3764,9 @@ line breaks are adjacent */
 }
 
 .popular-posts-wg .post__meta {
-    position: absolute;
+    position: relative;
     padding: 1px 10px;
-    bottom: 5px;
-    right: 5px;
     font-size: 12px;
-    background: rgba(0,0,0,1);
-    color: #ffffff;
-    color: rgba(255,255,255,0.8);
     z-index: 2;
 }
 

@@ -211,21 +211,24 @@ if ( ! class_exists( 'Reino_Generator_Class' ) ) {
 			$next_post     = get_next_post();
 			if ( is_singular( 'attachment' ) ) {
 				// Parent post navigation.
-				the_post_navigation( array(
-					'prev_text' => _x( '<span class="meta-nav">Published in</span><span class="post-title">%title</span>', 'Parent post link', 'reino' ),
-				) );
+				the_post_navigation(
+					array(
+						'prev_text' => _x( '<span class="meta-nav">Published in</span><span class="post-title">%title</span>', 'Parent post link', 'reino' ),
+					)
+				);
 			}
 			if ( is_singular( 'post' ) ) {
 				// Previous/next post navigation.
-				the_post_navigation( array(
-					'next_text' => '<span class="meta-nav">' . __( 'Next Article:', 'reino' ) . '</span>%title',
-					'prev_text' => '<span class="meta-nav">' . __( 'Previous Article:', 'reino' ) . '</span>%title',
-				) );
+				the_post_navigation(
+					array(
+						'next_text' => '<span class="meta-nav">' . __( 'Next Article', 'reino' ) . '</span>%title',
+						'prev_text' => '<span class="meta-nav">' . __( 'Previous Article', 'reino' ) . '</span>%title',
+					)
+				);
 			}
 		}
 
-		// R E L A T E D   P O S T S
-		//--------------------------------------------------------
+		// RELATED POSTS
 		public function reino_related_posts() {
 
 			global $post;
