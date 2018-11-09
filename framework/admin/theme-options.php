@@ -38,6 +38,31 @@ if ( ! function_exists( 'reino_theme_options' ) ) {
 			return $range_options;
 		}
 
+		$uploads_arr      = wp_upload_dir();
+		$all_uploads_path = $uploads_arr['path'];
+		$all_uploads      = get_option( 'atp_uploads' );
+
+		$reino_cssfiles = array();
+
+		if ( is_dir( REINO_THEME_DIR . '/css/colors/' ) ) {
+			if (
+				$style_dirs = opendir( REINO_THEME_DIR . '/css/colors/' )
+			) {
+				while ( (
+					$color = readdir( $style_dirs ) ) !== false
+				) {
+					if (
+						stristr( $color, '.css' ) !== false
+					) {
+						$reino_cssfiles[ $color ] = $color;
+					}
+				}
+			}
+		}
+
+		$reino_theme_style = $reino_cssfiles;
+		array_unshift( $reino_theme_style, 'Default Stylesheet' );
+
 		$reino_fontface = array(
 			''                                      => esc_html__( 'Select a font', 'reino' ),
 			'Arial'                                 => esc_html__( 'Arial', 'reino' ),
@@ -369,6 +394,15 @@ if ( ! function_exists( 'reino_theme_options' ) ) {
 				'stretched' => REINO_FRAMEWORK_URI . 'admin/images/columns/stretched.png',
 				'boxed'     => REINO_FRAMEWORK_URI . 'admin/images/columns/boxed.png',
 			),
+		);
+		$reino_options[] = array(
+			'name'    => 'Stylesheet',
+			'desc'    => 'Select your themes alternative color scheme for this Theme Current theme has no extra custom made skins',
+			'id'      => 'reino_theme_skins',
+			'std'     => '',
+			'class'   => 'select300',
+			'options' => $reino_theme_style,
+			'type'    => 'select',
 		);
 		$reino_options[] = array(
 			'name' => esc_html__( 'Theme Color', 'reino' ),

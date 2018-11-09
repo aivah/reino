@@ -72,7 +72,11 @@ class Reino_Recent_Posts_Widget extends WP_Widget {
 				if ( true !== $imagedisable ) {
 					if ( has_post_thumbnail() ) {
 						echo '<div class="wg-post-img post__thumbnail">';
-						echo get_the_post_thumbnail( get_the_ID(), 'reino-medium-square' );
+						if ( true === $list_style ) {
+							echo get_the_post_thumbnail( get_the_ID(), 'reino-medium-square' );
+						} else {
+							echo get_the_post_thumbnail( get_the_ID(), 'reino-medium-horizontal' );
+						}
 						echo '<a class="hover__link" href="' . esc_url( get_permalink( get_the_ID() ) ) . '"></a>';
 						echo '</div>';
 					}

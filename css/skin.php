@@ -329,7 +329,7 @@ function reino_skin_generator() {
 			'.post-categories',
 			'.instagram-pics .insta-meta',
 			'.wg-post-content .date',
-			'.sidebar .widget a',
+			'.sidebar .widget a:not(.wg-post-title a)',
 			'.post-navigation .meta-nav',
 			'.footer-wrap .widget a',
 			'.post-navigation .nav-next',
