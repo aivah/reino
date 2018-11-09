@@ -792,6 +792,8 @@ blockquote.alignright p {
     -webkit-box-shadow: 0 0 20px 0 rgba(0,0,0,0.1);
             box-shadow: 0 0 20px 0 rgba(0,0,0,0.1);
 }
+
+.post-standard .post__thumbnail,
 .post__layout .post__thumbnail { margin-bottom: 20px;}
 
 .post__after-entry::after,
@@ -909,6 +911,7 @@ blockquote.alignright p {
     box-shadow: 0px 0px rgba(0, 0, 0, 0.07);
     transition: all 200ms linear;
 }
+.wg-post:hover .post__thumbnail img,
 .post__thumbnail:hover img {
     transform: translate(-4px,-4px);
     box-shadow: 8px 8px rgba(0, 0, 0, 0.07);
@@ -3717,12 +3720,12 @@ line breaks are adjacent */
     font-weight: 400;
 }
 
-.sidebar .widget { margin-bottom: 60px; border-radius: 20px;}
+.sidebar .widget { margin-bottom: 60px; }
 .widget select { width: 100% }
 .widget>*:last-child { margin-bottom: 0 }
 
 /* Reino Latest Posts */
-.wg-post {	margin-bottom:16px; }
+.wg-post {	margin-bottom:30px; }
 .wg-post:last-child { margin-bottom:0; }
 .wg-post-img { margin-bottom:16px; }
 
