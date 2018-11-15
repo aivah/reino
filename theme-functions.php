@@ -85,10 +85,10 @@ if ( ! function_exists( 'reino_post_meta_likes' ) ) {
 	function reino_post_meta_likes( $tag = 'span', $icon = false ) {
 		if ( get_option( 'reino_hide_likes' ) !== 'on' ) {
 
-			if ( false === $icon ) {
+			if ( true === $icon ) {
 				echo '<' . esc_attr( $tag ) . ' class="meta-likes">' . wp_kses_post( reino_post_like( 'iva_like' ) ) . '</' . esc_attr( $tag ) . '>';
 			}
-			if ( true === $icon ) {
+			if ( false === $icon ) {
 				echo '<' . esc_attr( $tag ) . ' class="meta-likes">' . wp_kses_post( reino_post_like( 'iva_like' ) ) . '</' . esc_attr( $tag ) . '>';
 			}
 		}
@@ -105,10 +105,10 @@ if ( ! function_exists( 'reino_post_meta_views' ) ) {
 			if ( function_exists( 'reino_postviews_round_number' ) ) {
 				$count = reino_postviews_round_number( $reino_post_count );
 			}
-			if ( false === $icon ) {
+			if ( true === $icon ) {
 				echo '<' . esc_attr( $tag ) . ' class="meta-views"><i class="fa fa-eye fa-fw" aria-hidden="true"></i> ' . esc_html( $count ) . '</' . esc_attr( $tag ) . '>';
 			}
-			if ( true === $icon ) {
+			if ( false === $icon ) {
 				/* translators: %s: views count */
 				$views_count = sprintf( _nx( '%s view', '%s views', $count, '', 'reino' ), $count );
 				echo '<' . esc_attr( $tag ) . ' class="meta-views">' . esc_html( $views_count ) . '</' . esc_attr( $tag ) . '>';
@@ -290,10 +290,9 @@ if ( ! function_exists( 'reino_featured_image' ) ) {
 
 		echo '<section class="' . esc_attr( $class ) . '" ' . $reino_fs_css . '>';
 		echo '<div class="page-header-inner ' . esc_attr( $reino_featured_styling ) . '">';
-		if ( is_singular( 'post' ) ) {
-			echo esc_html( reino_post_category( $post_id ) );
+		if ( ! is_singular( 'post' ) ) {
+			echo '<h1 class="entry-title" ' . $reino_fs_txt_css . '>' . get_the_title( $post_id ) . '</h1>';
 		}
-		echo '<h1 class="entry-title" ' . $reino_fs_txt_css . '>' . get_the_title( $post_id ) . '</h1>';
 		if ( is_singular( 'page' ) ) {
 			if ( ! empty( $reino_featured_desc ) ) {
 				echo wp_kses_post( $reino_featured_desc );
@@ -304,8 +303,14 @@ if ( ! function_exists( 'reino_featured_image' ) ) {
 			}
 		}
 		if ( is_singular( 'post' ) ) {
+			echo '<div class="post__header-details">';
+			echo '<div class="inner">';
+			echo esc_html( reino_post_category( $post_id ) );
+			echo '<h1 class="entry-title" ' . $reino_fs_txt_css . '>' . get_the_title( $post_id ) . '</h1>';
+			echo '</div>';
 			echo '<div class="post__header-meta">';
-			echo '<div class="post__header-avatar">' . get_avatar(
+			echo '<div class="inner">';
+			echo get_avatar(
 				get_the_author_meta( 'email' ),
 				$size    = '50',
 				$default = ''
@@ -313,6 +318,7 @@ if ( ! function_exists( 'reino_featured_image' ) ) {
 			if ( get_option( 'reino_postmeta' ) !== 'on' ) {
 				reino_the_post_meta( array( 'author', 'date', 'readtime', 'views', 'likes' ), false );
 			}
+			echo '</div>';
 			echo '</div>';
 			echo '</div>';
 		}
@@ -450,7 +456,7 @@ if ( ! function_exists( 'reino_body_class' ) ) {
 			}
 		}
 		if ( is_front_page() ) {
-			if ( get_option( 'reino_owl_slider_type' ) === 'fullscreen' ) {
+			if ( 'owl_slider' === get_option( 'reino_slider' ) && get_option( 'reino_owl_slider_type' ) === 'fullscreen' ) {
 				$classes[] = 'header-owl-fullscreen';
 			}
 		}
@@ -663,15 +669,17 @@ if ( ! function_exists( 'reino_post_header' ) ) {
 			echo '</ul>';
 		}
 		the_title( '<h2 class="entry-title"><a href="' . esc_url( get_permalink() ) . '" rel="bookmark">', '</a></h2>' );
+		echo '<div class="post__header-details">';
 		echo '<div class="post__header-meta">';
-		echo '<div class="post__header-avatar">' . get_avatar(
+		echo get_avatar(
 			get_the_author_meta( 'email' ),
 			$size    = '30',
 			$default = ''
-		) . '</div>';
+		);
 		if ( get_option( 'reino_postmeta' ) !== 'on' ) {
 			reino_the_post_meta( array( 'date', 'author', 'likes', 'comments' ), false );
 		}
+		echo '</div>';
 		echo '</div>';
 		echo '</div>'; //.post__header
 	}
@@ -899,6 +907,8 @@ function reino_post_ajax_search() {
 if ( ! function_exists( 'reino_grid_sizer' ) ) {
 	function reino_grid_sizer( $value = '50%' ) {
 
+		$grid = '';
+
 		$grid_columns = array(
 			'col-md-6' => '50%',
 			'col-md-4' => '33.33%',
@@ -934,8 +944,11 @@ if ( ! function_exists( 'reino_col_sizer' ) ) {
 
 		$reino_category_cols = get_term_meta( get_queried_object_id(), 'category_columns', true );
 		$reino_regular_cols  = get_option( 'reino_post_cols' );
+		$reino_tag_cols      = get_option( 'reino_tag_cols' );
 
-		if ( is_archive() ) {
+		if ( is_tag() ) {
+			$cols = $reino_tag_cols ? $reino_tag_cols : 'col-md-6';
+		} elseif ( is_archive() ) {
 			$cols = $reino_category_cols ? $reino_category_cols : 'col-md-6';
 		} else {
 			$cols = $reino_regular_cols ? $reino_regular_cols : 'col-md-6';

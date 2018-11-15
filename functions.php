@@ -39,6 +39,11 @@ if ( ! function_exists( 'reino_theme_enqueue_scripts' ) ) {
 		wp_enqueue_style( 'font-awesome', REINO_THEME_CSS . '/fontawesome/css/font-awesome.min.css' );
 		wp_enqueue_style( 'reino-animate', REINO_THEME_CSS . '/animate.css' );
 		wp_enqueue_style( 'reino-responsive', REINO_THEME_CSS . '/responsive.css' );
+
+		if ( get_option( 'reino_theme_skins' ) != '0' ) {
+			$reino_custom_style = get_option( 'reino_theme_skins' );
+			wp_enqueue_style( 'reino-custom-style', REINO_THEME_CSS . '/colors/' . $reino_custom_style, false, false, 'all' );
+		}
 	}
 	add_action( 'wp_enqueue_scripts', 'reino_theme_enqueue_scripts' );
 } // End if().
@@ -203,7 +208,7 @@ if ( ! class_exists( 'Reino_Theme_Functions' ) ) {
 		 */
 		function reino_theme_support() {
 			// Add post formats
-			add_theme_support( 'post-formats', array( 'video', 'audio', 'gallery', 'image' ) );
+			add_theme_support( 'post-formats', array( 'video', 'audio', 'gallery', 'image', 'quote' ) );
 
 			// Add HTML5 markup for captions
 			// http://codex.wordpress.org/Function_Reference/add_theme_support#HTML5
@@ -380,9 +385,9 @@ if ( ! function_exists( 'reino_theme_setup' ) ) {
 
 		// Add custom image sizes
 		add_image_size( 'reino-extra-large', 1920, '', false );
-		add_image_size( 'reino-large-horizontal', 1280, 720, true );
-		add_image_size( 'reino-large-vertical', 920, 1280, true );
-		add_image_size( 'reino-large-square', 1280, 1280, true );
+		add_image_size( 'reino-large-horizontal', 1180, 720, true );
+		add_image_size( 'reino-large-vertical', 920, 1180, true );
+		add_image_size( 'reino-large-square', 1180, 1180, true );
 		add_image_size( 'reino-medium-uncropped', 720, '', false );
 		add_image_size( 'reino-medium-horizontal', 720, 280, true );
 		add_image_size( 'reino-medium-vertical', 540, 720, true );

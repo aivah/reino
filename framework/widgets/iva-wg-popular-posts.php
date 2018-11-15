@@ -75,7 +75,7 @@ class Reino_Popular_Posts_Widget extends WP_Widget {
 				}
 
 				if ( 0 !== $reino_view_count ) {
-					echo '<div class="wg-post ' . ( true === $list_style ? ' list' : '' ) . '">';
+					echo '<div class="wg-post ' . ( true === $list_style ? ' list' : '' ) . ' ' . ( true === $imagedisable ? ' no-image' : '' ) . '">';
 					if ( true !== $imagedisable ) {
 						if ( has_post_thumbnail() ) {
 							echo '<div class="wg-post-img post__thumbnail">';

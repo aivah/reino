@@ -54,7 +54,7 @@ $reino_post_format = get_post_format();
 			if ( 'outside_post' === $reino_featured_img_pos ) {
 				// reino_post_single_thumb();
 				if ( has_post_thumbnail() ) {
-					if ( in_array( $reino_post_format, array( 'gallery', 'video', 'audio', 'image' ), true ) ) {
+					if ( in_array( $reino_post_format, array( 'gallery', 'video', 'audio', 'image', 'quote' ), true ) ) {
 						echo '<div class="post__thumb featured-inside-fullwidth">';
 						get_template_part( 'templates/format', $reino_post_format );
 						echo '</div>';
@@ -121,7 +121,7 @@ $reino_post_format = get_post_format();
 							}
 
 							if ( 'default' === $reino_featured_img_type || 'fullwidth' === $reino_featured_img_type ) {
-								if ( in_array( $reino_post_format, array( 'gallery', 'video', 'audio' ), true ) ) {
+								if ( in_array( $reino_post_format, array( 'gallery', 'video', 'audio', 'quote' ), true ) ) {
 									echo '<div class="post__thumbmedia">';
 									get_template_part( 'templates/format', $reino_post_format );
 									echo '</div>';//.post__thumb

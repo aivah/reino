@@ -1435,7 +1435,7 @@ if ( ! function_exists( 'reino_fw_optionsframework_mediaupload' ) ) {
 		$value = get_option( $_id );
 		$id    = strip_tags( strtolower( $_id ) );
 		// If a value is passed and we don't have a stored value, use the value that's passed through.
-		if ( '' !== $_value && '' === $value ) {
+		if ( '' !== $_value && empty( $value ) ) {
 			$value = $_value;
 		}
 		if ( '' !== $_name ) {

@@ -156,36 +156,11 @@
 		if ( $.isFunction($.fn.owlCarousel) ) {
 
 			if ( typeof owlcarousel_args != "undefined" ) {
+
 				var owl_navigation = owlcarousel_args.navigation == 'true' ? true : false;
-				var owl = $('.owl-carousel');
-				// Related  Post Carousel
-				$("#owl-carousel-related").owlCarousel({
-					autoplay: owlcarousel_args.relatedspeed,
-					nav: false,
-					touchDrag: true,
-					stopOnHover: true,
-					autoHeight:true,
-                    dots: true,
-					margin:20,
-					items : owlcarousel_args.relateditems,
-					responsive:{
-						320  :{
-				            items:1,
-				        },
-				        480 :{
-				            items:1,
-				        },
-				        768 :{
-				            items:2,
-				        },
-						1024 :{
-				            items:4,
-				        },
-						1199 :{
-				            items:4,
-				        }
-				    },
-				});
+				var owl_autoplay = owlcarousel_args.autoplay == 'true' ? true : false;
+				var owl_columns = $(".owl-columns").data("slidesnumber");
+
 				// Post Gallery  Carousel
 				$("#reino_postformat_gallery").owlCarousel({
 					autoplay: owlcarousel_args.galleryspeed,
@@ -203,9 +178,8 @@
 					itemsTablet : [768,1],
 					itemsMobile : [479,1]
 				});
-				// center
-				var owl_autoplay = owlcarousel_args.autoplay == 'true' ? true : false;
 
+				// center
 				jQuery('.owl-fullscreen').owlCarousel({
 					nav : true,
 					navText: [ "<div class='owl-btn'><i class='fa fa-angle-left'></i></div>", "<div class='owl-btn'><i class='fa fa-angle-right'></i></div>"],
@@ -220,6 +194,7 @@
 					transitionStyle : "fade",
 					onInitialized:owl_large,
 				});
+
 				function owl_large(){
 					var k = window.innerHeight;
 					var  c = jQuery('#wpadminbar').innerHeight(),
@@ -230,7 +205,6 @@
 				}
 
                 // Owl Slider Columns
-				var owl_columns = $(".owl-columns").data("slidesnumber");
 				$('.owl-columns').owlCarousel({
                     items: owl_columns,
 					nav : true,
@@ -546,7 +520,6 @@ if ( $.isFunction($.fn.flexslider) ) {
 			})
 		});
 
-
 		// Child Menu Toggle
 		jQuery('.iva-children-indenter').on('click', function(){
 			$(this).parent().parent().toggleClass('iva-menu-open');
@@ -556,7 +529,7 @@ if ( $.isFunction($.fn.flexslider) ) {
 		});
 
 
-		// Aivah Post Like
+		// Post Like
 		$(document).on('click','.iva-love', function() {
 			var $loveLink = $(this);
 			var $id = $(this).attr('id');

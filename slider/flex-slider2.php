@@ -18,7 +18,7 @@ $reino_chooseslider    = get_option( 'reino_slider' );
 		if ( '' !== $reino_slider_cat ) {
 
 			$reino_slider_query = array(
-				'posts_per_page' => -1,
+				'posts_per_page' => 5,
 				'tax_query'      => array(
 					'relation' => 'OR',
 				),
@@ -47,7 +47,7 @@ $reino_chooseslider    = get_option( 'reino_slider' );
 
 		} else {
 			$reino_slider_query = array(
-				'posts_per_page' => -1,
+				'posts_per_page' => 5,
 				'orderby'        => 'menu_order',
 				'order'          => 'ASC',
 			);

@@ -68,7 +68,7 @@ class Reino_Recent_Posts_Widget extends WP_Widget {
 
 			while ( $reino_recent_post_query->have_posts() ) :
 				$reino_recent_post_query->the_post();
-				echo '<div class="wg-post' . ( true === $list_style ? ' list' : '' ) . '">';
+				echo '<div class="wg-post' . ( true === $list_style ? ' list' : '' ) . ' ' . ( true === $imagedisable ? ' no-image' : '' ) . '">';
 				if ( true !== $imagedisable ) {
 					if ( has_post_thumbnail() ) {
 						echo '<div class="wg-post-img post__thumbnail">';

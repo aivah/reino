@@ -707,9 +707,7 @@ blockquote.alignright p {
 	position: relative;
 	margin-left: auto;
 	margin-right: auto;
-	display: table;
 	width: 100%;
-	max-width: 1180px;
 }
 
 .page-header-fullwidth .page-header {
@@ -722,11 +720,9 @@ blockquote.alignright p {
     -webkit-box-align: end;
     -ms-flex-align: end;
     align-items: flex-end;
-}
-
-.page-header-inner {
-    position: relative;
-    max-width: 880px;
+    background-size: cover;
+    background-position: center center;
+    background-attachment: fixed;
 }
 
 .page-header-bg .entry-title { color: #ffffff; }
@@ -763,7 +759,7 @@ blockquote.alignright p {
     border-right: 1px solid #eeeeee;
 }
 .archive-img img { border-radius: 150px; }
-.archive-details { }
+.archive-details { text-align: center;}
 
 .archive-details h1 { font-size: 70px; font-weight: 700; margin-bottom: 0;}
 
@@ -795,6 +791,22 @@ blockquote.alignright p {
 
 .post-standard .post__thumbnail,
 .post__layout .post__thumbnail { margin-bottom: 20px;}
+
+.post__layout blockquote {
+    background-color: #222222;
+    color: #ffffff;
+}
+
+.post__layout blockquote:before {
+    content: '\201C';
+    position: absolute;
+    font-family: none;
+    left: 0;
+    top: 0;
+    font-size: 1000%;
+    line-height: 80%;
+    opacity: 0.2;
+}
 
 .post__after-entry::after,
 .post__content::after,
@@ -846,15 +858,25 @@ blockquote.alignright p {
     margin-bottom: 20px;
 }
 
-.post__header-meta {
+.post__header-details {
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
     -webkit-box-align: center;
-        -ms-flex-align: center;
-            align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+    flex-direction: column;
 }
-
+.single-post .post__header-meta {
+    width: 100%;
+    background-color: #ffffff;
+    background-color: rgba(255, 255, 255, 0.95);
+    padding: 10px 0;
+}
+.post__header-metainner {
+    max-width: 1180px;
+    margin: 0 auto;
+}
 /* Post Categories */
 .post__header .post-categories,
 .post-categories {
@@ -2333,9 +2355,8 @@ body:not(.fullwidth) .entry-content-wrapper { padding:60px 0 40px 0; }
 	left: -20px;
 	font-size: 100%;
 	opacity: 0;
-	transition: 0;
 }
-.sf-menu ul li:hover a:before {
+.sf-menu ul li a:hover:before {
 	left: 0px;
 	opacity: 1;
     -webkit-transition: 0.3s ease;
@@ -2360,6 +2381,13 @@ body:not(.fullwidth) .entry-content-wrapper { padding:60px 0 40px 0; }
     top: -16px;
     left: 50%;
     margin-left: -6px;
+    opacity: 1;
+}
+
+.sf-menu li.current-menu-item > a:before,
+.sf-menu li.current-menu-ancestor > a:before,
+.sf-menu li.current-page-ancestor > a:before {
+    left: 0;
     opacity: 1;
 }
 
@@ -3732,11 +3760,10 @@ line breaks are adjacent */
 .wg-post-content .wg-post-title { margin-bottom:4px; line-height: 1.3; font-size: 18px; }
 .wg-post-content .date,
 .wg-post-content p {
-    font-size:13px;
+    font-size: 14px;
     display:block;
     margin-top: 5px;
     margin-bottom:0;
-    opacity: 0.5;
 }
 
 /* Reino Latest Posts in List Style */
